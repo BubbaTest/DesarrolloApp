@@ -1,0 +1,350 @@
+﻿@using Gaia.Helpers;
+@model Gaia.DAL.Model.Persona
+
+@{
+
+    //IEnumerable<Nicarao.DAL.Model.CEPOV.Departamentos> departamentos = ViewBag.Departamentos;
+    string addres = "apiAlexaLocal";
+}
+
+<style>
+    strong {
+        color: darkBlue;
+    }
+
+    /*label {
+        font-weight: bold;
+    }*/
+
+    /*:disabled {
+        background-color: #609ae3 !important;
+        color: white;
+        font-weight: 600;
+    }*/
+
+    /*.select2-container--default.select2-container--disabled .select2-selection--single {
+        background-color: #609ae3 !important;
+        color: white;
+        font-weight: 600;
+    }*/
+
+    .uppercase {
+        text-transform: uppercase;
+    }
+
+    .vw_GestionarSupervision {
+        /*display: grid;
+        grid-template: 29% 71%/100%;
+        height: 584px;
+        margin-top: -2%;*/
+        display: grid;
+        grid-template: 100%/100%;
+        /*height: 584px;*/
+        margin-top: 1%;
+    }
+
+    .GS-header {
+        background: #2196F3;
+    }
+
+    .GS-body {
+        /*display: grid;
+        grid-template: 100% /18% 82%;*/
+        display: grid;
+        grid-template: 100% /20% 80%;
+    }
+
+    .GS-menu {
+        /*background: black;*/
+        /*height: 100%;*/
+        height: fit-content;
+        overflow: auto;
+        position: relative;
+    }
+
+    .GS-contentGS {
+        background: white;
+        overflow: auto;
+        /*height: 78%;*/
+    }
+
+    /*.GS-internal {*/
+    /*height: 6000px;*/
+    /*padding: 10px;
+    }*/
+
+    .dataTables_empty {
+        display: none;
+    }
+
+    table.cell-border {
+        width: 100%;
+        clear: both;
+    }
+
+        table.cell-border th {
+            padding: 5px;
+            border: 1px solid #fff;
+        }
+
+        table.cell-border thead th {
+            text-align: center;
+            background: #66a9bd;
+        }
+
+        table.cell-border tbody td {
+            text-align: center;
+        }
+
+    .btn-link {
+        font-weight: 450;
+        color: #000000;
+        text-decoration: none;
+    }
+
+        .btn-link:hover {
+            text-decoration: none;
+        }
+
+    #accordionExample i {
+        margin-right: 5px;
+    }
+
+    .card-header {
+        background-color: #206699;
+    }
+
+    .card-title {
+        background-color: #2196F3;
+    }
+
+    .card-subtitle {
+        background-color: #e7d5ec;
+    }
+    /*.card {
+        box-shadow: 0px 1px 4px 0px #607d8b;
+    }
+
+        .card :hover {
+            cursor: pointer;
+        }
+
+    .card-active {
+        color: white;
+        background-color: #1876c1;
+        font-weight: 600;
+    }*/
+    /*fieldset.scheduler-border {
+        border: 0.5px groove #ddd !important;
+        padding: 0 0.4em 0.4em 0.4em !important;
+        margin: 0 0 0.5em 0 !important;
+        -webkit-box-shadow: 0px 0px 0px 0px #000;
+        box-shadow: 0px 0px 0px 0px #000;
+    }
+
+    legend.scheduler-border {
+        width: inherit;  Or auto
+        padding: 0 10px;  To give a bit of padding on the left and right
+        border-bottom: none;
+        margin-bottom: 0;
+    }*/
+
+    .validar {
+        color: red;
+        display: none;
+        font-size: 11px;
+    }
+</style>
+
+<fieldset class="scheduler-border">
+    <div class="row justify-content-center">
+        <div class="col-md-2">
+            <div class="form-group">
+                <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Identificación">
+                    @Html.TextBoxFor(model => model.Identificador, new { id = "txtIdentificacion", placeholder = "Identificación", @class = "form-control", autocomplete = "off" })
+                    @Html.ValidationMessage("identificacion", "* Campo Requerido *", new { id = "lblidentificacion", @style = "color:red; display: none;" })
+                    <span>No Identificación</span>
+                </label>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <button type="button" id="btnEvaluarActResolucion" class="btn btn-light" style="border-radius:50%;" onclick="ValidarNicaraoActuacion()" data-toggle="tooltip" data-placement="top" title="Buscar">
+                <span class="fa fa-search" style="color:blue;font-size: 2rem;"></span>
+            </button>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Número de Boleta">
+                    @Html.TextBoxFor(model => model.Identificador, new { id = "txtBoleta", placeholder = "Número de Boleta", @class = "form-control", autocomplete = "off", disabled = "disabled" })
+                    <span>Número de Boleta</span>
+                </label>
+            </div>
+        </div>       
+        @*<div class="col-md-3">
+            <div class="form-group">
+                <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Censo/Encuesta">
+                    <select id="ddlIngresoDepartamentoMunicipio" class="sel">
+                        @foreach (var itemgroup in departamentos)
+                        {
+                            <option></option>
+                            <optgroup label="@itemgroup.NomDepartamento">
+                                @foreach (var item in @itemgroup.Municipios)
+                                {
+                                    <option value="@item.CodMunicipio">
+                                        @item.NomMunicipio
+                                    </option>
+                                }
+                            </optgroup>
+                        }
+                    </select>
+                    <span>Censo/Encuesta:</span>
+                </label>
+                @Html.ValidationMessage("scenenc", "* Campo Requerido *", new { id = "lblscenenc", @style = "color:red; display: none;" })
+            </div>
+        </div>*@
+    </div>
+</fieldset>
+
+<div class="vw_GestionarSupervision">
+    <div class="GS-body">
+        <div class="GS-menu">
+            <nav id="sidebar-dgcip">
+                <ul class="list-unstyled components">
+                    <li id="frameHeader" class="sidebar-dgcip-header-li">
+                        <h2 class="fa fa-home sidebar-dgcip-header">Menu</h2>
+                    </li>
+                    <li id="frameIdeUbiUso" class="nav-item" data-toggle="tooltip" data-placement="top" title="Identificación, Ubicación, Uso Edificación">
+                        <a href="#" class="nav-a" onclick="IdeUbiUsoVivienda()">&nbsp Identificación, Ubicación, Uso Edificación</a>
+                    </li>
+                    <li id="frameResVivIde" class="nav-item" data-toggle="tooltip" data-placement="top" title="Residentes Vivienda e Identificación Hogares">
+                        <a href="#" class="nav-a" onclick="ResVivIdeHogares()">&nbsp Residentes Vivienda e Identificación Hogares</a>
+                    </li>
+                    <li id="frameIntervinientes" class="nav-item" data-toggle="tooltip" data-placement="top" title="Datos de la Vivienda">
+                        <a href="#" class="nav-a" onclick="DatVivHogPrincipal()">&nbsp Datos de la Vivienda</a>
+                    </li>
+                    <li id="frameVolverInicio" class="nav-item" data-toggle="tooltip" data-placement="top" title="Características del Hogar">
+                        <a href="#" class="nav-a" onclick="CarHog()">&nbsp Características del Hogar</a>
+                    </li>
+                    <li id="frameVolverInicio" class="nav-item" data-toggle="tooltip" data-placement="top" title="Personas del Hogar">
+                        <a href="#" class="nav-a" onclick="PerHog()">&nbsp Personas del Hogar</a>
+                    </li>
+                    <li id="frameVolverInicio" class="nav-item" data-toggle="tooltip" data-placement="top" title="Características de las Personas">
+                        <a href="#" class="nav-a" onclick="CarPer()">&nbsp Características de las Personas</a>
+                    </li>
+                    <li id="frameVolverInicio" class="nav-item" data-toggle="tooltip" data-placement="top" title="Emigración Internacional en el Hogar">
+                        <a href="#" class="nav-a" onclick="EmiHoga()">&nbsp Emigración Internacional Hogar</a>
+                    </li>
+                    <li id="frameVolverInicio" class="nav-item" data-toggle="tooltip" data-placement="top" title="Defunciones en el Hogar">
+                        <a href="#" class="nav-a" onclick="DefHoga()">&nbsp Defunciones en el Hogar</a>
+                    </li>
+                    <li id="frameVolverInicio" class="nav-item" data-toggle="tooltip" data-placement="top" title="Identificación Actividad Agropecuaria Hogar">
+                        <a href="#" class="nav-a" onclick="IAAHoga()">&nbsp Identificación Actividad Agropecuaria Hogar</a>
+                    </li>
+                    <li id="frameVolverInicio" class="nav-item" data-toggle="tooltip" data-placement="top" title="Resultado Entrevista">
+                        <a href="#" class="nav-a" onclick="REHoga()">&nbsp Resultado Entrevista</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="GS-contentGS">
+            <div id="cell-content22" class="GS-internal">
+            </div>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginScriptContext())
+{
+    Html.AddScriptBlock(
+@<script type="text/javascript">
+    $(document).ready(function () {
+        $(".sel").select2({
+            placeholder: "Seleccione Opción",
+            allowClear: true,
+        });
+
+        $("#txtIdentificacion").inputmask("999-999999-9999A");
+
+        //cargaTipoObjeto();
+    })
+
+    function IdeUbiUsoVivienda() {
+         $('#cell-content22').empty();
+         $("#cell-content22").load(obtenerURL("/CensoEncuesta/IdentificacionUbicacionUsoEdificacion"));
+     }
+
+    function ResVivIdeHogares() {
+         $('#cell-content22').empty();
+         $("#cell-content22").load(obtenerURL("/CensoEncuesta/ResidentesViviendaIdentificacionHogares"));
+     }
+
+    function DatVivHogPrincipal() {
+         $('#cell-content22').empty();
+         $("#cell-content22").load(obtenerURL("/CensoEncuesta/DatosViviendaHogarPrincipal"));
+    }
+
+    function CarHog() {
+        $('#cell-content22').empty();
+        $("#cell-content22").load(obtenerURL("/CensoEncuesta/CaracteristicasHogar"));
+    }
+
+    function PerHog() {
+        $('#cell-content22').empty();
+        $("#cell-content22").load(obtenerURL("/CensoEncuesta/PersonasHogar"));
+    }
+
+    function CarPer() {
+        $('#cell-content22').empty();
+        $("#cell-content22").load(obtenerURL("/CensoEncuesta/CaracteristicasPersonas"));
+    }
+
+    function EmiHoga() {
+        $('#cell-content22').empty();
+        $("#cell-content22").load(obtenerURL("/CensoEncuesta/EmigracionInternacionalHogar"));
+    }
+
+    function DefHoga() {
+        $('#cell-content22').empty();
+        $("#cell-content22").load(obtenerURL("/CensoEncuesta/DefuncionesHogar"));
+    }
+
+    function IAAHoga() {
+        $('#cell-content22').empty();
+        $("#cell-content22").load(obtenerURL("/CensoEncuesta/ActividadAgropecuariaHogar"));
+    }
+
+    function REHoga() {
+        $('#cell-content22').empty();
+        $("#cell-content22").load(obtenerURL("/CensoEncuesta/ResultadoEntrevistaHogar"));
+    }
+
+    function CenEco() {
+        $('#cell-content').empty();
+        $("#cell-content").load(obtenerURL("/Censoencuesta/ContenedorCensoEconomico"));
+    }
+
+    function cargaTipoObjeto() {
+        $.ajax({
+            url: obtenerURL('@HtmlEncriptUrl.EncodeUrl(addres, "sp/PruebaCata", "get")'),
+            type: "get",
+            dataType: "json",
+            success: function (result) {
+                dato = result.retorno[0];
+                $(dato).each(function () {
+                    $("#ddlDepartamento").append($("<option></option>").val(this.RolId).html(this.NomRol)).select2("val", "ca");
+                });
+
+            },
+            error: function (data) {
+                alertify.alert().destroy();
+                alertify.alert('Confirmación', data.Mensaje);
+                alertify.alert().setting('modal', true);
+            }
+        });
+    }  
+
+
+</script>
+, true);
+}
+

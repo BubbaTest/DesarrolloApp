@@ -1,0 +1,1104 @@
+﻿@using Gaia.Helpers;
+@model Gaia.DAL.Model.Persona
+
+@{
+    string addres = "apiAlexaLocal";
+}
+
+<div class="content">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0">Sección VI. CARACTERISTICAS DE LAS PERSONAS</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Nombre de la persona">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtNombrePersona", PlaceHolder = "Nombre Persona", @class = "form-control", autocomplete = "off" })
+                            <span>Nombre Persona</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <h5 class="card-title">PARA TODAS LAS PERSONAS</h5>
+            <div class="row">
+                <div class="col-md-3">
+                    <label>¿Qué parentesco tiene con el jefe(a) de hogar?</label>
+                </div>
+                <div class="col-md-2">
+                    <label>¿Es varón o mujer?</label>
+                </div>
+                <div class="col-md-3">
+                    <label>¿Cuántos años cumplidos tiene? (Menor de 1 año anote 000)</label>
+                </div>
+                <div class="col-md-2">
+                    <label>¿En qué fecha nacio?</label>
+                </div>
+                <div class="col-md-2">
+                    <label>Actualmente está</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Parentesco jefe(a) de hogar">
+                            <select id="ddlParetescoJefeHogar" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Varón o mujer">
+                            <select id="ddlVaronMujer" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Años cumplidos">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtAnosCumplidos", PlaceHolder = "Años Cumplidos", @class = "form-control mask", autocomplete = "off", Value="000" })
+                            <span>Años Cumplidos</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Fecha nacimiento">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtFechaNacimiento", PlaceHolder = "Fecha Nacimiento", @class = "form-control mask" })
+                            <span>Fecha Nacimiento</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Actualmente está">
+                            <select id="ddlActualmenteEsta" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <label>¿Por sus costumbres y tradiciones, se considera perteneciente a un pueblo indígena, comunidad étnica o afrodescendiente?</label>
+                </div>
+                <div class="col-md-4">
+                    <label>¿A cuál de los siguientes pueblos indígenas o etnias pertenece?</label>
+                </div>
+                <div class="col-md-4">
+                    <label>¿Qué idiomas o lenguas habla?</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Se considera Pueblo Indigena, Etnica o Afrodescendiente">
+                            <select id="ddlIndigenaEtnicaAfrodescendiente" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Pueblo Indigena o Etnica">
+                            <select id="ddlIndigenaEtnica" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Cuál">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtCualEtnia", PlaceHolder = "Cuál", @class = "form-control", disabled = "disabled", autocomplete = "off" })
+                            <span>Cuál</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Idiomas o lenguas que habla">
+                            <select id="ddlIdiomaLengua" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Cuál">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtCualIdiomaLengua", PlaceHolder = "Cuál", @class = "form-control", disabled = "disabled", autocomplete = "off" })
+                            <span>Cuál</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <label>¿A qué religión pertenece?</label>
+                </div>
+                <div class="col-md-2">
+                    <label>¿Es dependiente del hogar?</label>
+                </div>
+                <div class="col-md-4">
+                    <label>¿Razon dependiente del hogar?</label>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Religión">
+                            <select id="ddlReligion" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Cuál">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtCualReligion", PlaceHolder = "Cuál", @class = "form-control", disabled = "disabled", autocomplete = "off" })
+                            <span>Cuál</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Dependiente del hogar">
+                            <select id="ddlDependienteHogar" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Razón Dependiente del hogar">
+                            <select id="ddlRazonDependienteHogar" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Cuál">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtCualRazonDepediente", PlaceHolder = "Cuál", @class = "form-control", disabled = "disabled", autocomplete = "off" })
+                            <span>Cuál</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label>¿En qué lugar del país nacio?</label>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Departamento">
+                            <select id="ddlDepartamento" class="form-control sel"></select>
+                            <span>Departamento</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Municipio">
+                            <select id="ddlMunicipio" class="form-control sel"></select>
+                            <span>Municipio</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2" id="divchkNoSabe">
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="switch-NoSabe">
+                        <label class="custom-control-label" for="switch-NoSabe" id="labelNoSabe">No sabe?</label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Otro país">
+                            <select id="ddlOtroPais" class="form-control sel"></select>
+                            <span>Otro País</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Año que llego a nicaragua">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtAnoLlegoNicaragua", PlaceHolder = "Año llego nicaragua", @class = "form-control mask", autocomplete = "off" })
+                            <span>Año llego Nicaragua</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <label>¿Cuál es la nacionalidad extranjera?</label>
+                </div>
+                <div class="col-md-3">
+                    <label>¿Es residente de Nicaragua?</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Nacionalidad">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtNacionalidad", PlaceHolder = "Nacionalidad", @class = "form-control", disabled = "disabled" })
+                            <span>Nacionalidad</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Residente nicaraguense">
+                            <select id="ddlResidente" class="form-control sel" disabled></select>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Con las siguientes preguntas se investiga sobre las dificultades que puede tener una persona para realizar ciertas actividades. Tiene dificultades para?</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-4">
+                    <label class="card-subtitle">SOLO PARA PERSONAS DE 3 AÑOS Y MAS</label>
+                </div>
+                <div class="col-md-4">
+                    <label class="card-subtitle">SOLO PARA PERSONAS DE 5 AÑOS Y MAS</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Ver aunque use anteojos o lentes">
+                            <select id="ddlVerConLentes" class="form-control sel"></select>
+                            <span>Ver con Anteojos</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Oir aunque use aparato auditivo">
+                            <select id="ddlOir" class="form-control sel"></select>
+                            <span>Oir con aparato auditivo</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Hablar (mudez o dificultad en el habla)">
+                            <select id="ddlHablar" class="form-control sel"></select>
+                            <span>Hablar</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Caminar o subir gradas">
+                            <select id="ddlCaminar" class="form-control sel"></select>
+                            <span>Caminar</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Bañarse, Vestirse o alimentarse por si mismo">
+                            <select id="ddlBanarseVestirse" class="form-control sel"></select>
+                            <span>Bañarse, Vestirse solo</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Recordar, concentrarse">
+                            <select id="ddlRecordarConcentrarse" class="form-control sel"></select>
+                            <span>Recordar Concentrarse</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <label class="card-subtitle">SOLO PARA PERSONAS DE 5 AÑOS Y MAS</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Comunicarse debido aun problema de salud mental o emocional">
+                            <select id="ddlComunicarseSaludMentalEmocional" class="form-control sel"></select>
+                            <span>Comunicarse por Salud mental Emocional</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">PARA PERSONAS DE 5 AÑOS Y MAS</h5>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <label>¿En qué lugar vivía hace 5 años? (2019)</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Departamento">
+                            <select id="ddlDepartamento5" class="form-control sel"></select>
+                            <span>Departamento</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Municipio">
+                            <select id="ddlMunicipio5" class="form-control sel"></select>
+                            <span>Municipio</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2" id="divchkNoSabe5">
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="switch-NoSabe5">
+                        <label class="custom-control-label" for="switch-NoSabe5" id="labelNoSabe5">No sabe?</label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Otro país">
+                            <select id="ddlOtroPais5" class="form-control sel"></select>
+                            <span>Otro País</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Año que llego a nicaragua">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtAnoLlegoNicaragua5", PlaceHolder = "Año llego nicaragua", @class = "form-control mask", autocomplete = "off" })
+                            <span>Año llego Nicaragua</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Nombre o Mencione</label>
+                </div>
+                <div class="col-md-3">
+                    <label>¿Asiste actualmente a un centro de enseñanza como: preescolar, primaria, secundaria, técnica o universitaria?</label>
+                </div>
+                <div class="col-md-5">
+                    <label>¿Cuál es la razón principal porque no asiste actualmente a clases?</label>
+                </div>
+                <div class="col-md-2">
+                    <label>¿Cuál es el grado o año mas alto que aprobo?</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Nombre o Mencione">
+                            <select id="ddlNombreMencione" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Asiste Centro de Enseñanza">
+                            <select id="ddlCentroEnsenanza" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Porqué no aiste a clases">
+                            <select id="ddlNoAsisteClases" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Cuál">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtCualNoAsisteClases", PlaceHolder = "Cuál", @class = "form-control", disabled = "disabled", autocomplete = "off" })
+                            <span>Cuál</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Grado o año mas alto que aprobo">
+                            <select id="ddlGradoMasAltoAprobo" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <label>¿Cuál es el nombre de la carrera técnica o universitaria?</label>
+                </div>
+                <div class="col-md-4">
+                    <label>¿Completo su carrera técnica o universitaria?</label>
+                </div>
+                <div class="col-md-4">
+                    <label>¿Actualmente trabaja en la carrera técnica o universitaria que estudia/estudio?</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Carrera técnica o universitaria">
+                            <select id="ddlCarreraTecnicaUniversitaria" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Completo Carrera técnica o universitaria">
+                            <select id="ddlCompletoCarreraTecnicaUniversitaria" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Obtuvo diplomo / egresado">
+                            <select id="ddlDiplomaEgresado" class="form-control sel" disabled></select>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Actualmente trabja en la Carrera técnica o universitaria">
+                            <select id="ddlTrabajaCarreraTecnicaUniversitaria" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">PARA PERSONAS DE 14 AÑOS Y MAS</h5>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label>¿Trabajó durante la semana pasada al menos una hora?</label>
+                </div>
+                <div class="col-md-2">
+                    <label>Aunque dijo que no trabajo la semana pasada. ¿Tenía algún trabajo al que va regresar?</label>
+                </div>
+                <div class="col-md-2">
+                    <label>¿Cuántas horas trabajo la semana pasado o la última semana que trabajo?</label>
+                </div>
+                <div class="col-md-2">
+                    <label>El trabajo que realiza es</label>
+                </div>
+                <div class="col-md-2">
+                    <label>¿Qué hace en su trabajo principal?</label>
+                </div>
+                <div class="col-md-2">
+                    <label>En esta ocupación trabaja(o) como</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Trabajo durante la semana pasada al menos una hora">
+                            <select id="ddlTrabajoSemanaPasadaUnaHora" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Tenía algún trabajo al que va regresar">
+                            <select id="ddlTeniaTrabajaRegresar" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Cuantas horas trabajo la semana pasada o la última semana que trabajo">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtTotalHoras", PlaceHolder = "Total Horas", @class = "form-control mask", autocomplete = "off" })
+                            <span>Total Horas</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="El trabajo que realiza es">
+                            <select id="ddlTrabajoRealiza" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Qué hace en su trabajo principal">
+                            @Html.TextAreaFor(model => model.Identificador, new { id = "txtHaceTrabajoPrincipal", PlaceHolder = "Que hace trabajo principal", @class = "form-control  f2", autocomplete = "off" })
+                            <span>Que Hace Trabajo</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="En está ocupación trabaja como">
+                            <select id="ddlOcupacionTrabajaComo" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <label>¿A que se dedica el establecimiento o lugar de trabajo? Describa</label>
+                </div>
+                <div class="col-md-2">
+                    <label>¿Buscó trabajo en las últimas cuatro semanas?</label>
+                </div>
+                <div class="col-md-4">
+                    <label>¿A qué se dedica actualmente?</label>
+                </div>
+                <div class="col-md-3">
+                    <label>Observaciones</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="A qué se dedica e establecimiento o lugar de trabajo">
+                            @Html.TextAreaFor(model => model.Identificador, new { id = "txtHaceTrabajoPrincipal", PlaceHolder = "Que hace trabajo principal", @class = "form-control  f2", autocomplete = "off" })
+                            <span>A que se dedica establecimiento trabajo</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Busco trabajo en las últimas cuatro semanas">
+                            <select id="ddlBuscoTrabajoCuatroSemanas" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="A qué se dedica actualmente">
+                            <select id="ddlDedicaActualmente" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Cuál">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtCualDedicaActualmente", PlaceHolder = "Cuál", @class = "form-control", disabled = "disabled", autocomplete = "off" })
+                            <span>Cuál</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Observaciones">
+                            @Html.TextAreaFor(model => model.Identificador, new { id = "txtObservaciones", PlaceHolder = "Observaciones", @class = "form-control  f2", autocomplete = "off" })
+                            <span>Observaciones</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">PARA MUJERES DE 13 AÑOS Y MAS</h5>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label>¿Ha tenido hijos(as) nacidos vivos?</label>
+                </div>
+                <div class="col-md-4">
+                    <label>¿Cuántos hijos(as) nacidos vivos ha tenido en total?</label>
+                </div>
+                <div class="col-md-4">
+                    <label>¿Cuántos hijos(as) están vivos actualmente?</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Ha tenido hijos(as) nacidos vivos">
+                            <select id="ddlHijosNacidosVivos" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Total">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtTotalHijosNacidos", PlaceHolder = "Total", @class = "form-control mask", Value = "0", disabled = "disabled" })
+                            <span>Total</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Varones">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtVaronesNacidos", PlaceHolder = "Varones", @class = "form-control mask", Value = "0" })
+                            <span>Varones</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Mujeres">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtMujeresNacidos", PlaceHolder = "Mujeres", @class = "form-control mask", Value = "0" })
+                            <span>Mujeres</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Total">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtTotalHijosVivos", PlaceHolder = "Total", @class = "form-control mask", Value = "0", disabled = "disabled" })
+                            <span>Total</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Varones">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtVaronesVivos", PlaceHolder = "Varones", @class = "form-control mask", Value = "0" })
+                            <span>Varones</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Mujeres">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtMujeresVivos", PlaceHolder = "Mujeres", @class = "form-control mask", Value = "0" })
+                            <span>Mujeres</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <label>¿En que fecha nacio el ultimo hijo(a) nacido vivo?</label>
+                </div>
+                <div class="col-md-2">
+                    <label>¿Está vivo o muerto su último hijo nacido vivo?</label>
+                </div>
+                <div class="col-md-5">
+                    <label>¿Donde le atendieron el parto del útimo hijo(a) nacido vivo?</label>
+                </div>
+               
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Fecha nacio el último hijo(a) nacido vivo">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtFechaNacimientoUltimoHijoVivo", PlaceHolder = "Mujeres", @class = "form-control mask" })
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Esta vivo o muerto último hijo(a) nacido vivo">
+                            <select id="ddlVivoMuertoUltimoHijoNacidoVivo" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Donde le atendieron el parto">
+                            <select id="ddlDondeAtendieronParto" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>  
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Cuál">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtCualDondeAtendieronParto", PlaceHolder = "Cuál", @class = "form-control", disabled="disabled", autocomplete = "off" })
+                            <span>Cuál</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">               
+                <div class="col-md-4">
+                    <label>¿Le extendieron constancia de nacimiento del MINSA de este último hijo(a) nacido vivo?</label>
+                </div>
+                <div class="col-md-3">
+                    <label>¿Lo inscribio en el registro civil?</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Le extendieron constancia de nacimiento del MINSA">
+                            <select id="ddlExtendieronConstanciaNacimientoMinsa" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Lo inscribio en el registro civil">
+                            <select id="ddlInscribioRegistroCivil" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@using (Html.BeginScriptContext())
+{
+    Html.AddScriptBlock(
+@<script type="text/javascript">
+    var dato;
+     $(document).ready(function () {
+         $(".sel").select2({
+             placeholder: "Seleccione Opción",
+             allowClear: true,
+         });
+
+         $(".mask").inputmask('Regex', { regex: "^[0-9]+$" });
+
+         $("#txtFechaNacimiento").inputmask("99/99/9999");
+         $("#txtFechaNacimientoUltimoHijoVivo").inputmask("99/99/9999");
+
+         $(".f2").keydown(function (e) {
+             if (e.keyCode == 113) {
+                 var Control = $(this).attr('id');
+                 var modal = alertify.confirm()
+                     .set('basic', true)
+                     .setContent($("#" + Control).val())
+                     .set({ 'resizable': true, 'maximizable': false })
+                     .resizeTo(350, 350)
+                     .show();
+             }
+         })
+
+         $('#switch-NoSabe').on('change', function (event, state) {
+             if (event.target.checked == true) {
+                 alertify.error('Pase a dificultades que puede tener una persona para realizar ciertas actividades', 'warning', 3, function () { });
+                 $('#txtNacionalidad').prop("disabled", true);
+                 $('#ddlResidente').prop("disabled", true);
+             }
+             else {
+                 $('#txtNacionalidad').prop("disabled", false);
+                 $('#ddlResidente').prop("disabled", false);
+             }
+         }); 
+
+         cargaTipoObjeto();
+         
+     })
+
+     function cargaTipoObjeto() {
+        $.ajax({
+            url: obtenerURL('@HtmlEncriptUrl.EncodeUrl(addres, "catalogos/Listar/{seccion}", "get")'),
+            type: "get",
+            dataType: "json",
+            data: { "seccion": "CaracteristicasPersonas" },
+            success: function (result) {
+                dato = result[0].JsonDatos;                
+                $(dato.JsonParentesco).each(function () {
+                    $("#ddlParetescoJefeHogar").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                });
+                $(dato.JsonVaronMujer).each(function () {
+                    $("#ddlVaronMujer").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                });
+                $(dato.JsonActualmenteEsta).each(function () {
+                    $("#ddlActualmenteEsta").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                });
+                $(dato.JsonPueblosIndigenas).each(function () {
+                    $("#ddlIndigenaEtnica").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                });
+                $(dato.JsonIdiomas).each(function () {
+                    $("#ddlIdiomaLengua").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                });
+                $(dato.JsonReligion).each(function () {
+                    $("#ddlReligion").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                });
+                $(dato.JsonDependienteHogar).each(function () {
+                    $("#ddlRazonDependienteHogar").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                });
+                $(dato.JsonDepartamentos).each(function () {
+                    $("#ddlDepartamento").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                    $("#ddlDepartamento5").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca"); 
+                });                
+                $(dato.JsonSiNo).each(function () { 
+                    $("#ddlIndigenaEtnicaAfrodescendiente").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                    $("#ddlDependienteHogar").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                    $("#ddlResidente").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                    $("#ddlCentroEnsenanza").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca"); 
+                    $("#ddlCompletoCarreraTecnicaUniversitaria").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca"); 
+                    $("#ddlTrabajaCarreraTecnicaUniversitaria").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca"); 
+                    $("#ddlTrabajoSemanaPasadaUnaHora").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                    $("#ddlTeniaTrabajaRegresar").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                    $("#ddlBuscoTrabajoCuatroSemanas").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                    $("#ddlHijosNacidosVivos").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");                    
+                    $("#ddlExtendieronConstanciaNacimientoMinsa").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                    $("#ddlInscribioRegistroCivil").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");                     
+                });
+                $(dato.JsonDificultadesActividades).each(function () {
+                    $("#ddlVerConLentes").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                    $("#ddlOir").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                    $("#ddlHablar").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                    $("#ddlCaminar").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                    $("#ddlBanarseVestirse").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                    $("#ddlRecordarConcentrarse").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                    $("#ddlComunicarseSaludMentalEmocional").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                });
+                $(dato.JsonNombre).each(function () {
+                    $("#ddlNombreMencione").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                });
+                $(dato.JsonRazonNoAsisteClases).each(function () {
+                    $("#ddlNoAsisteClases").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                });
+                $(dato.JsonGradoEscolarAlto).each(function () {
+                    $("#ddlGradoMasAltoAprobo").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                });
+                $(dato.JsonDiplomaEgresado).each(function () {
+                    $("#ddlDiplomaEgresado").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                });
+                $(dato.JsonTrabajoRealiza).each(function () {
+                    $("#ddlTrabajoRealiza").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                });
+                $(dato.JsonOcupacion).each(function () {
+                    $("#ddlOcupacionTrabajaComo").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                });                
+                $(dato.JsonDedicaActualmente).each(function () {
+                    $("#ddlDedicaActualmente").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                });
+                $(dato.JsonVivoMuero).each(function () {
+                    $("#ddlVivoMuertoUltimoHijoNacidoVivo").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                });
+                $(dato.JsonAtendieronParto).each(function () {
+                    $("#ddlDondeAtendieronParto").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                });   
+                $(dato.JsonPais).each(function () {
+                    $("#ddlOtroPais").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                    $("#ddlOtroPais5").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                }); 
+                $(dato.JsonCarreraTecnica).each(function () {
+                    $("#ddlCarreraTecnicaUniversitaria").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                }); 
+            },
+            error: function (data) {
+                alertify.alert().destroy();
+                alertify.alert('Confirmación', data.Mensaje);
+                alertify.alert().setting('modal', true);
+            }
+        })
+    };
+
+    $("#ddlIndigenaEtnicaAfrodescendiente").on("select2:select", function (a) {
+        var strcesEtnia = $(this).val();
+        if (strcesEtnia == 2) {
+            alertify.error('Pase a que idioma o leguas habla', 'warning', 3, function () { });
+            $('#ddlIndigenaEtnica').prop("disabled", true);
+        }
+        else { $('#ddlIndigenaEtnica').prop("disabled", false); }
+    }); 
+
+    $("#ddlIndigenaEtnica").on("select2:select", function (a) {
+        var strcesEtnia = $(this).val();
+        if (strcesEtnia == 12) {
+            $('#txtCualEtnia').prop("disabled", false);
+        }
+        else { $('#txtCualEtnia').prop("disabled", true); }
+    });
+
+    $("#ddlIdiomaLengua").on("select2:select", function (a) {
+        var strcesEtnia = $(this).val();
+        if (strcesEtnia == 5) {
+            $('#txtCualIdiomaLengua').prop("disabled", false);
+        }
+        else { $('#txtCualIdiomaLengua').prop("disabled", true); }
+    });
+
+    $("#ddlReligion").on("select2:select", function (a) {
+        var strcesEtnia = $(this).val();
+        if (strcesEtnia == 9) {
+            $('#txtCualReligion').prop("disabled", false);
+        }
+        else { $('#txtCualReligion').prop("disabled", true); }
+    }); 
+     
+    $("#ddlRazonDependienteHogar").on("select2:select", function (a) {
+        var strrazonDependiente = $(this).val();
+        if (strrazonDependiente == 8) {
+            $('#txtCualRazonDepediente').prop("disabled", false);
+        }
+        else { $('#txtCualRazonDepediente').prop("disabled", true) }
+    }); 
+
+    $("#ddlMunicipio").on("select2:select", function (a) {
+        alertify.error('Pase a dificultades que puede tener una persona para realizar ciertas actividades', 'warning', 3, function () { });
+        $('#txtNacionalidad').prop("disabled", true);
+        $('#ddlResidente').prop("disabled", true);
+    }); 
+
+    $("#ddlDependienteHogar").on("select2:select", function (a) {
+        var strdependienteHogar = $(this).val();
+        if (strdependienteHogar == 2) {
+            $('#ddlRazonDependienteHogar').prop("disabled", true);
+        }
+        else { $('#ddlRazonDependienteHogar').prop("disabled", false); }        
+    }); 
+
+    $("#ddlOtroPais").on("select2:select", function (a) {
+        $('#txtNacionalidad').prop("disabled", false);
+        $('#ddlResidente').prop("disabled", false);
+    }); 
+
+    $("#ddlCentroEnsenanza").on("select2:select", function (a) {
+        var strdependienteHogar = $(this).val();
+        if (strdependienteHogar == 1) {
+            $('#ddlNoAsisteClases').prop("disabled", true);
+        }
+        else { $('#ddlNoAsisteClases').prop("disabled", false); }
+    }); 
+
+    $("#ddlNoAsisteClases").on("select2:select", function (a) {
+        var strnoAsisteClase = $(this).val();
+        if (strnoAsisteClase == 12) {
+            $('#txtCualNoAsisteClases').prop("disabled", false);
+        }
+        else { $('#txtCualNoAsisteClases').prop("disabled", true); }
+    }); 
+
+    $("#ddlGradoMasAltoAprobo").on("select2:select", function (a) {
+        var strgradoMasAltoAprobo = $(this).val();
+        if (strgradoMasAltoAprobo == 0 || strgradoMasAltoAprobo == 1 || strgradoMasAltoAprobo == 2 || strgradoMasAltoAprobo == 3) {
+            alertify.error('Pase a Trabajó durante la semana pasada al menos una hora', 'warning', 3, function () { });
+            $('#ddlCarreraTecnicaUniversitaria').prop("disabled", true);
+            $('#ddlCompletoCarreraTecnicaUniversitaria').prop("disabled", true);
+            $('#ddlDiplomaEgresado').prop("disabled", true);
+            $('#ddlTrabajaCarreraTecnicaUniversitaria').prop("disabled", true);
+        }
+        else {
+            $('#ddlCarreraTecnicaUniversitaria').prop("disabled", false);
+            $('#ddlCompletoCarreraTecnicaUniversitaria').prop("disabled", false);
+            $('#ddlDiplomaEgresado').prop("disabled", false);
+            $('#ddlTrabajaCarreraTecnicaUniversitaria').prop("disabled", false);
+        }
+    }); 
+
+    $("#ddlCompletoCarreraTecnicaUniversitaria").on("select2:select", function (a) {
+        var strcompletoCarrera = $(this).val();
+        if (strcompletoCarrera == 1) {
+            $('#ddlDiplomaEgresado').prop("disabled", false);
+        }
+        else {
+            $('#ddlDiplomaEgresado').prop("disabled", true);          
+        }
+    }); 
+
+    $("#ddlTrabajaCarreraTecnicaUniversitaria").on("select2:select", function (a) {
+        if ($("#ddlVaronMujer").val == 2 && $("#txtAnosCumplidos").val == 13) {
+            alertify.error('Pase a Ha tenido hijos(as) nacidos vivos', 'warning', 3, function () { });
+        }
+    }); 
+
+    $("#ddlTrabajoSemanaPasadaUnaHora").on("select2:select", function (a) {
+        var strtrabajoSemanaUnaHora = $(this).val();
+        if (strtrabajoSemanaUnaHora == 1) {
+            $('#ddlTeniaTrabajaRegresar').prop("disabled", true);
+        }
+        else {
+            $('#ddlTeniaTrabajaRegresar').prop("disabled", false);
+        }
+    }); 
+
+    $("#ddlTeniaTrabajaRegresar").on("select2:select", function (a) {
+        var strtrabajoRegresar = $(this).val();
+        if (strtrabajoRegresar == 2) {
+            alertify.error('Pase a Busco trabajo en las últimas cuatro semanas', 'warning', 3, function () { });
+            $('#txtTotalHoras').prop("disabled", true);
+            $('#ddlTrabajoRealiza').prop("disabled", true);
+            $('#txtHaceTrabajoPrincipal').prop("disabled", true);
+            $('#ddlOcupacionTrabajaComo').prop("disabled", true);
+            $('#txtHaceTrabajoPrincipal').prop("disabled", true);
+        }
+        else {
+            $('#txtTotalHoras').prop("disabled", false);
+            $('#ddlTrabajoRealiza').prop("disabled", false);
+            $('#txtHaceTrabajoPrincipal').prop("disabled", false);
+            $('#ddlOcupacionTrabajaComo').prop("disabled", false);
+            $('#txtHaceTrabajoPrincipal').prop("disabled", false);
+        }
+    }); 
+
+    $("#ddlDedicaActualmente").on("select2:select", function (a) {
+        var strtrabajoSemanaUnaHora = $(this).val();
+        if (strtrabajoSemanaUnaHora == 6) {
+            $('#txtCualDedicaActualmente').prop("disabled", false);
+        }
+        else {
+            $('#txtCualDedicaActualmente').prop("disabled", true);
+        }
+        if ($("#ddlVaronMujer").val == 1 ) {
+            alertify.error('Pase a siguiente persona', 'warning', 3, function () { });
+        }
+    }); 
+
+    $("#txtHaceTrabajoPrincipal").focusout(function () {
+        if ($("#ddlVaronMujer").val == 2) {
+            alertify.error('Pase a Ha tenido hijos(as) nacidos vivos', 'warning', 3, function () { });
+        }
+        else {
+            alertify.error('Pase a siguiente persona', 'warning', 3, function () { });
+        }
+    })
+
+    $("#ddlHijosNacidosVivos").on("select2:select", function (a) {
+        var strhijosVivos = $(this).val();
+        if (strhijosVivos == 2) {
+            $('#txtVaronesNacidos').prop("disabled", true);
+            $('#txtMujeresNacidos').prop("disabled", true);
+            $('#txtVaronesVivos').prop("disabled", true);
+            $('#txtMujeresVivos').prop("disabled", true); 
+            $('#txtFechaNacimientoUltimoHijoVivo').prop("disabled", true); 
+            $('#ddlVivoMuertoUltimoHijoNacidoVivo').prop("disabled", true); 
+            $('#ddlDondeAtendieronParto').prop("disabled", true); 
+            $('#ddlExtendieronConstanciaNacimientoMinsa').prop("disabled", true); 
+            $('#ddlInscribioRegistroCivil').prop("disabled", true); 
+            alertify.error('Pase a siguiente persona', 'warning', 3, function () { });
+        }
+        else {
+            $('#txtVaronesNacidos').prop("disabled", false);
+            $('#txtMujeresNacidos').prop("disabled", false);
+            $('#txtVaronesVivos').prop("disabled", false);
+            $('#txtMujeresVivos').prop("disabled", false);
+            $('#txtFechaNacimientoUltimoHijoVivo').prop("disabled", false);
+            $('#ddlVivoMuertoUltimoHijoNacidoVivo').prop("disabled", false);
+            $('#ddlDondeAtendieronParto').prop("disabled", false);
+            $('#ddlExtendieronConstanciaNacimientoMinsa').prop("disabled", false);
+            $('#ddlInscribioRegistroCivil').prop("disabled", false); 
+        }
+    }); 
+
+    $("#txtVaronesNacidos").focusout(function () {
+        var vTotal = (parseFloat($("#txtVaronesNacidos").val()) + parseFloat($("#txtMujeresNacidos").val()));
+        $("#txtTotalHijosNacidos").val(vTotal);
+
+    })
+
+    $("#txtMujeresNacidos").focusout(function () {
+        var vTotal = (parseFloat($("#txtVaronesNacidos").val()) + parseFloat($("#txtMujeresNacidos").val()));
+        $("#txtTotalHijosNacidos").val(vTotal);
+    })
+
+    $("#txtVaronesVivos").focusout(function () {
+        var vTotal = (parseFloat($("#txtVaronesVivos").val()) + parseFloat($("#txtMujeresVivos").val()));
+        $("#txtTotalHijosVivos").val(vTotal);
+
+    })
+
+    $("#txtMujeresVivos").focusout(function () {
+        var vTotal = (parseFloat($("#txtVaronesVivos").val()) + parseFloat($("#txtMujeresVivos").val()));
+        $("#txtTotalHijosVivos").val(vTotal);
+    })
+
+    $("#ddlDondeAtendieronParto").on("select2:select", function (a) {
+        var strdondeAtendieron = $(this).val();
+        if (strdondeAtendieron == 3) {
+            $('#txtDondeAtendieronParto').prop("disabled", false);
+        }
+        else {
+            $('#txtDondeAtendieronParto').prop("disabled", true);
+        }
+    }); 
+</script>
+, true);
+}
+

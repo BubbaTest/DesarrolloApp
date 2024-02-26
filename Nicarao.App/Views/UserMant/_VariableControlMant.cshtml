@@ -1,0 +1,299 @@
+﻿@model  PJN.DAL.Model.GENERAL.VARIABLECONTROL
+
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <div class="row justify-content-center">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="VariableId">
+                            @Html.TextBoxFor(model => model.VariableId, new { id = "txtVCId", PlaceHolder = "VariableId", @class = "form-control", autocomplete = "off" })
+                            <span>VariableId</span>
+                        </label>
+                        @Html.ValidationMessage("variableid", "* Campo Requerido *", new { id = "lblvariableid", @style = "color:red; display: none;" })
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Tabla">
+                            @Html.TextBoxFor(model => model.Cadena, new { id = "txtTabla", PlaceHolder = "Tabla", @class = "form-control" })
+                            <span>Tabla</span>
+                        </label>
+                        @Html.ValidationMessage("tabla", "* Campo Requerido *", new { id = "lbltabla", @style = "color:red; display: none;" })
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Campo">
+                            @Html.TextBoxFor(model => model.Cadena, new { id = "txtCampo", PlaceHolder = "Campo", @class = "form-control" })
+                            <span>Campo</span>
+                        </label>
+                        @Html.ValidationMessage("campo", "* Campo Requerido *", new { id = "lblcampo", @style = "color:red; display: none;" })
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Campo2">
+                            @Html.TextBoxFor(model => model.Cadena, new { id = "txtCampo2", PlaceHolder = "Campo2", @class = "form-control", Value = "NULL" })
+                            <span>Campo2</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Campo3">
+                            @Html.TextBoxFor(model => model.Cadena, new { id = "txtCampo3", PlaceHolder = "Campo3", @class = "form-control", Value = "NULL" })
+                            <span>Campo3</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center" id="ActivoEs">
+                <label class="input-control checkbox small-check">
+                    <input type="checkbox" id="activoes" value="true" checked>
+                    <span class="check"></span>
+                    <span class="caption">Catalogo</span>
+                </label>
+                <label class="input-control checkbox small-check">
+                    <input type="checkbox" id="inactivoes" value="false">
+                    <span class="check"></span>
+                    <span class="caption">Formulario</span>
+                </label>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="catalogo">
+                            @Html.TextBoxFor(model => model.Catalogo, new { id = "txtCatalogo", PlaceHolder = "Catalogo", @class = "form-control" })
+                            <span>Catalogo</span>
+                        </label>
+                        @Html.ValidationMessage("catalogo", "* Campo Requerido *", new { id = "lblcatalogo", @style = "color:red; display: none;" })
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Censo/Encuesta">
+                            @Html.DropDownListFor(model => model.CenEnc, new SelectList(ViewBag.CenEnc as System.Collections.IEnumerable, "Id", "Descripcion"),
+                                "", new { id = "ddlVCenEnc", @class = "form-control sel", @style = "width:100%;" })
+                            <span>Censo/Encuesta:</span>
+                        </label>
+                        @Html.ValidationMessage("vcenenc", "* Campo Requerido *", new { id = "lblvcenenc", @style = "color:red; display: none;" })
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Vista">
+                            @Html.TextBoxFor(model => model.Catalogo, new { id = "txtVista", PlaceHolder = "Vista", @class = "form-control" })
+                            <span>Vista</span>
+                        </label>
+                        @Html.ValidationMessage("vista", "* Campo Requerido *", new { id = "lblvista", @style = "color:red; display: none;" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row" style=" height: 100px; align-content: center;">
+                        <div class="col-md-12 d-flex justify-content-center" id="rowButtons">
+                            <button class="btn btn-primary" style="margin-right:10px;" data-tabcontinuar="data-tabcontinuar" id="btnGuardaVC" onclick="AgregarVC()">
+                                <span>Guardar</span>
+                                <span class="fa fa-database"></span>
+                            </button>
+                            <button class="btn btn-secondary" style="margin-right:10px; display:none" data-tabcontinuar="data-tabcontinuar" id="btnActualizaVC" onclick="ActualizarVC('Actualiza')">
+                                <span>Actualizar</span>
+                                <span class="fa fa-database"></span>
+                            </button>
+                            <button class="btn btn-success" style="margin-right:10px;" data-tabcontinuar="data-tabcontinuar" id="btnNuevoVC" onclick="NuevaVC()">
+                                <span>Nuevo</span>
+                                <span class="fa fa-plus"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@using (Html.BeginScriptContext())
+{
+    Html.AddScriptBlock(
+        @<script type="text/javascript">
+            function ActualizarVC(estado) {
+                var bandera = true;
+                var Activo;
+                if ($('#txtVCId').val().toString().length < 1) {
+                    $("#lblvariableid").show();
+                    bandera = false;
+                }
+                if ($('#txtTabla').val().toString().length < 1) {
+                    $("#lbltabla").show();
+                    bandera = false;
+                }
+                if ($('#txtCatalogo').val().toString().length < 1) {
+                    $("#lblcatalogo").show();
+                    bandera = false;
+                }
+
+                if ($('#ddlVCenEnc').val() == "" || $('#ddlVCenEnc').val() == null) {
+                    $("#lblvcenenc").show();
+                    bandera = false;
+                } 
+                if ($('#txtVista').val().toString().length < 1) {
+                    $("#lblvista").show();
+                    bandera = false;
+                }
+
+                if (bandera == true) {
+                    $("#lblvariableid").hide();
+                    $("#lblcadena").hide();
+                    $("#lblcatalogo").hide();
+                    $("#lblvcenenc").hide();
+                    $("#lblvista").hide();
+
+                    var sCadena = $('#txtTabla').val() + "/" + $('#txtCampo').val() + "/" + $('#txtCampo2').val() + "/" + $('#txtCampo3').val();
+                    var listaCheck = $("#ActivoRol input[type='checkbox']");
+                        $.each(listaCheck, function (index, value) {
+                            if ($(value).prop('checked') === true) {
+                                Activo = value.value;
+                            }
+                        })
+
+                    var vcjson = JSON.stringify({ "VariableId": $('#txtVCId').val(), "Cadena": sCadena, "EsCatalogo": Activo, "Catalogo": $('#txtCatalogo').val(), "CenEnc": $('#ddlVCenEnc').val(), "Vista": $('#txtVista').val() });
+                    var url = obtenerURL('/UserMant/ActualizarVariableControl?vcjson=' + vcjson);
+                        $.post(url)
+                            .done(function (data) {
+                                var listado = JSON.parse(data);
+                                if (listado.Resultado === "true") {
+                                    $('#frVariableControl').empty();
+                                    $('#frVariableControl').load(obtenerURL("/UserMant/ListaVariableControl"));
+                                    alertify.alert().destroy();
+                                    alertify.alert('Confirmación', listado.Mensaje);
+                                    alertify.alert().setting('modal', true);
+                                }
+                                else {
+                                    alertify.alert().destroy();
+                                    alertify.alert('Advertencia', listado.Mensaje);
+                                    alertify.alert().setting('modal', true);
+                                }
+                            })
+                    closealertify();
+                }
+                else {
+                    alertify.confirm().destroy();
+                    alertify.confirm('Llenar todos los campos obligatorios!').set('basic', true);
+                    alertify.confirm().setting('modal', true);
+                }
+            }
+
+            function AgregarVC() {
+                var bandera = true;
+                var Activo;
+                if ($('#txtVCId').val().toString().length < 1) {
+                    $("#lblvariableid").show();
+                    bandera = false;
+                }
+                if ($('#txtTabla').val().toString().length < 1) {
+                    $("#lbltabla").show();
+                    bandera = false;
+                }
+                 if ($('#txtCatalogo').val().toString().length < 1) {
+                    $("#lblcatalogo").show();
+                    bandera = false;
+                }
+
+                if ($('#ddlVCenEnc').val() == "" || $('#ddlVCenEnc').val() == null) {
+                    $("#lblvcenenc").show();
+                    bandera = false;
+                } 
+                if ($('#txtVista').val().toString().length < 1) {
+                    $("#lblvista").show();
+                    bandera = false;
+                }
+
+                if (bandera == true) {
+                    $("#lblvariableid").hide();
+                    $("#lblcadena").hide();
+                    $("#lblcatalogo").hide();
+                    $("#lblvcenenc").hide();
+                    $("#lblvista").hide();
+
+                    var sCadena = $('#txtTabla').val() + "/" + $('#txtCampo').val() + "/" + $('#txtCampo2').val() + "/" + $('#txtCampo3').val();
+                    var listaCheck = $("#ActivoRol input[type='checkbox']");
+                        $.each(listaCheck, function (index, value) {
+                            if ($(value).prop('checked') === true) {
+                                Activo = value.value;
+                            }
+                        })
+
+                    var vcjson = JSON.stringify({ "VariableId": $('#txtVCId').val(), "Cadena": sCadena, "EsCatalogo": Activo, "Catalogo": $('#txtCatalogo').val(), "CenEnc": $('#ddlVCenEnc').val(), "Vista": $('#txtVista').val() });
+                    var url = obtenerURL('/UserMant/AgregarVariableControl?vcjson=' + vcjson);
+                        $.post(url)
+                            .done(function (data) {
+                                var listado = JSON.parse(data);
+                                if (listado.Resultado === "true") {
+                                    $('#frVariableControl').empty();
+                                    $('#frVariableControl').load(obtenerURL("/UserMant/ListaVariableControl"));
+                                    alertify.alert().destroy();
+                                    alertify.alert('Confirmación', listado.Mensaje);
+                                    alertify.alert().setting('modal', true);
+                                }
+                                else {
+                                    alertify.alert().destroy();
+                                    alertify.alert('Advertencia', listado.Mensaje);
+                                    alertify.alert().setting('modal', true);
+                                }
+                            })
+                    closealertify();
+                }
+                else {
+                    alertify.confirm().destroy();
+                    alertify.confirm('Llenar todos los campos obligatorios!').set('basic', true);
+                    alertify.confirm().setting('modal', true);
+                }
+            }
+
+            function NuevaVC() {
+                $('#txtVCId').val("");
+                $('#txtTabla').val("");
+                $('#txtCampo').val("");
+                $('#txtCampo2').val("");
+                $('#txtCampo3').val("");
+                $('#ActivoEs input[type=checkbox]').prop("checked", false);
+                $('#activoes').prop('checked', true);
+                $('#txtCatalogo').val("");
+                $('#ddlVCenEnc').select2("val", "ca");
+                $('#txtVista').val("");
+                $('#btnActualizarVC').hide();
+                $('#btnGuardaVC').show();
+            }
+
+            $(document).ready(function () {
+                $('#ActivoEs input[type=checkbox]').click(function () {
+                    $('#ActivoEs input[type=checkbox]').prop("checked", false);
+                    $(this).prop("checked", true);
+                });
+
+                $(".sel").select2({
+                    placeholder: "Seleccione Opción",
+                    allowClear: true,
+                });
+            })
+        </script>
+    , true);
+}
+
+
+

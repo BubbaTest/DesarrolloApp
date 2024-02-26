@@ -1,0 +1,178 @@
+﻿@using Gaia.Helpers;
+@model Gaia.DAL.Model.Persona
+
+<style>
+    strong {
+        color: darkBlue;
+    }
+
+    .uppercase {
+        text-transform: uppercase;
+    }
+
+    .vw_GestionarSupervision {
+        display: grid;
+        grid-template: 100%/100%;
+        margin-top: 1%;
+    }
+
+    .GS-header {
+        background: #2196F3;
+    }
+
+    .GS-body {
+        display: grid;
+        grid-template: 100% /20% 80%;
+    }
+
+    .GS-menu {
+        height: fit-content;
+        overflow: auto;
+        position: relative;
+    }
+
+    .GS-contentGS {
+        background: white;
+        overflow: auto;
+    }
+
+    .dataTables_empty {
+        display: none;
+    }
+
+    table.cell-border {
+        width: 100%;
+        clear: both;
+    }
+
+        table.cell-border th {
+            padding: 5px;
+            border: 1px solid #fff;
+        }
+
+        table.cell-border thead th {
+            text-align: center;
+            background: #66a9bd;
+        }
+
+        table.cell-border tbody td {
+            text-align: center;
+        }
+
+    .btn-link {
+        font-weight: 450;
+        color: #000000;
+        text-decoration: none;
+    }
+
+        .btn-link:hover {
+            text-decoration: none;
+        }
+
+    #accordionExample i {
+        margin-right: 5px;
+    }
+
+    .card-header {
+        background-color: #206699;
+    }
+
+    .card-title {
+        background-color: #2196F3;
+    }
+
+    .card-subtitle {
+        background-color: #e7d5ec;
+    }
+
+    .validar {
+        color: red;
+        display: none;
+        font-size: 11px;
+    }
+</style>
+
+<fieldset class="scheduler-border">
+    <div class="row justify-content-center">
+        <div class="col-md-2">
+            <div class="form-group">
+                <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Identificación">
+                    @Html.TextBoxFor(model => model.Identificador, new { id = "txtIdentificacion", placeholder = "Identificación", @class = "form-control", autocomplete = "off" })
+                    @Html.ValidationMessage("identificacion", "* Campo Requerido *", new { id = "lblidentificacion", @style = "color:red; display: none;" })
+                    <span>No Identificación</span>
+                </label>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <button type="button" id="btnEvaluarActResolucion" class="btn btn-light" style="border-radius:50%;" onclick="ValidarNicaraoActuacion()" data-toggle="tooltip" data-placement="top" title="Buscar">
+                <span class="fa fa-search" style="color:blue;font-size: 2rem;"></span>
+            </button>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Número de Boleta">
+                    @Html.TextBoxFor(model => model.Identificador, new { id = "txtBoleta", placeholder = "Número de Boleta", @class = "form-control", autocomplete = "off", disabled = "disabled" })
+                    <span>Número de Boleta</span>
+                </label>
+            </div>
+        </div>
+    </div>
+</fieldset>
+
+<div class="vw_GestionarSupervision">
+    <div class="GS-body">
+        <div class="GS-menu">
+            <nav id="sidebar-dgcip">
+                <ul class="list-unstyled components">
+                    <li id="frameHeader" class="sidebar-dgcip-header-li">
+                        <h2 class="fa fa-home sidebar-dgcip-header">Menu</h2>
+                    </li>
+                    <li id="frameIdeUbiUso" class="nav-item" data-toggle="tooltip" data-placement="top" title="Identificación, Ubicación Establecimiento">
+                        <a href="#" class="nav-a" onclick="IdeUbiEst()">&nbsp Identificación, Ubicación Establecimiento</a>
+                    </li>
+                    <li id="frameVolverInicio" class="nav-item" data-toggle="tooltip" data-placement="top" title="Resultado Entrevista">
+                        <a href="#" class="nav-a" onclick="REECO()">&nbsp Resultado Entrevista</a>
+                    </li>
+                    <li id="frameResVivIde" class="nav-item" data-toggle="tooltip" data-placement="top" title="Características del Establecimiento Económico y/o Hogar con Actividad Económica">
+                        <a href="#" class="nav-a" onclick="CarEstEco()">&nbsp Características del Establecimiento y/o Hogar Actividad Económica</a>
+                    </li>                    
+                </ul>
+            </nav>
+        </div>
+        <div class="GS-contentGS">
+            <div id="cell-content22" class="GS-internal">
+            </div>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginScriptContext())
+{
+    Html.AddScriptBlock(
+@<script type="text/javascript">
+    $(document).ready(function () {
+        $(".sel").select2({
+            placeholder: "Seleccione Opción",
+            allowClear: true,
+        });
+
+        $("#txtIdentificacion").inputmask("999-999999-9999A");
+    })
+
+    function IdeUbiEst() {
+        $('#cell-content22').empty();
+        $("#cell-content22").load(obtenerURL("/CensoEncuesta/IdentificacionUbicacionEstablecimiento"));
+    }    
+
+    function REECO() {
+        $('#cell-content22').empty();
+        $("#cell-content22").load(obtenerURL("/CensoEncuesta/ResultadoEntrevistaEconomica"));
+    }
+
+    function CarEstEco() {
+        $('#cell-content22').empty();
+        $("#cell-content22").load(obtenerURL("/CensoEncuesta/CaracteristicasEstablecimientoEconomico"));
+    }
+</script>
+, true);
+}

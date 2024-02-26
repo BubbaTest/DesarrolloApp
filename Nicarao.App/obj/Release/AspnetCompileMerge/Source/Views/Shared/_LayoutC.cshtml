@@ -1,0 +1,206 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <style type="text/css">
+        /*Color de Background y Border Purple*/
+        .border-purple-secondary {
+            border-color: #aa66cc !important;
+        }
+
+        .bg-purple-secondary {
+            background-color: #aa66cc !important;
+        }
+
+        a.bg-purple-secondary:focus, a.bg-purple-secondary:hover {
+            background-color: #aa66cc !important;
+        }
+
+        /* Estilo Fernando para el input de password */
+
+        .cont-inputpass {
+            position: relative;
+        }
+
+        .password {
+            height: 37px;
+            width: 100%;
+        }
+
+        .ico {
+            display: none;
+            position: absolute;
+            top: 50%;
+            right: 12px;
+            background: #dddddd;
+            border-radius: 8px;
+            padding: 3px;
+            transform: translate(0%, -50%);
+            -webkit-transform: translate(0%, -50%);
+        }
+
+            .password:hover + .ico, .ico:hover {
+                display: block;
+                cursor: pointer;
+            }
+        /* Fin del estilo de fernando para el input de password */
+    </style>
+
+    @Styles.Render("~/Content/gaia_css/menu.css")
+    @Styles.Render("~/Content/gaia_css/formulario.css")
+    @Styles.Render("~/Content/css/template")
+    @Styles.Render("~/Content/css/select2")
+    @Styles.Render("~/Content/css/tooltip")
+    @Styles.Render("~/Content/css/alertify")
+    @Styles.Render("~/Content/css/datatables")
+    @Styles.Render("~/Content/css/app")
+
+</head>
+<body>
+    <div class="menugaia">
+        <nav id='cssmenu' style="z-index:1048;position:fixed;width:100%;">           
+            <ul class="menuResponsive">
+                <!-- Empieza lógica para el menú -->
+                <li class="nav-item"><a class="nav-link" onclick="fnHome()"><spam class="fa fa-home"></spam>  Inicio</a></li>
+            </ul>
+
+            <ul>
+                <li class="nav-item">
+                    <a class="nav-link">Asignar</a>
+                    <ul>                        
+                        <li>
+                            <a href="~/CodificarCP/_CodificarTrazas" class="nav-link"
+                               data-clic="data-clic" data-ajax="true" data-ajax-method="GET" data-ajax-mode="replace"
+                               data-ajax-update="#cell-content">
+                                Codificar Trazas
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <ul id="ulPerfil">
+                <li>
+                    <a href="~/CodificarCp/DescargaManual" class="nav-link"
+                       data-clic="data-clic" data-ajax="true" data-ajax-method="GET" data-ajax-mode="replace"
+                       data-ajax-update="#cell-content">
+                        Manual
+                    </a>
+                </li>
+                <!-- Empieza el menu del perfil -->
+                <li class="nav-item"><a class="nav-link" onclick="CerrarSesion()"><spam class="fa fa-sign-out"></spam> Salir</a></li>
+            </ul>
+            <input type="hidden" id="sUsuario" name="sUsuario" value="@ViewBag.sUsuario" />
+            <input type="hidden" id="uRol" name="uRol" value="@ViewBag.sRol" />
+            <input type="hidden" id="mUsuario" name="mUsuario" value="@ViewBag.UsuarioMaquina" />
+            <input type="hidden" id="mIp" name="mIp" value="@ViewBag.Ip" />
+        </nav>
+    </div>
+
+    <main role="main">
+        <div>
+            <div id="cell-content" style="padding-top: 5%;">
+                @RenderBody()
+            </div>
+        </div>
+    </main>
+    <div id="ModalGenerico" style="display:none"></div>
+    @using (Html.BeginScriptContext())
+            {
+                Html.AddScriptBlock(
+                    @<script type="text/javascript">
+
+
+                        $(document).ajaxStart(function () {
+                            var oaw = new AlertWaiting()
+                            oaw.show();
+                        });
+
+                        $(document).ajaxComplete(function (event, XMLHttpRequest, ajaxOptions) {
+                            var VistaWizzaard = document.getElementsByClassName("wizzard-container");
+
+                            if (VistaWizzaard.length > 0) { document.body.style.zoom = "79%"; }
+                            else { document.body.style.zoom = "100%"; }
+
+                            var oaw = new AlertWaiting()
+                            oaw.close();
+
+                            if (XMLHttpRequest.status !== 200 && XMLHttpRequest.status !== 0)
+                            { showalertifyfail(XMLHttpRequest.status, XMLHttpRequest.statusText); }
+                        });
+
+                        function obtenerURL(sUrl) {
+                            var path_name = "";
+                            if (sUrl.length <= 0) {
+                                console.log("obtenerURL: la URL es un parametro requerido");
+                                return;
+                            } //Agregar slash en caso de que la url no lo contenga
+                            if (sUrl.substr(0, 1) != "/") {
+                                sUrl = "/" + sUrl;
+                            }
+
+                            if (window.location.pathname != "/") {
+                                path_name = window.location.pathname;
+
+                            }
+                            // Cuando el sitio este alojado en una ruta distinta al nodo raiz
+                            if (path_name.includes("/Usuario/Login")) {
+                                path_name = path_name.replace("/Usuario/Login", "");
+                            }
+                            return (path_name + sUrl);
+                        }
+
+                        function fnHome() { $('#cell-content').empty();}
+
+                        function InicioVolver() { window.location.href = obtenerURL("/Usuario/Login"); }
+
+                        function CerrarSesion()
+                        {
+                            url = $(location).attr("origin") + obtenerURL("/Home/CerrarSesion");
+                            $(location).attr("href", url);
+                        }
+
+                        $(document).ready(function () {
+                            window.RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
+                            var pc = new RTCPeerConnection({ iceServers: [] }), noop = function () { };
+                            pc.createDataChannel("");
+                            pc.createOffer(pc.setLocalDescription.bind(pc), noop);
+                            pc.onicecandidate = function (ice) {
+                                if (!ice || !ice.candidate || !ice.candidate.candidate) return;
+                                var myIP = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/.exec(ice.candidate.candidate)[1];
+                                $("#IPADDRESS").val(myIP);
+                                pc.onicecandidate = noop;
+                            };
+                        });
+
+                    </script>
+            , true);
+
+        Html.AddScriptFile("~/bundles/jquery");
+        Html.AddScriptFile("~/bundles/template");
+        Html.AddScriptFile("~/bundles/jqueryval");
+        Html.AddScriptFile("~/bundles/inputmask");
+        Html.AddScriptFile("~/bundles/select2");
+        Html.AddScriptFile("~/bundles/tooltip");
+        Html.AddScriptFile("~/bundles/alertify");
+        Html.AddScriptFile("~/bundles/datatables");
+        Html.AddScriptFile("~/bundles/app");
+    }
+
+    @*@Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/template")
+        @Scripts.Render("~/bundles/jqueryval")
+        @Scripts.Render("~/bundles/inputmask")
+        @Scripts.Render("~/bundles/select2")
+        @Scripts.Render("~/bundles/tooltip")
+        @Scripts.Render("~/bundles/alertify")
+        @Scripts.Render("~/bundles/datatables")
+        @Scripts.Render("~/bundles/app")*@
+
+    @RenderSection("scripts", required: false)
+    @Html.RenderScripts(Scripts.Render)
+</body>
+</html>
+

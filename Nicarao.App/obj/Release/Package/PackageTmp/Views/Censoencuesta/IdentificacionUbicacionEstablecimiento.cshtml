@@ -1,0 +1,150 @@
+﻿@using Gaia.Helpers;
+@model Gaia.DAL.Model.Persona
+
+@{
+    string addres = "apiAlexaLocal";
+}
+
+<div class="content">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0">Sección I-A. IDENTIFICACION Y UBICACION GEOGRAFICA DEL ESTABLECIMIENTO</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Departamento">
+                            <select id="ddlDepartamento" class="form-control sel"></select>
+                            <span>Departamento</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Municipio">
+                            <select id="ddlMunicipio" class="form-control sel"></select>
+                            <span>Municipio</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Area de Residencia">
+                            <select id="ddlAreaResidencia" class="form-control sel"></select>
+                            <span>Area de Residencia</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Distrito">
+                            <select id="ddlDistrito" class="form-control sel" disabled></select>
+                            <span>Distrito</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Barrio">
+                            <select id="ddlBarrio" class="form-control sel"></select>
+                            <span>Barrio</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Comarca">
+                            <select id="ddlComarca" class="form-control sel" disabled></select>
+                            <span>Comarca</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Comunidad">
+                            <select id="ddlComunidad" class="form-control sel" disabled></select>
+                            <span>Comunidad</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Localidad">
+                            <select id="ddlLocalidad" class="form-control sel" disabled></select>
+                            <span>Localidad</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Dirección de le Edificación">
+                            @Html.TextAreaFor(model => model.Identificador, new { id = "txtDireccion", PlaceHolder = "Observación", @class = "form-control", autocomplete = "off" })
+                            <span>Dirección de le Edificación</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginScriptContext())
+{
+    Html.AddScriptBlock(
+@<script type="text/javascript">
+    var dato;
+    $(document).ready(function () {
+        $(".sel").select2({
+            placeholder: "Seleccione Opción",
+            allowClear: true,
+        });
+
+        cargaTipoObjeto();
+    })
+
+    function cargaTipoObjeto() {
+        $.ajax({
+            url: obtenerURL('@HtmlEncriptUrl.EncodeUrl(addres, "catalogos/Listar/{seccion}", "get")'),
+            type: "get",
+            dataType: "json",
+            data: { "seccion": "IdentificacionUbicacionGeograficaEdificacion" },
+            success: function (result) {
+                dato = result[0].JsonDatos;
+                $(dato.JsonDepartamentos).each(function () {
+                    $("#ddlDepartamento").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                });
+                $(dato.JsonAreaResidencia).each(function () {
+                    $("#ddlAreaResidencia").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                });
+                $(dato.JsonDistrito).each(function () {
+                    $("#ddlDistrito").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                });
+            },
+            error: function (data) {
+                alertify.alert().destroy();
+                alertify.alert('Confirmación', data.Mensaje);
+                alertify.alert().setting('modal', true);
+            }
+        });
+    }
+
+    $("#ddlDepartamento").on("select2:select", function (a) {
+        var strDept = $(this).val();
+        $("#ddlMunicipio option").each(function () { $(this).remove(); });
+        var datoespecifico = dato.JsonMunicipios.filter(e => (e.Departamento == strDept));
+        $(datoespecifico).each(function () {
+            $("#ddlMunicipio").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+        });
+    });
+
+    $("#ddlMunicipio").on("select2:select", function (a) {
+        var strMun = $(this).val();
+        if (strMun == 5525) { $('#ddlDistrito').prop("disabled", false); }
+    });
+</script>
+, true);
+}
+

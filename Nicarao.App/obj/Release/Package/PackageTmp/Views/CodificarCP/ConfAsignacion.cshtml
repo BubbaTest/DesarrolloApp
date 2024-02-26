@@ -1,0 +1,272 @@
+﻿@model Nicarao.DAL.Model.CEPOV.CUTP
+
+@Html.Hidden("txtUsuario", (object)ViewBag.Usuario.ToString())
+<div class="content">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0">CONFIGURAR ASIGNACION</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Censo/Encuesta">
+                                    @Html.DropDownListFor(model => model.CodTecnico, new SelectList(ViewBag.CenEnc as System.Collections.IEnumerable, "Id", "Descripcion"),
+                                        "", new { id = "ddlCenEnc", @class = "form-control sel", @style = "width:100%;" })
+                                    <span>Censo/Encuesta:</span>
+                                </label>
+                                @Html.ValidationMessage("vcenenc", "* Campo Requerido *", new { id = "lblvcenenc", @style = "color:red; display: none;" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Personal a Cargo">
+                                    @Html.DropDownListFor(x => x.CodTecnico, new SelectList(ViewBag.Codificador as System.Collections.IEnumerable, "UsuarioId", "NombreCompleto"),
+                                "", new { id = "ddlCensista", @class = "form-control sel", @style = "width:100%;", disabled = "disabled" })
+                                    <span>Personal a Cargo:</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Departamento">
+                                    @Html.DropDownListFor(model => model.CodTecnico, new SelectList(ViewBag.departamento as System.Collections.IEnumerable, "CodDepartamento", "NomDepartamento"),
+                                "", new { id = "ddlDepartamento", @class = "form-control sel", @style = "width:100%;", disabled = "disabled" })
+                                    <span>Departamento:</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Municipio">
+                                    <select id="ddlMunicipio" class="form-control sel"></select>
+                                    <span>Municipio:</span>
+                                </label>
+                            </div>
+                        </div>                       
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Segmento">
+                                    <select id="ddlSegmento" class="form-control sel"></select>
+                                    @Html.ValidationMessage("desp", "* Campo Requerido *", new { id = "lbldesp", @style = "color:red; display: none;" })
+                                    <span>Segmento:</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row" style=" height: 100px; align-content: center;">
+                                <div class="col-md-12 d-flex justify-content-center" id="rowButtons">
+                                    <button class="btn btn-primary" style="margin-right:10px; display:none" data-tabcontinuar="data-tabcontinuar" id="bnAgregarConf" onclick="AgregarAsignacion()">
+                                        <span>Agregar</span>
+                                        <span class="fa fa-plus"></span>
+                                    </button>
+                                    <button class="btn btn-secondary" style="margin-right:10px; display:none" data-tabcontinuar="data-tabcontinuar" id="btnListarConf" onclick="CargaListado()">
+                                        <span>Listar</span>
+                                        <span class="fa fa-search"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container" id="contDetalleAsig">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@using (Html.BeginScriptContext())
+{
+    Html.AddScriptBlock(
+@<script type="text/javascript">
+    $(document).ready(function () {
+                $(".sel").select2({
+                    placeholder: "Seleccione Opción",
+                    allowClear: true,
+                });
+    }) 
+
+    $("#ddlCenEnc").on("change", function (a) {
+        $('#ddlCensista').prop("disabled", false);
+    });
+
+    $("#ddlCensista").on("change", function (a) {
+        $('#ddlDepartamento').prop("disabled", false);
+    });
+
+    $("#ddlDepartamento").on("change", function (a) {
+        var strDept = $(this).val();
+        $("#ddlMunicipio option").each(function () { $(this).remove(); });
+        var sUrl = obtenerURL("/CodificarCP/ddlMunicipio?Departamento=" + strDept);
+        $("#ddlMunicipio").load(sUrl);
+        $("#btnListarConf").show();
+    });
+
+    $("#ddlMunicipio").on("change", function (a) {
+        var strMun = $(this).val();
+        $("#ddlSegmento option").each(function () { $(this).remove(); });
+        var sUrl = obtenerURL("/CodificarCP/ddlSegmento?Municipio=" + strMun);
+        $("#ddlSegmento").load(sUrl);
+    });
+
+    $("#ddlSegmento").on("select2:select", function () {
+        $("#bnAgregarConf").show();
+    }) 
+
+    function AgregarAsignacion() {
+        var bandera = true;
+        var pljson, url;
+
+        if ($('#ddlSegmento').val() == null || $('#ddlSegmento').val() == "") {
+            $("#lblsegmento").show();
+            bandera = false;
+        }
+
+        if (bandera == true) {
+            $("#lblsegmento").hide();
+
+            if ($("#ddlSegmento").val() == "Todos") {
+                    url = obtenerURL('/CodificarCP/GuardarTodosAsignaSegmentoMunicipio?UsuarioId=' + $('#ddlCensista').val() + '&AsignoId=' + $("#txtUsuario").val() + '&IDMUNIC=' + $("#ddlMunicipio").val() + '&CenEnc=' + $("#ddlCenEnc").val());                             
+            }
+            else {
+                pljson = JSON.stringify({ "IdSegmento": $('#ddlSegmento').val(), "IDMUNIC": $('#ddlMunicipio').val(), "UsuarioId": $('#ddlCensista').val(), "Activo": true, "AsignoId": $("#txtUsuario").val(), "CenEnc": $("#ddlCenEnc").val() });                
+                url = obtenerURL('/CodificarCP/AgregarAsignacion?pljson=' + pljson);
+            }
+
+            $.post(url)
+                .done(function (data) {
+                    var listado = JSON.parse(data);
+
+                    if (listado.Resultado === "true") {
+                        LimpiaSegmentoDDL();
+                        alertify.alert().destroy();
+                        alertify.alert('Confirmación', listado.Mensaje);
+                        alertify.alert().setting('modal', true);
+                    }
+                    else {
+                        alertify.alert().destroy();
+                        alertify.alert('Advertencia', listado.Mensaje);
+                        alertify.alert().setting('modal', true);
+                    }
+                })
+        }
+        else {
+            alertify.confirm().destroy();
+            alertify.confirm('Llenar todos los campos obligatorios!').set('basic', true);
+            alertify.confirm().setting('modal', true);
+        }
+    }
+
+    function LimpiaSegmentoDDL() {
+        $('#ddlSegmento').select2("val", "ca");
+        var strMun = $("#ddlMunicipio").val();
+        $("#ddlSegmento option").each(function () { $(this).remove(); });
+        var sUrl = obtenerURL("/CodificarCP/ddlSegmento?Municipio=" + strMun);
+        $("#ddlSegmento").load(sUrl, function (response, status, xhr) {
+            if (status === "success") {
+                CargaListado();
+            }
+        });
+    }
+
+    function EliminaAsignacion(obj) {
+        alertify.defaults.theme.ok = "button warning";
+        alertify.defaults.theme.cancel = "button primary";
+        alertify.confirm().destroy();
+        alertify.confirm('Advertencia', 'Esta seguro de querer Eliminar la Asignación?'
+        , function () { //onOk
+            var vSegmento = $(obj).attr('id');
+            var url = obtenerURL('/CodificarCP/EliminaAsignacion?asignacionjson=' + vSegmento);
+            $.post(url)
+                .done(function (data) {
+                    var listado = JSON.parse(data);
+
+                    if (listado.Resultado === "true") {
+                        LimpiaSegmentoDDL();
+                        CargaListado();
+                        alertify.alert().destroy();
+                        alertify.alert('Confirmación', listado.Mensaje);
+                        alertify.alert().setting('modal', true);
+                    }
+                    else {
+                        alertify.alert().destroy();
+                        alertify.alert('Advertencia', listado.Mensaje);
+                        alertify.alert().setting('modal', true);
+                    }
+                })
+        }
+        , function () { })//onCancel
+        .set('labels', { ok: '< Si >', cancel: '< No >' });
+    }
+
+    function CargaListado() {
+        var url;
+        var vDepartamento = $("#ddlDepartamento").val();
+        var vMunicipio = $("#ddlMunicipio").val();
+        var vUsuario = $("#txtUsuario").val();
+        if ($("#ddlMunicipio").val() == null || $("#ddlMunicipio").val() == "") { url = obtenerURL('/CodificarCP/ObtenerAsignacion?Usuario=' + vUsuario + '&CodDepartamento=' + vDepartamento)}
+        else { url = obtenerURL('/CodificarCP/ObtenerAsignacion?Usuario=' + vUsuario + '&CodDepartamento=' + vDepartamento + '&CodMunicipio=' + vMunicipio)}
+        $('#contDetalleAsig').empty();
+        $("#contDetalleAsig").load(obtenerURL("/CodificarCP/_ListaAsignacion"), function (response, status, xhr) {
+            if (status === "success") {
+                table = $('#dtListasAsignacion').DataTable({
+                    ajax: {
+                            url: url,
+                            dataSrc: "",
+                        },
+                    rowId: 'AsignacionGUID',
+                    retrieve: true,
+                    columns: [
+                        {
+                            'data': null,
+                            'render': function (data, type, row) {
+                                return '<spam id="' + row.Id_Segment + '"class="fa fa-close" style="color: red; font-size: 1.5rem;cursor: pointer;" data-toggle="tooltip" data-placement="top" title="Eliminar" onclick="EliminaAsignacion(this)"></spam>'
+                            }, width: "5%", orderable: false, searchable: false
+                        },
+                        { data: "NomDepartamento" },
+                        { data: "NomMunicipio" },
+                        { data: "NombreCompleto" },
+                        { data: "Cod_Segmen" }
+                    ],
+                    fnInitComplete: function (settings, json) {
+                        var api = this.api();
+                        var table = $('#dtListasAsignacion').DataTable();
+
+                        @*table.columns().every(function (index) {
+                            $('#dtListasAsignacion thead tr:eq(0) th:eq(' + index + ') input').on('keyup change', function () {
+                                table.column($(this).parent().index() + ':visible')
+                                    .search(this.value)
+                                    .draw();
+                            });
+                        })*@
+
+                        api.$('td').click(function (xolumna) {
+                            if (xolumna.currentTarget.cellIndex < 1 ) {
+                            } else { api.search(this.innerHTML).draw(); }
+                        });
+                    },
+                    dom: 'Bfrtip',
+                    buttons: [{ extend: 'pdfHtml5', title: 'LISTADO DE ASIGNACION', text: 'Exportar Pdf', orientation: 'landscape', pageSize: 'LEGAL' }, { extend: 'excelHtml5', title: 'LISTADO DE EXPEDIENTES', text: 'Exportar Excel' }],
+                    language: { url: obtenerURL("/Json/Spanish.json") }, lengthMenu: [5], bLengthChange: false, searching: true
+                });
+
+                $('#dtListasAsignacion tbody').on('click', 'tr', function () {
+                    $("#dtListasAsignacion tr.selected").removeClass();
+                    $(this).addClass('selected');
+                });
+            }
+        })
+    }
+
+</script>
+, true);
+}
+

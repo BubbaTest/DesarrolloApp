@@ -1,0 +1,23 @@
+﻿<div class="content full-size" id="documentosAsig">
+    <table id="dtListasAsignacion" class="display cell-border" cellspacing="0">        
+        <thead>
+            <tr>
+                <th></th>
+                <th class="sortable-column">DEPARTAMENTO</th>
+                <th class="sortable-column">MUNICIPIO</th>
+                <th class="sortable-column">PERSONAL ASIGNADO</th>
+                <th class="sortable-column">SEGMENTO</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@using (Html.BeginScriptContext())
+{
+    Html.AddScriptBlock(
+        @<script type="text/javascript">
+        </script>
+    , true);
+}
+
+

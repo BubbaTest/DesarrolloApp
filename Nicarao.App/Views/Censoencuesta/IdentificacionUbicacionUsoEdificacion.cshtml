@@ -1,0 +1,237 @@
+﻿@using Gaia.Helpers;
+@model Gaia.DAL.Model.Persona
+
+@{
+    string addres = "apiAlexaLocal";
+}
+
+<div class="content">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0">Sección I-A. IDENTIFICACION Y UBICACION GEOGRAFICA DE LA EDIFICACION</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Departamento">
+                            <select id="ddlDepartamento" class="form-control sel"></select>
+                            <span>Departamento</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Municipio">
+                            <select id="ddlMunicipio" class="form-control sel"></select>
+                            <span>Municipio</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Area de Residencia">
+                            <select id="ddlAreaResidencia" class="form-control sel"></select>
+                            <span>Area de Residencia</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Distrito">
+                            <select id="ddlDistrito" class="form-control sel" disabled></select>
+                            <span>Distrito</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Barrio">
+                            <select id="ddlBarrio" class="form-control sel"></select>
+                            <span>Barrio</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Comarca">
+                            <select id="ddlComarca" class="form-control sel" disabled></select>
+                            <span>Comarca</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Comunidad">
+                            <select id="ddlComunidad" class="form-control sel" disabled></select>
+                            <span>Comunidad</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Localidad">
+                            <select id="ddlLocalidad" class="form-control sel" disabled></select>
+                            <span>Localidad</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Dirección de le Edificación">
+                            @Html.TextAreaFor(model => model.Identificador, new { id = "txtDireccion", PlaceHolder = "Observación", @class = "form-control", autocomplete = "off" })
+                            <span>Dirección de le Edificación</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<div class="content">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0">Sección I-B. USO DE LA EDIFICACION</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Uso de la Vivienda">
+                            <select id="ddlUsoVivienda" class="form-control sel"></select>
+                            <span>Uso de la Vivienda</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@using (Html.BeginScriptContext())
+{
+    Html.AddScriptBlock(
+@<script type="text/javascript">
+    var dato;
+    $(document).ready(function () {
+        $(".sel").select2({
+            placeholder: "Seleccione Opción",
+            allowClear: true,
+        });
+
+        cargaTipoObjeto();
+    })
+
+    function cargaTipoObjeto() {
+        $.ajax({
+            url: obtenerURL('@HtmlEncriptUrl.EncodeUrl(addres, "catalogos/Listar/{seccion}", "get")'),
+            type: "get",
+            dataType: "json",
+            //headers: { 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVVElMSVNBVFJJQ0UiOiJsZGF2aWxhIiwiUk9MRSI6IlN1cGVydmlzb3IiLCJleHAiOjE3MDc4MTg0NjB9.sA-cXAHPqvOeSqyxOJXUQGXxitsKV0H7pJbqwdDkbzs' },
+            data: { "seccion": "IdentificacionUbicacionGeograficaEdificacion" },
+            success: function (result) {
+                if (result.Retorno == 401) {
+                    alertify.alert().destroy();
+                    alertify.alert('Confirmación', result.Mensaje);
+                    alertify.alert().setting('modal', true);
+                }
+                else {
+                    dato = result[0].JsonDatos;
+                    $(dato.JsonDepartamentos).each(function () {
+                        $("#ddlDepartamento").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                    });
+                    $(dato.JsonAreaResidencia).each(function () {
+                        $("#ddlAreaResidencia").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                    });
+                    $(dato.JsonDistrito).each(function () {
+                        $("#ddlDistrito").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                    });
+                    $(dato.JsonUsoEdificacion).each(function () {
+                        $("#ddlUsoVivienda").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                    });
+                }
+                
+            },
+            error: function (data) {
+                alertify.alert().destroy();
+                alertify.alert('Confirmación', data.Mensaje);
+                alertify.alert().setting('modal', true);
+            }
+        });
+    }
+
+    $("#ddlDepartamento").on("select2:select", function (a) {
+        var strDept = $(this).val();
+        $("#ddlMunicipio option").each(function () { $(this).remove(); });
+        var datoespecifico = dato.JsonMunicipios.filter(e => (e.Departamento == strDept));
+        $(datoespecifico).each(function () {
+            $("#ddlMunicipio").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+        });
+    });
+
+    $("#ddlMunicipio").on("select2:select", function (a) {
+        var strMun = $(this).val();
+        if (strMun == 5525) { $('#ddlDistrito').prop("disabled", false); }
+    });
+
+    $("#ddlUsoVivienda").on("select2:select", function (a) {
+        var strusoVivienda = $(this).val();
+        if (strusoVivienda == 1) {
+            alertify.error('Pase a Seccion II, condición de ocupación', 'warning', 3, function () { });
+            $('#cell-content22').empty();
+            $("#cell-content22").load(obtenerURL("/CensoEncuesta/ResidentesViviendaIdentificacionHogares"));
+        }
+        else if (strusoVivienda == 2) {
+            alertify.error('Pase a Seccion III, tipo de vivienda colectiva', 'warning', 3, function () { });
+            $('#cell-content22').empty();
+            $("#cell-content22").load(obtenerURL("/CensoEncuesta/DatosViviendaHogarPrincipal"), function (response, status, xhr) {
+                if (status === "success") {
+                    $("#rowControl1").css({ opacity: 0.5 });
+                    $("#rowControl1").css("pointer-events", "none");
+                    $("#rowControl2").css({ opacity: 0.5 });
+                    $("#rowControl2").css("pointer-events", "none");
+                    $("#rowControl3").css({ opacity: 0.5 });
+                    $("#rowControl3").css("pointer-events", "none");
+                    $("#rowControl4").css({ opacity: 0.5 });
+                    $("#rowControl4").css("pointer-events", "none");
+                    $("#rowControl5").css({ opacity: 0.5 });
+                    $("#rowControl5").css("pointer-events", "none");
+                    $("#rowControl6").css({ opacity: 0.5 });
+                    $("#rowControl6").css("pointer-events", "none");
+                }
+            });
+        }
+        else if (strusoVivienda == 3 || strusoVivienda == 4 || strusoVivienda == 5) {
+            alertify.error('Pase a Seccion III, censo económico', 'warning', 3, function () { });
+            $('#cell-content').empty();
+            $("#cell-content").load(obtenerURL("/Censoencuesta/ContenedorCensoEconomico"));
+        }
+        else if (strusoVivienda == 6) {
+            alertify.error('Pase a Seccion V-B', 'warning', 3, function () { });
+            $('#cell-content22').empty();
+            $("#cell-content22").load(obtenerURL("/CensoEncuesta/PersonasHogar"), function (response, status, xhr) {
+                if (status === "success") {
+                    $("#rowControl1").css({ opacity: 0.5 });
+                    $("#rowControl1").css("pointer-events", "none");
+                    $("#rowControl2").css({ opacity: 0.5 });
+                    $("#rowControl2").css("pointer-events", "none");
+                    $("#rowControl3").css({ opacity: 0.5 });
+                    $("#rowControl3").css("pointer-events", "none");
+                    $('#txtTotalColectivo').prop("disabled", false);
+                    $('#txtVaronesColectivo').prop("disabled", false); 
+                    $('#txtMujeresColectivo').prop("disabled", false); 
+                }
+            });
+        }
+        else {
+            alertify.error('Pase a Seccion X', 'warning', 3, function () { });
+            $('#cell-content22').empty();
+            $("#cell-content22").load(obtenerURL("/CensoEncuesta/ResultadoEntrevistaHogar"));
+        }
+    });
+
+</script>
+, true);
+}

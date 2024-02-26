@@ -1,0 +1,2315 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.TypeScript.MSBuild.5.3.3\build\Microsoft.TypeScript.MSBuild.props" Condition="Exists('..\packages\Microsoft.TypeScript.MSBuild.5.3.3\build\Microsoft.TypeScript.MSBuild.props')" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D3EE7ED9-CDEC-4C11-95EB-DDCF47672F03}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Nicarao.App</RootNamespace>
+    <AssemblyName>Nicarao.App</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>2.6</TypeScriptToolsVersion>
+    <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Common.Logging.Elmah.v2, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.Elmah.v2.1.0.2\lib\net40\Common.Logging.Elmah.v2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Elmah, Version=1.2.14706.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=6847f3395fc61b47, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFrameworkWithHierarchyId.6.1.2\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=6847f3395fc61b47, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFrameworkWithHierarchyId.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Forloop.HtmlHelpers, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Forloop.HtmlHelpers.1.2.0.0\lib\net45\Forloop.HtmlHelpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.6.5.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.6.5\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="LinqKit, Version=1.0.0.0, Culture=neutral, PublicKeyToken=bc217f8844052a91, processorArchitecture=MSIL">
+      <HintPath>..\packages\LinqKit.1.0\lib\35\LinqKit.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Build" />
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.SqlServer.Types, Version=10.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.10.50.1600.1\lib\Net20\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\..\Gaia\Gaia.Seguridad\Content\gaia_css\formulario.css">
+      <Link>Content\gaia_css\formulario.css</Link>
+    </Content>
+    <Content Include="..\..\..\Gaia\Gaia.Seguridad\Content\gaia_css\menu.css">
+      <Link>Content\gaia_css\menu.css</Link>
+    </Content>
+    <Content Include="..\..\..\Gaia\Gaia.Seguridad\Content\gaia_css\rol.css">
+      <Link>Content\gaia_css\rol.css</Link>
+    </Content>
+    <Content Include="..\..\..\Gaia\Gaia.Seguridad\NotFound.html">
+      <Link>Error\NotFound.html</Link>
+    </Content>
+    <Content Include="..\..\..\Gaia\Gaia.Seguridad\Scripts\gaia_js\fnGaia.js">
+      <Link>Scripts\gaia_js\fnGaia.js</Link>
+    </Content>
+    <Content Include="App_Readme\Elmah.txt" />
+    <Content Include="Content\alertifyjs\alertify.css" />
+    <Content Include="Content\alertifyjs\alertify.min.css" />
+    <Content Include="Content\alertifyjs\alertify.rtl.css" />
+    <Content Include="Content\alertifyjs\alertify.rtl.min.css" />
+    <Content Include="Content\alertifyjs\themes\bootstrap.css" />
+    <Content Include="Content\alertifyjs\themes\bootstrap.min.css" />
+    <Content Include="Content\alertifyjs\themes\bootstrap.rtl.css" />
+    <Content Include="Content\alertifyjs\themes\bootstrap.rtl.min.css" />
+    <Content Include="Content\alertifyjs\themes\default.css" />
+    <Content Include="Content\alertifyjs\themes\default.min.css" />
+    <Content Include="Content\alertifyjs\themes\default.rtl.css" />
+    <Content Include="Content\alertifyjs\themes\default.rtl.min.css" />
+    <Content Include="Content\alertifyjs\themes\semantic.css" />
+    <Content Include="Content\alertifyjs\themes\semantic.min.css" />
+    <Content Include="Content\alertifyjs\themes\semantic.rtl.css" />
+    <Content Include="Content\alertifyjs\themes\semantic.rtl.min.css" />
+    <Content Include="Content\all.css" />
+    <Content Include="Content\all.min.css" />
+    <Content Include="Content\app\Layout.css" />
+    <Content Include="Content\app\signin.css" />
+    <Content Include="Content\app\style.css" />
+    <Content Include="Content\app\stylebutton.css" />
+    <Content Include="Content\app\stylebutton.min.css" />
+    <Content Include="Content\app\StyleProject.css" />
+    <Content Include="Content\bootstrap-float-label-master\bootstrap-float-label.css" />
+    <Content Include="Content\bootstrap-float-label-master\bootstrap-float-label.min.css" />
+    <Content Include="Content\bootstrap-float-label-master\bootstrap-float-label.png" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap\bootstrap.css" />
+    <Content Include="Content\bootstrap\bootstrap.min.css" />
+    <Content Include="Content\bootstrap\docs.min.css" />
+    <Content Include="Content\brands.css" />
+    <Content Include="Content\brands.min.css" />
+    <Content Include="Content\Calendar-csj\Calendar-csj.css" />
+    <Content Include="Content\Calendar-csj\Calendar-csj.js" />
+    <Content Include="Content\css\select2.css" />
+    <Content Include="Content\css\select2.min.css" />
+    <Content Include="Content\css_wizard\WizzardNE.css" />
+    <Content Include="Content\DataTables\css\autoFill.bootstrap.css" />
+    <Content Include="Content\DataTables\css\autoFill.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\autoFill.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\autoFill.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\autoFill.dataTables.css" />
+    <Content Include="Content\DataTables\css\autoFill.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\autoFill.foundation.css" />
+    <Content Include="Content\DataTables\css\autoFill.foundation.min.css" />
+    <Content Include="Content\DataTables\css\autoFill.jqueryui.css" />
+    <Content Include="Content\DataTables\css\autoFill.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\autoFill.semanticui.css" />
+    <Content Include="Content\DataTables\css\autoFill.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\buttons.bootstrap.css" />
+    <Content Include="Content\DataTables\css\buttons.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\buttons.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\buttons.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\buttons.dataTables.css" />
+    <Content Include="Content\DataTables\css\buttons.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\buttons.foundation.css" />
+    <Content Include="Content\DataTables\css\buttons.foundation.min.css" />
+    <Content Include="Content\DataTables\css\buttons.jqueryui.css" />
+    <Content Include="Content\DataTables\css\buttons.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\buttons.semanticui.css" />
+    <Content Include="Content\DataTables\css\buttons.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\colReorder.bootstrap.css" />
+    <Content Include="Content\DataTables\css\colReorder.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\colReorder.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\colReorder.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\colReorder.dataTables.css" />
+    <Content Include="Content\DataTables\css\colReorder.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\colReorder.foundation.css" />
+    <Content Include="Content\DataTables\css\colReorder.foundation.min.css" />
+    <Content Include="Content\DataTables\css\colReorder.jqueryui.css" />
+    <Content Include="Content\DataTables\css\colReorder.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\colReorder.semanticui.css" />
+    <Content Include="Content\DataTables\css\colReorder.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.bootstrap.css" />
+    <Content Include="Content\DataTables\css\dataTables.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\dataTables.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.foundation.css" />
+    <Content Include="Content\DataTables\css\dataTables.foundation.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.jqueryui.css" />
+    <Content Include="Content\DataTables\css\dataTables.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.material.css" />
+    <Content Include="Content\DataTables\css\dataTables.material.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.semanticui.css" />
+    <Content Include="Content\DataTables\css\dataTables.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\dataTables.uikit.css" />
+    <Content Include="Content\DataTables\css\dataTables.uikit.min.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.bootstrap.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.dataTables.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.foundation.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.foundation.min.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.jqueryui.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.semanticui.css" />
+    <Content Include="Content\DataTables\css\fixedColumns.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.bootstrap.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.dataTables.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.foundation.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.foundation.min.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.jqueryui.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.semanticui.css" />
+    <Content Include="Content\DataTables\css\fixedHeader.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\jquery.dataTables.css" />
+    <Content Include="Content\DataTables\css\jquery.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\jquery.dataTables_themeroller.css" />
+    <Content Include="Content\DataTables\css\keyTable.bootstrap.css" />
+    <Content Include="Content\DataTables\css\keyTable.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\keyTable.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\keyTable.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\keyTable.dataTables.css" />
+    <Content Include="Content\DataTables\css\keyTable.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\keyTable.foundation.css" />
+    <Content Include="Content\DataTables\css\keyTable.foundation.min.css" />
+    <Content Include="Content\DataTables\css\keyTable.jqueryui.css" />
+    <Content Include="Content\DataTables\css\keyTable.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\keyTable.semanticui.css" />
+    <Content Include="Content\DataTables\css\keyTable.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\responsive.bootstrap.css" />
+    <Content Include="Content\DataTables\css\responsive.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\responsive.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\responsive.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\responsive.dataTables.css" />
+    <Content Include="Content\DataTables\css\responsive.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\responsive.foundation.css" />
+    <Content Include="Content\DataTables\css\responsive.foundation.min.css" />
+    <Content Include="Content\DataTables\css\responsive.jqueryui.css" />
+    <Content Include="Content\DataTables\css\responsive.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\responsive.semanticui.css" />
+    <Content Include="Content\DataTables\css\responsive.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\rowGroup.bootstrap.css" />
+    <Content Include="Content\DataTables\css\rowGroup.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\rowGroup.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\rowGroup.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\rowGroup.dataTables.css" />
+    <Content Include="Content\DataTables\css\rowGroup.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\rowGroup.foundation.css" />
+    <Content Include="Content\DataTables\css\rowGroup.foundation.min.css" />
+    <Content Include="Content\DataTables\css\rowGroup.jqueryui.css" />
+    <Content Include="Content\DataTables\css\rowGroup.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\rowGroup.semanticui.css" />
+    <Content Include="Content\DataTables\css\rowGroup.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\rowReorder.bootstrap.css" />
+    <Content Include="Content\DataTables\css\rowReorder.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\rowReorder.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\rowReorder.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\rowReorder.dataTables.css" />
+    <Content Include="Content\DataTables\css\rowReorder.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\rowReorder.foundation.css" />
+    <Content Include="Content\DataTables\css\rowReorder.foundation.min.css" />
+    <Content Include="Content\DataTables\css\rowReorder.jqueryui.css" />
+    <Content Include="Content\DataTables\css\rowReorder.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\rowReorder.semanticui.css" />
+    <Content Include="Content\DataTables\css\rowReorder.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\scroller.bootstrap.css" />
+    <Content Include="Content\DataTables\css\scroller.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\scroller.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\scroller.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\scroller.dataTables.css" />
+    <Content Include="Content\DataTables\css\scroller.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\scroller.foundation.css" />
+    <Content Include="Content\DataTables\css\scroller.foundation.min.css" />
+    <Content Include="Content\DataTables\css\scroller.jqueryui.css" />
+    <Content Include="Content\DataTables\css\scroller.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\scroller.semanticui.css" />
+    <Content Include="Content\DataTables\css\scroller.semanticui.min.css" />
+    <Content Include="Content\DataTables\css\select.bootstrap.css" />
+    <Content Include="Content\DataTables\css\select.bootstrap.min.css" />
+    <Content Include="Content\DataTables\css\select.bootstrap4.css" />
+    <Content Include="Content\DataTables\css\select.bootstrap4.min.css" />
+    <Content Include="Content\DataTables\css\select.dataTables.css" />
+    <Content Include="Content\DataTables\css\select.dataTables.min.css" />
+    <Content Include="Content\DataTables\css\select.foundation.css" />
+    <Content Include="Content\DataTables\css\select.foundation.min.css" />
+    <Content Include="Content\DataTables\css\select.jqueryui.css" />
+    <Content Include="Content\DataTables\css\select.jqueryui.min.css" />
+    <Content Include="Content\DataTables\css\select.semanticui.css" />
+    <Content Include="Content\DataTables\css\select.semanticui.min.css" />
+    <Content Include="Content\DataTables\images\details_close.png" />
+    <Content Include="Content\DataTables\images\details_open.png" />
+    <Content Include="Content\DataTables\images\sort_asc.png" />
+    <Content Include="Content\DataTables\images\sort_asc_disabled.png" />
+    <Content Include="Content\DataTables\images\sort_both.png" />
+    <Content Include="Content\DataTables\images\sort_desc.png" />
+    <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
+    <Content Include="Content\DataTables\swf\flashExport.swf" />
+    <Content Include="Content\datepicker.css" />
+    <Content Include="Content\filepond-plugin-get-file.css" />
+    <Content Include="Content\filepond-plugin-get-file.min.css" />
+    <Content Include="Content\filepond.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\fontawesome.css" />
+    <Content Include="Content\fontawesome.min.css" />
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\fonts\metro.svg" />
+    <Content Include="Content\ico\Avatar-DatosGenerales.png" />
+    <Content Include="Content\ico\Avatar.png" />
+    <Content Include="Content\ico\check-finalizar.png" />
+    <Content Include="Content\ico\Escudo.svg" />
+    <Content Include="Content\ico\icon-solicitud.png" />
+    <Content Include="Content\ico\ico_escudo.png" />
+    <Content Include="Content\ico\word.png" />
+    <Content Include="Content\Images\anonymous.png" />
+    <Content Include="Content\Images\CSJN.jpg" />
+    <Content Include="Content\Images\flecha.png" />
+    <Content Include="Content\Img\bpinide.jpg" />
+    <Content Include="Content\Img\404.jpg" />
+    <Content Include="Content\Img\bg_header.png" />
+    <Content Include="Content\Img\Inide.png" />
+    <Content Include="Content\Img\logo_escudo.png" />
+    <Content Include="Content\metro\metro-colors.css" />
+    <Content Include="Content\metro\metro-icons.css" />
+    <Content Include="Content\metro\metro-responsive.css" />
+    <Content Include="Content\metro\metro-schemes.css" />
+    <Content Include="Content\metro\metro.css" />
+    <Content Include="Content\regular.css" />
+    <Content Include="Content\regular.min.css" />
+    <Content Include="Content\sidebar.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\solid.css" />
+    <Content Include="Content\solid.min.css" />
+    <Content Include="Content\svg-with-js.css" />
+    <Content Include="Content\svg-with-js.min.css" />
+    <Content Include="Content\svg\si-glyph-abacus.svg" />
+    <Content Include="Content\svg\si-glyph-adjustment-horizon.svg" />
+    <Content Include="Content\svg\si-glyph-adjustment-vertical.svg" />
+    <Content Include="Content\svg\si-glyph-air-balloon.svg" />
+    <Content Include="Content\svg\si-glyph-airplane-2.svg" />
+    <Content Include="Content\svg\si-glyph-airplane.svg" />
+    <Content Include="Content\svg\si-glyph-alarm-clock.svg" />
+    <Content Include="Content\svg\si-glyph-alien.svg" />
+    <Content Include="Content\svg\si-glyph-aligh-left.svg" />
+    <Content Include="Content\svg\si-glyph-align-center.svg" />
+    <Content Include="Content\svg\si-glyph-align-left.svg" />
+    <Content Include="Content\svg\si-glyph-align-right.svg" />
+    <Content Include="Content\svg\si-glyph-ambulance.svg" />
+    <Content Include="Content\svg\si-glyph-anchor.svg" />
+    <Content Include="Content\svg\si-glyph-android.svg" />
+    <Content Include="Content\svg\si-glyph-angle-1.svg" />
+    <Content Include="Content\svg\si-glyph-angle-2.svg" />
+    <Content Include="Content\svg\si-glyph-antenna-1.svg" />
+    <Content Include="Content\svg\si-glyph-apron.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-backward.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-change.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-circle-rycycle.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-down.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-forward.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-four-way.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-fullscreen-2.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-fullscreen.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-left-right.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-left.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-move.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-reload.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-resize-1.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-resize-2.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-resize-3.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-resize-4.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-resize-5.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-resize-6.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-right.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-shuffle.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-thick-down.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-thick-left.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-thick-right.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-thick-thin-down.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-thick-thin-up.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-thick-up.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-thin-down.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-thin-left-bottom.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-thin-left-top.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-thin-left.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-thin-right-bottom.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-thin-right-top.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-thin-right.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-thin-up.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-three-way-1.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-three-way-2.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-triangle-recycle.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-two-left-right.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-two-up.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-two-way-left-right.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-two-way-right-bottom.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-two-way-right.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-two-way.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-up-down.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-up.svg" />
+    <Content Include="Content\svg\si-glyph-arrow-wave.svg" />
+    <Content Include="Content\svg\si-glyph-art-board.svg" />
+    <Content Include="Content\svg\si-glyph-askterisk.svg" />
+    <Content Include="Content\svg\si-glyph-atm-card.svg" />
+    <Content Include="Content\svg\si-glyph-axe.svg" />
+    <Content Include="Content\svg\si-glyph-baby-milk-botl.svg" />
+    <Content Include="Content\svg\si-glyph-baby-stroller.svg" />
+    <Content Include="Content\svg\si-glyph-baby-troller.svg" />
+    <Content Include="Content\svg\si-glyph-baby.svg" />
+    <Content Include="Content\svg\si-glyph-back-pack.svg" />
+    <Content Include="Content\svg\si-glyph-backward-page.svg" />
+    <Content Include="Content\svg\si-glyph-badge-name.svg" />
+    <Content Include="Content\svg\si-glyph-bag-plus.svg" />
+    <Content Include="Content\svg\si-glyph-bag-remove.svg" />
+    <Content Include="Content\svg\si-glyph-bag.svg" />
+    <Content Include="Content\svg\si-glyph-balance.svg" />
+    <Content Include="Content\svg\si-glyph-balloon.svg" />
+    <Content Include="Content\svg\si-glyph-bandage.svg" />
+    <Content Include="Content\svg\si-glyph-bank.svg" />
+    <Content Include="Content\svg\si-glyph-barcode.svg" />
+    <Content Include="Content\svg\si-glyph-barrier.svg" />
+    <Content Include="Content\svg\si-glyph-baseball-stick.svg" />
+    <Content Include="Content\svg\si-glyph-baseball.svg" />
+    <Content Include="Content\svg\si-glyph-basket-arrow-down.svg" />
+    <Content Include="Content\svg\si-glyph-basket-arrow-left.svg" />
+    <Content Include="Content\svg\si-glyph-basket-arrow-right.svg" />
+    <Content Include="Content\svg\si-glyph-basket-arrow-up.svg" />
+    <Content Include="Content\svg\si-glyph-basket-checked.svg" />
+    <Content Include="Content\svg\si-glyph-basket-error.svg" />
+    <Content Include="Content\svg\si-glyph-basket-plus.svg" />
+    <Content Include="Content\svg\si-glyph-basket-remove.svg" />
+    <Content Include="Content\svg\si-glyph-basket.svg" />
+    <Content Include="Content\svg\si-glyph-basketball.svg" />
+    <Content Include="Content\svg\si-glyph-battery-charging.svg" />
+    <Content Include="Content\svg\si-glyph-battery-empty.svg" />
+    <Content Include="Content\svg\si-glyph-battery-full.svg" />
+    <Content Include="Content\svg\si-glyph-battery-half-2.svg" />
+    <Content Include="Content\svg\si-glyph-battery-half.svg" />
+    <Content Include="Content\svg\si-glyph-battery-low.svg" />
+    <Content Include="Content\svg\si-glyph-bed.svg" />
+    <Content Include="Content\svg\si-glyph-bell.svg" />
+    <Content Include="Content\svg\si-glyph-bicycle-1.svg" />
+    <Content Include="Content\svg\si-glyph-bicycle-3.svg" />
+    <Content Include="Content\svg\si-glyph-bicycle-man.svg" />
+    <Content Include="Content\svg\si-glyph-bikini.svg" />
+    <Content Include="Content\svg\si-glyph-billiard-ball.svg" />
+    <Content Include="Content\svg\si-glyph-binocular.svg" />
+    <Content Include="Content\svg\si-glyph-birthday-cake.svg" />
+    <Content Include="Content\svg\si-glyph-biscuit.svg" />
+    <Content Include="Content\svg\si-glyph-blender.svg" />
+    <Content Include="Content\svg\si-glyph-blood-bag.svg" />
+    <Content Include="Content\svg\si-glyph-bluetooth.svg" />
+    <Content Include="Content\svg\si-glyph-board.svg" />
+    <Content Include="Content\svg\si-glyph-boat.svg" />
+    <Content Include="Content\svg\si-glyph-bolt.svg" />
+    <Content Include="Content\svg\si-glyph-bomb-1.svg" />
+    <Content Include="Content\svg\si-glyph-bomb-2.svg" />
+    <Content Include="Content\svg\si-glyph-bone.svg" />
+    <Content Include="Content\svg\si-glyph-book-%40.svg" />
+    <Content Include="Content\svg\si-glyph-book-1.svg" />
+    <Content Include="Content\svg\si-glyph-book-3.svg" />
+    <Content Include="Content\svg\si-glyph-book-4.svg" />
+    <Content Include="Content\svg\si-glyph-book-open.svg" />
+    <Content Include="Content\svg\si-glyph-book-person.svg" />
+    <Content Include="Content\svg\si-glyph-bookcase.svg" />
+    <Content Include="Content\svg\si-glyph-bookmark.svg" />
+    <Content Include="Content\svg\si-glyph-botl-2.svg" />
+    <Content Include="Content\svg\si-glyph-botl-milk.svg" />
+    <Content Include="Content\svg\si-glyph-bow-tie.svg" />
+    <Content Include="Content\svg\si-glyph-box-download.svg" />
+    <Content Include="Content\svg\si-glyph-box-upload.svg" />
+    <Content Include="Content\svg\si-glyph-box.svg" />
+    <Content Include="Content\svg\si-glyph-bread.svg" />
+    <Content Include="Content\svg\si-glyph-briefcase-person.svg" />
+    <Content Include="Content\svg\si-glyph-briefcase.svg" />
+    <Content Include="Content\svg\si-glyph-brightness.svg" />
+    <Content Include="Content\svg\si-glyph-brush-1.svg" />
+    <Content Include="Content\svg\si-glyph-brush-2.svg" />
+    <Content Include="Content\svg\si-glyph-brush-and-pencil.svg" />
+    <Content Include="Content\svg\si-glyph-bubble-chat.svg" />
+    <Content Include="Content\svg\si-glyph-bubble-message-dot-2.svg" />
+    <Content Include="Content\svg\si-glyph-bubble-message-dot.svg" />
+    <Content Include="Content\svg\si-glyph-bubble-message-hi.svg" />
+    <Content Include="Content\svg\si-glyph-bubble-message-quote.svg" />
+    <Content Include="Content\svg\si-glyph-bubble-message-talk.svg" />
+    <Content Include="Content\svg\si-glyph-bubble-message-text.svg" />
+    <Content Include="Content\svg\si-glyph-bubble-message.svg" />
+    <Content Include="Content\svg\si-glyph-bucket.svg" />
+    <Content Include="Content\svg\si-glyph-bug.svg" />
+    <Content Include="Content\svg\si-glyph-building.svg" />
+    <Content Include="Content\svg\si-glyph-bullet-checked-list.svg" />
+    <Content Include="Content\svg\si-glyph-bullet-list-2.svg" />
+    <Content Include="Content\svg\si-glyph-bullet-list.svg" />
+    <Content Include="Content\svg\si-glyph-bus.svg" />
+    <Content Include="Content\svg\si-glyph-button-arrow-down.svg" />
+    <Content Include="Content\svg\si-glyph-button-arrow-left.svg" />
+    <Content Include="Content\svg\si-glyph-button-arrow-right.svg" />
+    <Content Include="Content\svg\si-glyph-button-arrow-up.svg" />
+    <Content Include="Content\svg\si-glyph-button-buy.svg" />
+    <Content Include="Content\svg\si-glyph-button-error.svg" />
+    <Content Include="Content\svg\si-glyph-button-hd.svg" />
+    <Content Include="Content\svg\si-glyph-button-play.svg" />
+    <Content Include="Content\svg\si-glyph-button-plus.svg" />
+    <Content Include="Content\svg\si-glyph-button-remove.svg" />
+    <Content Include="Content\svg\si-glyph-button-sale.svg" />
+    <Content Include="Content\svg\si-glyph-button-sell.svg" />
+    <Content Include="Content\svg\si-glyph-button-starburst.svg" />
+    <Content Include="Content\svg\si-glyph-button-triangle-up.svg" />
+    <Content Include="Content\svg\si-glyph-button-tv.svg" />
+    <Content Include="Content\svg\si-glyph-cabin-cable.svg" />
+    <Content Include="Content\svg\si-glyph-cabinet.svg" />
+    <Content Include="Content\svg\si-glyph-calculator-2.svg" />
+    <Content Include="Content\svg\si-glyph-calculator.svg" />
+    <Content Include="Content\svg\si-glyph-calendar-1.svg" />
+    <Content Include="Content\svg\si-glyph-calendar-3.svg" />
+    <Content Include="Content\svg\si-glyph-calendar-empty.svg" />
+    <Content Include="Content\svg\si-glyph-call-forward.svg" />
+    <Content Include="Content\svg\si-glyph-call-reply.svg" />
+    <Content Include="Content\svg\si-glyph-call.svg" />
+    <Content Include="Content\svg\si-glyph-camera-projector.svg" />
+    <Content Include="Content\svg\si-glyph-camera-security.svg" />
+    <Content Include="Content\svg\si-glyph-camera.svg" />
+    <Content Include="Content\svg\si-glyph-can-water.svg" />
+    <Content Include="Content\svg\si-glyph-candle.svg" />
+    <Content Include="Content\svg\si-glyph-candy-stick.svg" />
+    <Content Include="Content\svg\si-glyph-candy.svg" />
+    <Content Include="Content\svg\si-glyph-car-garage.svg" />
+    <Content Include="Content\svg\si-glyph-car.svg" />
+    <Content Include="Content\svg\si-glyph-casette.svg" />
+    <Content Include="Content\svg\si-glyph-cashier-machine.svg" />
+    <Content Include="Content\svg\si-glyph-castle.svg" />
+    <Content Include="Content\svg\si-glyph-caterpillar-machine.svg" />
+    <Content Include="Content\svg\si-glyph-cente-justify.svg" />
+    <Content Include="Content\svg\si-glyph-chair-1.svg" />
+    <Content Include="Content\svg\si-glyph-chair-2.svg" />
+    <Content Include="Content\svg\si-glyph-champion-cup.svg" />
+    <Content Include="Content\svg\si-glyph-chart-column-decrease.svg" />
+    <Content Include="Content\svg\si-glyph-chart-column-increase.svg" />
+    <Content Include="Content\svg\si-glyph-chart-column.svg" />
+    <Content Include="Content\svg\si-glyph-chart-decrease.svg" />
+    <Content Include="Content\svg\si-glyph-chart-piece.svg" />
+    <Content Include="Content\svg\si-glyph-checked.svg" />
+    <Content Include="Content\svg\si-glyph-cheese.svg" />
+    <Content Include="Content\svg\si-glyph-cherry.svg" />
+    <Content Include="Content\svg\si-glyph-christmas-mistletoe.svg" />
+    <Content Include="Content\svg\si-glyph-christmass-ball.svg" />
+    <Content Include="Content\svg\si-glyph-christmass-egg.svg" />
+    <Content Include="Content\svg\si-glyph-christmass-hat.svg" />
+    <Content Include="Content\svg\si-glyph-christmass-tree.svg" />
+    <Content Include="Content\svg\si-glyph-circle-backward.svg" />
+    <Content Include="Content\svg\si-glyph-circle-control-pad.svg" />
+    <Content Include="Content\svg\si-glyph-circle-drashed.svg" />
+    <Content Include="Content\svg\si-glyph-circle-error.svg" />
+    <Content Include="Content\svg\si-glyph-circle-forward.svg" />
+    <Content Include="Content\svg\si-glyph-circle-help.svg" />
+    <Content Include="Content\svg\si-glyph-circle-info.svg" />
+    <Content Include="Content\svg\si-glyph-circle-load-left.svg" />
+    <Content Include="Content\svg\si-glyph-circle-load-right.svg" />
+    <Content Include="Content\svg\si-glyph-circle-plus.svg" />
+    <Content Include="Content\svg\si-glyph-circle-remove.svg" />
+    <Content Include="Content\svg\si-glyph-circle-star.svg" />
+    <Content Include="Content\svg\si-glyph-circle-triangle-down.svg" />
+    <Content Include="Content\svg\si-glyph-circle-triangle-left.svg" />
+    <Content Include="Content\svg\si-glyph-circle-triangle-right.svg" />
+    <Content Include="Content\svg\si-glyph-circle.svg" />
+    <Content Include="Content\svg\si-glyph-city.svg" />
+    <Content Include="Content\svg\si-glyph-clamp.svg" />
+    <Content Include="Content\svg\si-glyph-clapboard-play.svg" />
+    <Content Include="Content\svg\si-glyph-clapboard.svg" />
+    <Content Include="Content\svg\si-glyph-clip.svg" />
+    <Content Include="Content\svg\si-glyph-clipboard-checked.svg" />
+    <Content Include="Content\svg\si-glyph-clipboard.svg" />
+    <Content Include="Content\svg\si-glyph-clock.svg" />
+    <Content Include="Content\svg\si-glyph-close.svg" />
+    <Content Include="Content\svg\si-glyph-cloud-cloud.svg" />
+    <Content Include="Content\svg\si-glyph-cloud-download.svg" />
+    <Content Include="Content\svg\si-glyph-cloud-heavy-rain.svg" />
+    <Content Include="Content\svg\si-glyph-cloud-plus.svg" />
+    <Content Include="Content\svg\si-glyph-cloud-rain-heavy-rain.svg" />
+    <Content Include="Content\svg\si-glyph-cloud-remove.svg" />
+    <Content Include="Content\svg\si-glyph-cloud-snow.svg" />
+    <Content Include="Content\svg\si-glyph-cloud-sun.svg" />
+    <Content Include="Content\svg\si-glyph-cloud-thunder.svg" />
+    <Content Include="Content\svg\si-glyph-cloud-upload.svg" />
+    <Content Include="Content\svg\si-glyph-cloud.svg" />
+    <Content Include="Content\svg\si-glyph-clover.svg" />
+    <Content Include="Content\svg\si-glyph-cock-pot.svg" />
+    <Content Include="Content\svg\si-glyph-cocktail.svg" />
+    <Content Include="Content\svg\si-glyph-coconut.svg" />
+    <Content Include="Content\svg\si-glyph-code.svg" />
+    <Content Include="Content\svg\si-glyph-coffee-machine.svg" />
+    <Content Include="Content\svg\si-glyph-color-picker.svg" />
+    <Content Include="Content\svg\si-glyph-column-decrease.svg" />
+    <Content Include="Content\svg\si-glyph-column-increase.svg" />
+    <Content Include="Content\svg\si-glyph-column-wave.svg" />
+    <Content Include="Content\svg\si-glyph-comb.svg" />
+    <Content Include="Content\svg\si-glyph-compass.svg" />
+    <Content Include="Content\svg\si-glyph-cone.svg" />
+    <Content Include="Content\svg\si-glyph-congratulation-hat.svg" />
+    <Content Include="Content\svg\si-glyph-connect-1.svg" />
+    <Content Include="Content\svg\si-glyph-connect-2.svg" />
+    <Content Include="Content\svg\si-glyph-contact-book.svg" />
+    <Content Include="Content\svg\si-glyph-contacter.svg" />
+    <Content Include="Content\svg\si-glyph-contrast.svg" />
+    <Content Include="Content\svg\si-glyph-control-pad-.svg" />
+    <Content Include="Content\svg\si-glyph-corkscrew.svg" />
+    <Content Include="Content\svg\si-glyph-corner-flag.svg" />
+    <Content Include="Content\svg\si-glyph-cover-flow.svg" />
+    <Content Include="Content\svg\si-glyph-cover-food.svg" />
+    <Content Include="Content\svg\si-glyph-cow.svg" />
+    <Content Include="Content\svg\si-glyph-cpu.svg" />
+    <Content Include="Content\svg\si-glyph-cran.svg" />
+    <Content Include="Content\svg\si-glyph-crop.svg" />
+    <Content Include="Content\svg\si-glyph-cross-hair-2.svg" />
+    <Content Include="Content\svg\si-glyph-cross-hair.svg" />
+    <Content Include="Content\svg\si-glyph-crown.svg" />
+    <Content Include="Content\svg\si-glyph-cruise.svg" />
+    <Content Include="Content\svg\si-glyph-cubic.svg" />
+    <Content Include="Content\svg\si-glyph-cup-cake.svg" />
+    <Content Include="Content\svg\si-glyph-curtain.svg" />
+    <Content Include="Content\svg\si-glyph-customer-support.svg" />
+    <Content Include="Content\svg\si-glyph-dashboard.svg" />
+    <Content Include="Content\svg\si-glyph-data-arrow-down.svg" />
+    <Content Include="Content\svg\si-glyph-database-download.svg" />
+    <Content Include="Content\svg\si-glyph-database-error.svg" />
+    <Content Include="Content\svg\si-glyph-database-plus.svg" />
+    <Content Include="Content\svg\si-glyph-database-remove.svg" />
+    <Content Include="Content\svg\si-glyph-database-share.svg" />
+    <Content Include="Content\svg\si-glyph-database-upload.svg" />
+    <Content Include="Content\svg\si-glyph-database.svg" />
+    <Content Include="Content\svg\si-glyph-delete.svg" />
+    <Content Include="Content\svg\si-glyph-delicious-circle.svg" />
+    <Content Include="Content\svg\si-glyph-deny.svg" />
+    <Content Include="Content\svg\si-glyph-desktop.svg" />
+    <Content Include="Content\svg\si-glyph-dial-number-1.svg" />
+    <Content Include="Content\svg\si-glyph-dial-number.svg" />
+    <Content Include="Content\svg\si-glyph-diamond.svg" />
+    <Content Include="Content\svg\si-glyph-dice-1.svg" />
+    <Content Include="Content\svg\si-glyph-dice-2.svg" />
+    <Content Include="Content\svg\si-glyph-dice-3.svg" />
+    <Content Include="Content\svg\si-glyph-dice-5.svg" />
+    <Content Include="Content\svg\si-glyph-dice-6-.svg" />
+    <Content Include="Content\svg\si-glyph-dice-6.svg" />
+    <Content Include="Content\svg\si-glyph-disc-add.svg" />
+    <Content Include="Content\svg\si-glyph-disc-deny.svg" />
+    <Content Include="Content\svg\si-glyph-disc-download.svg" />
+    <Content Include="Content\svg\si-glyph-disc-error.svg" />
+    <Content Include="Content\svg\si-glyph-disc-pause.svg" />
+    <Content Include="Content\svg\si-glyph-disc-play-2.svg" />
+    <Content Include="Content\svg\si-glyph-disc-play.svg" />
+    <Content Include="Content\svg\si-glyph-disc-remove.svg" />
+    <Content Include="Content\svg\si-glyph-disc-stop.svg" />
+    <Content Include="Content\svg\si-glyph-disc-upload.svg" />
+    <Content Include="Content\svg\si-glyph-disc.svg" />
+    <Content Include="Content\svg\si-glyph-dish.svg" />
+    <Content Include="Content\svg\si-glyph-disk-antenna.svg" />
+    <Content Include="Content\svg\si-glyph-dna.svg" />
+    <Content Include="Content\svg\si-glyph-document-arrow-down.svg" />
+    <Content Include="Content\svg\si-glyph-document-arrow-left.svg" />
+    <Content Include="Content\svg\si-glyph-document-arrow-right.svg" />
+    <Content Include="Content\svg\si-glyph-document-arrow-up.svg" />
+    <Content Include="Content\svg\si-glyph-document-backward.svg" />
+    <Content Include="Content\svg\si-glyph-document-bullet-list.svg" />
+    <Content Include="Content\svg\si-glyph-document-checked.svg" />
+    <Content Include="Content\svg\si-glyph-document-copy.svg" />
+    <Content Include="Content\svg\si-glyph-document-doc.svg" />
+    <Content Include="Content\svg\si-glyph-document-edit.svg" />
+    <Content Include="Content\svg\si-glyph-document-error.svg" />
+    <Content Include="Content\svg\si-glyph-document-forward.svg" />
+    <Content Include="Content\svg\si-glyph-document-help.svg" />
+    <Content Include="Content\svg\si-glyph-document-music.svg" />
+    <Content Include="Content\svg\si-glyph-document-pdf.svg" />
+    <Content Include="Content\svg\si-glyph-document-plus.svg" />
+    <Content Include="Content\svg\si-glyph-document-remove.svg" />
+    <Content Include="Content\svg\si-glyph-document-rss.svg" />
+    <Content Include="Content\svg\si-glyph-document-search.svg" />
+    <Content Include="Content\svg\si-glyph-document-star.svg" />
+    <Content Include="Content\svg\si-glyph-document-warning.svg" />
+    <Content Include="Content\svg\si-glyph-document.svg" />
+    <Content Include="Content\svg\si-glyph-dog.svg" />
+    <Content Include="Content\svg\si-glyph-door.svg" />
+    <Content Include="Content\svg\si-glyph-downstair.svg" />
+    <Content Include="Content\svg\si-glyph-downwards-arrow-to-bar.svg" />
+    <Content Include="Content\svg\si-glyph-drill.svg" />
+    <Content Include="Content\svg\si-glyph-drop-water.svg" />
+    <Content Include="Content\svg\si-glyph-dropbox.svg" />
+    <Content Include="Content\svg\si-glyph-drum.svg" />
+    <Content Include="Content\svg\si-glyph-easal.svg" />
+    <Content Include="Content\svg\si-glyph-edit.svg" />
+    <Content Include="Content\svg\si-glyph-egg.svg" />
+    <Content Include="Content\svg\si-glyph-eject.svg" />
+    <Content Include="Content\svg\si-glyph-electron.svg" />
+    <Content Include="Content\svg\si-glyph-elevator-down.svg" />
+    <Content Include="Content\svg\si-glyph-elevator-up.svg" />
+    <Content Include="Content\svg\si-glyph-emoticon.svg" />
+    <Content Include="Content\svg\si-glyph-end-page.svg" />
+    <Content Include="Content\svg\si-glyph-erase.svg" />
+    <Content Include="Content\svg\si-glyph-euro.svg" />
+    <Content Include="Content\svg\si-glyph-excavator.svg" />
+    <Content Include="Content\svg\si-glyph-extinguisher.svg" />
+    <Content Include="Content\svg\si-glyph-eye-drop.svg" />
+    <Content Include="Content\svg\si-glyph-eye-glass.svg" />
+    <Content Include="Content\svg\si-glyph-factory.svg" />
+    <Content Include="Content\svg\si-glyph-faucet.svg" />
+    <Content Include="Content\svg\si-glyph-feather.svg" />
+    <Content Include="Content\svg\si-glyph-female.svg" />
+    <Content Include="Content\svg\si-glyph-fence-2.svg" />
+    <Content Include="Content\svg\si-glyph-fence.svg" />
+    <Content Include="Content\svg\si-glyph-file-box.svg" />
+    <Content Include="Content\svg\si-glyph-file-download.svg" />
+    <Content Include="Content\svg\si-glyph-file-upload.svg" />
+    <Content Include="Content\svg\si-glyph-film-35mm.svg" />
+    <Content Include="Content\svg\si-glyph-film.svg" />
+    <Content Include="Content\svg\si-glyph-finder.svg" />
+    <Content Include="Content\svg\si-glyph-finger-up.svg" />
+    <Content Include="Content\svg\si-glyph-fire-alarm.svg" />
+    <Content Include="Content\svg\si-glyph-fire-hydrant.svg" />
+    <Content Include="Content\svg\si-glyph-fire-wood.svg" />
+    <Content Include="Content\svg\si-glyph-fire.svg" />
+    <Content Include="Content\svg\si-glyph-first-aid-briefcase.svg" />
+    <Content Include="Content\svg\si-glyph-fish.svg" />
+    <Content Include="Content\svg\si-glyph-flag.svg" />
+    <Content Include="Content\svg\si-glyph-float.svg" />
+    <Content Include="Content\svg\si-glyph-floppy-disk.svg" />
+    <Content Include="Content\svg\si-glyph-flower-pot.svg" />
+    <Content Include="Content\svg\si-glyph-flower.svg" />
+    <Content Include="Content\svg\si-glyph-folder-contact.svg" />
+    <Content Include="Content\svg\si-glyph-folder-error.svg" />
+    <Content Include="Content\svg\si-glyph-folder-music.svg" />
+    <Content Include="Content\svg\si-glyph-folder-open.svg" />
+    <Content Include="Content\svg\si-glyph-folder-plus.svg" />
+    <Content Include="Content\svg\si-glyph-folder-remove.svg" />
+    <Content Include="Content\svg\si-glyph-folder-rss.svg" />
+    <Content Include="Content\svg\si-glyph-folder-search.svg" />
+    <Content Include="Content\svg\si-glyph-folder-share.svg" />
+    <Content Include="Content\svg\si-glyph-folder-warning.svg" />
+    <Content Include="Content\svg\si-glyph-folder.svg" />
+    <Content Include="Content\svg\si-glyph-foot-sign.svg" />
+    <Content Include="Content\svg\si-glyph-forcus.svg" />
+    <Content Include="Content\svg\si-glyph-forklift.svg" />
+    <Content Include="Content\svg\si-glyph-forward-page.svg" />
+    <Content Include="Content\svg\si-glyph-fridge.svg" />
+    <Content Include="Content\svg\si-glyph-fullscreen.svg" />
+    <Content Include="Content\svg\si-glyph-game-1.svg" />
+    <Content Include="Content\svg\si-glyph-game-controll.svg" />
+    <Content Include="Content\svg\si-glyph-gas-station.svg" />
+    <Content Include="Content\svg\si-glyph-gate.svg" />
+    <Content Include="Content\svg\si-glyph-gear-1.svg" />
+    <Content Include="Content\svg\si-glyph-gear.svg" />
+    <Content Include="Content\svg\si-glyph-ghost.svg" />
+    <Content Include="Content\svg\si-glyph-gift.svg" />
+    <Content Include="Content\svg\si-glyph-glass-water.svg" />
+    <Content Include="Content\svg\si-glyph-global.svg" />
+    <Content Include="Content\svg\si-glyph-globe.svg" />
+    <Content Include="Content\svg\si-glyph-glove.svg" />
+    <Content Include="Content\svg\si-glyph-golf-ball.svg" />
+    <Content Include="Content\svg\si-glyph-golf-flag.svg" />
+    <Content Include="Content\svg\si-glyph-guitar.svg" />
+    <Content Include="Content\svg\si-glyph-hamburger.svg" />
+    <Content Include="Content\svg\si-glyph-hammer-and-wrench.svg" />
+    <Content Include="Content\svg\si-glyph-hammer.svg" />
+    <Content Include="Content\svg\si-glyph-hand-lamp.svg" />
+    <Content Include="Content\svg\si-glyph-hand-switch.svg" />
+    <Content Include="Content\svg\si-glyph-hand.svg" />
+    <Content Include="Content\svg\si-glyph-handcuff.svg" />
+    <Content Include="Content\svg\si-glyph-hanger.svg" />
+    <Content Include="Content\svg\si-glyph-hardware.svg" />
+    <Content Include="Content\svg\si-glyph-hat-chef.svg" />
+    <Content Include="Content\svg\si-glyph-hat.svg" />
+    <Content Include="Content\svg\si-glyph-head-set.svg" />
+    <Content Include="Content\svg\si-glyph-head.svg" />
+    <Content Include="Content\svg\si-glyph-heart-delete.svg" />
+    <Content Include="Content\svg\si-glyph-heart-plus.svg" />
+    <Content Include="Content\svg\si-glyph-heart-remove.svg" />
+    <Content Include="Content\svg\si-glyph-heart-signal.svg" />
+    <Content Include="Content\svg\si-glyph-heart.svg" />
+    <Content Include="Content\svg\si-glyph-helicopter-pad.svg" />
+    <Content Include="Content\svg\si-glyph-helicopter.svg" />
+    <Content Include="Content\svg\si-glyph-helm-wheel.svg" />
+    <Content Include="Content\svg\si-glyph-helmet.svg" />
+    <Content Include="Content\svg\si-glyph-hightheel.svg" />
+    <Content Include="Content\svg\si-glyph-history.svg" />
+    <Content Include="Content\svg\si-glyph-hockey.svg" />
+    <Content Include="Content\svg\si-glyph-home-page.svg" />
+    <Content Include="Content\svg\si-glyph-horse-shoe.svg" />
+    <Content Include="Content\svg\si-glyph-horse.svg" />
+    <Content Include="Content\svg\si-glyph-hospital.svg" />
+    <Content Include="Content\svg\si-glyph-house.svg" />
+    <Content Include="Content\svg\si-glyph-ice-cream.svg" />
+    <Content Include="Content\svg\si-glyph-id-badge.svg" />
+    <Content Include="Content\svg\si-glyph-image.svg" />
+    <Content Include="Content\svg\si-glyph-in-columns.svg" />
+    <Content Include="Content\svg\si-glyph-inbox-download.svg" />
+    <Content Include="Content\svg\si-glyph-inbox-upload.svg" />
+    <Content Include="Content\svg\si-glyph-infinity-2.svg" />
+    <Content Include="Content\svg\si-glyph-infinity.svg" />
+    <Content Include="Content\svg\si-glyph-info.svg" />
+    <Content Include="Content\svg\si-glyph-ipod.svg" />
+    <Content Include="Content\svg\si-glyph-iron.svg" />
+    <Content Include="Content\svg\si-glyph-jump-backward.svg" />
+    <Content Include="Content\svg\si-glyph-jump-double-page-left-right.svg" />
+    <Content Include="Content\svg\si-glyph-jump-forward.svg" />
+    <Content Include="Content\svg\si-glyph-jump-page-left-right.svg" />
+    <Content Include="Content\svg\si-glyph-jump-page-up-down.svg" />
+    <Content Include="Content\svg\si-glyph-kette.svg" />
+    <Content Include="Content\svg\si-glyph-key-2.svg" />
+    <Content Include="Content\svg\si-glyph-key.svg" />
+    <Content Include="Content\svg\si-glyph-keyboard.svg" />
+    <Content Include="Content\svg\si-glyph-knife.svg" />
+    <Content Include="Content\svg\si-glyph-ladder-pool.svg" />
+    <Content Include="Content\svg\si-glyph-lamp-desk.svg" />
+    <Content Include="Content\svg\si-glyph-lamp.svg" />
+    <Content Include="Content\svg\si-glyph-lavabo.svg" />
+    <Content Include="Content\svg\si-glyph-law-hammer.svg" />
+    <Content Include="Content\svg\si-glyph-layout-1.svg" />
+    <Content Include="Content\svg\si-glyph-layout-2.svg" />
+    <Content Include="Content\svg\si-glyph-layout-3.svg" />
+    <Content Include="Content\svg\si-glyph-layout-4.svg" />
+    <Content Include="Content\svg\si-glyph-leaf.svg" />
+    <Content Include="Content\svg\si-glyph-left-justify.svg" />
+    <Content Include="Content\svg\si-glyph-leftwards-arrow-to-bar.svg" />
+    <Content Include="Content\svg\si-glyph-light-alarm.svg" />
+    <Content Include="Content\svg\si-glyph-light-bulb.svg" />
+    <Content Include="Content\svg\si-glyph-light-house.svg" />
+    <Content Include="Content\svg\si-glyph-like-unlike.svg" />
+    <Content Include="Content\svg\si-glyph-like.svg" />
+    <Content Include="Content\svg\si-glyph-line-two-angle-point.svg" />
+    <Content Include="Content\svg\si-glyph-link-1.svg" />
+    <Content Include="Content\svg\si-glyph-link-2.svg" />
+    <Content Include="Content\svg\si-glyph-link-3.svg" />
+    <Content Include="Content\svg\si-glyph-load.svg" />
+    <Content Include="Content\svg\si-glyph-lock-unlock.svg" />
+    <Content Include="Content\svg\si-glyph-lock.svg" />
+    <Content Include="Content\svg\si-glyph-louder-2.svg" />
+    <Content Include="Content\svg\si-glyph-louder-speaker.svg" />
+    <Content Include="Content\svg\si-glyph-magnet.svg" />
+    <Content Include="Content\svg\si-glyph-magnifier-2.svg" />
+    <Content Include="Content\svg\si-glyph-magnifier.svg" />
+    <Content Include="Content\svg\si-glyph-mail-box.svg" />
+    <Content Include="Content\svg\si-glyph-mail-empty.svg" />
+    <Content Include="Content\svg\si-glyph-mail-has-mail.svg" />
+    <Content Include="Content\svg\si-glyph-mail-inbox.svg" />
+    <Content Include="Content\svg\si-glyph-mail-send.svg" />
+    <Content Include="Content\svg\si-glyph-mail.svg" />
+    <Content Include="Content\svg\si-glyph-male.svg" />
+    <Content Include="Content\svg\si-glyph-man-doctor.svg" />
+    <Content Include="Content\svg\si-glyph-map-3.svg" />
+    <Content Include="Content\svg\si-glyph-map-square.svg" />
+    <Content Include="Content\svg\si-glyph-mark-snorker.svg" />
+    <Content Include="Content\svg\si-glyph-mask-1.svg" />
+    <Content Include="Content\svg\si-glyph-mask-2.svg" />
+    <Content Include="Content\svg\si-glyph-medal-star.svg" />
+    <Content Include="Content\svg\si-glyph-microphone-1.svg" />
+    <Content Include="Content\svg\si-glyph-microphone-2.svg" />
+    <Content Include="Content\svg\si-glyph-microscope.svg" />
+    <Content Include="Content\svg\si-glyph-mobile.svg" />
+    <Content Include="Content\svg\si-glyph-mocule.svg" />
+    <Content Include="Content\svg\si-glyph-money-%24.svg" />
+    <Content Include="Content\svg\si-glyph-money-3.svg" />
+    <Content Include="Content\svg\si-glyph-money-bag.svg" />
+    <Content Include="Content\svg\si-glyph-money-coin.svg" />
+    <Content Include="Content\svg\si-glyph-moon-star.svg" />
+    <Content Include="Content\svg\si-glyph-motobike.svg" />
+    <Content Include="Content\svg\si-glyph-mountain.svg" />
+    <Content Include="Content\svg\si-glyph-movie-play.svg" />
+    <Content Include="Content\svg\si-glyph-movie-projector.svg" />
+    <Content Include="Content\svg\si-glyph-multifunction-knife.svg" />
+    <Content Include="Content\svg\si-glyph-mushrooms.svg" />
+    <Content Include="Content\svg\si-glyph-music-note.svg" />
+    <Content Include="Content\svg\si-glyph-music.svg" />
+    <Content Include="Content\svg\si-glyph-mustache.svg" />
+    <Content Include="Content\svg\si-glyph-network-2.svg" />
+    <Content Include="Content\svg\si-glyph-network.svg" />
+    <Content Include="Content\svg\si-glyph-newspaper.svg" />
+    <Content Include="Content\svg\si-glyph-no-dog.svg" />
+    <Content Include="Content\svg\si-glyph-no-smoke.svg" />
+    <Content Include="Content\svg\si-glyph-note-2.svg" />
+    <Content Include="Content\svg\si-glyph-note.svg" />
+    <Content Include="Content\svg\si-glyph-old-phone.svg" />
+    <Content Include="Content\svg\si-glyph-open.svg" />
+    <Content Include="Content\svg\si-glyph-pallette.svg" />
+    <Content Include="Content\svg\si-glyph-paper-clip.svg" />
+    <Content Include="Content\svg\si-glyph-paper-plane.svg" />
+    <Content Include="Content\svg\si-glyph-paper-roll.svg" />
+    <Content Include="Content\svg\si-glyph-paper-shredder.svg" />
+    <Content Include="Content\svg\si-glyph-pause.svg" />
+    <Content Include="Content\svg\si-glyph-pawn.svg" />
+    <Content Include="Content\svg\si-glyph-paypal.svg" />
+    <Content Include="Content\svg\si-glyph-pen-nib.svg" />
+    <Content Include="Content\svg\si-glyph-pen.svg" />
+    <Content Include="Content\svg\si-glyph-pencil.svg" />
+    <Content Include="Content\svg\si-glyph-percent.svg" />
+    <Content Include="Content\svg\si-glyph-person-2.svg" />
+    <Content Include="Content\svg\si-glyph-person-checked.svg" />
+    <Content Include="Content\svg\si-glyph-person-door-man.svg" />
+    <Content Include="Content\svg\si-glyph-person-error.svg" />
+    <Content Include="Content\svg\si-glyph-person-man.svg" />
+    <Content Include="Content\svg\si-glyph-person-people.svg" />
+    <Content Include="Content\svg\si-glyph-person-plus.svg" />
+    <Content Include="Content\svg\si-glyph-person-prison.svg" />
+    <Content Include="Content\svg\si-glyph-person-public.svg" />
+    <Content Include="Content\svg\si-glyph-person-remove.svg" />
+    <Content Include="Content\svg\si-glyph-person-talk.svg" />
+    <Content Include="Content\svg\si-glyph-person-woman.svg" />
+    <Content Include="Content\svg\si-glyph-person.svg" />
+    <Content Include="Content\svg\si-glyph-pet-carrier.svg" />
+    <Content Include="Content\svg\si-glyph-phone-fax.svg" />
+    <Content Include="Content\svg\si-glyph-phone-number.svg" />
+    <Content Include="Content\svg\si-glyph-piano.svg" />
+    <Content Include="Content\svg\si-glyph-pick.svg" />
+    <Content Include="Content\svg\si-glyph-picture-2.svg" />
+    <Content Include="Content\svg\si-glyph-picture-copy.svg" />
+    <Content Include="Content\svg\si-glyph-picture.svg" />
+    <Content Include="Content\svg\si-glyph-piggy-bank.svg" />
+    <Content Include="Content\svg\si-glyph-pill.svg" />
+    <Content Include="Content\svg\si-glyph-pin-location-1.svg" />
+    <Content Include="Content\svg\si-glyph-pin-location-2.svg" />
+    <Content Include="Content\svg\si-glyph-pin-location-add.svg" />
+    <Content Include="Content\svg\si-glyph-pin-location-delete.svg" />
+    <Content Include="Content\svg\si-glyph-pin-location-love.svg" />
+    <Content Include="Content\svg\si-glyph-pin-location-map.svg" />
+    <Content Include="Content\svg\si-glyph-pin-location-remove.svg" />
+    <Content Include="Content\svg\si-glyph-pin-location.svg" />
+    <Content Include="Content\svg\si-glyph-pin-map.svg" />
+    <Content Include="Content\svg\si-glyph-ping-pong-racket.svg" />
+    <Content Include="Content\svg\si-glyph-pipe.svg" />
+    <Content Include="Content\svg\si-glyph-pizza.svg" />
+    <Content Include="Content\svg\si-glyph-plugin.svg" />
+    <Content Include="Content\svg\si-glyph-plus.svg" />
+    <Content Include="Content\svg\si-glyph-podium.svg" />
+    <Content Include="Content\svg\si-glyph-poker-1.svg" />
+    <Content Include="Content\svg\si-glyph-poker-2.svg" />
+    <Content Include="Content\svg\si-glyph-poker-3.svg" />
+    <Content Include="Content\svg\si-glyph-poker-4.svg" />
+    <Content Include="Content\svg\si-glyph-print.svg" />
+    <Content Include="Content\svg\si-glyph-puzzle.svg" />
+    <Content Include="Content\svg\si-glyph-quote-close.svg" />
+    <Content Include="Content\svg\si-glyph-quote-open.svg" />
+    <Content Include="Content\svg\si-glyph-radio.svg" />
+    <Content Include="Content\svg\si-glyph-radioactive.svg" />
+    <Content Include="Content\svg\si-glyph-record.svg" />
+    <Content Include="Content\svg\si-glyph-reduce.svg" />
+    <Content Include="Content\svg\si-glyph-reel-audio.svg" />
+    <Content Include="Content\svg\si-glyph-reel-film.svg" />
+    <Content Include="Content\svg\si-glyph-remove.svg" />
+    <Content Include="Content\svg\si-glyph-repeat.svg" />
+    <Content Include="Content\svg\si-glyph-resize-in-frame.svg" />
+    <Content Include="Content\svg\si-glyph-resize-out-frame.svg" />
+    <Content Include="Content\svg\si-glyph-retroeexcavadora.svg" />
+    <Content Include="Content\svg\si-glyph-ribbon.svg" />
+    <Content Include="Content\svg\si-glyph-right-justify.svg" />
+    <Content Include="Content\svg\si-glyph-rightwards-arrow-to-bar.svg" />
+    <Content Include="Content\svg\si-glyph-ring.svg" />
+    <Content Include="Content\svg\si-glyph-road.svg" />
+    <Content Include="Content\svg\si-glyph-rocket.svg" />
+    <Content Include="Content\svg\si-glyph-roller.svg" />
+    <Content Include="Content\svg\si-glyph-rss.svg" />
+    <Content Include="Content\svg\si-glyph-rugby-ball.svg" />
+    <Content Include="Content\svg\si-glyph-ruler.svg" />
+    <Content Include="Content\svg\si-glyph-safe-box.svg" />
+    <Content Include="Content\svg\si-glyph-safe-pin.svg" />
+    <Content Include="Content\svg\si-glyph-satellite.svg" />
+    <Content Include="Content\svg\si-glyph-saw.svg" />
+    <Content Include="Content\svg\si-glyph-scissor-line-cut.svg" />
+    <Content Include="Content\svg\si-glyph-scissor.svg" />
+    <Content Include="Content\svg\si-glyph-screen-ful.svg" />
+    <Content Include="Content\svg\si-glyph-screen-scale.svg" />
+    <Content Include="Content\svg\si-glyph-screw-driver.svg" />
+    <Content Include="Content\svg\si-glyph-screw.svg" />
+    <Content Include="Content\svg\si-glyph-sd-card.svg" />
+    <Content Include="Content\svg\si-glyph-seriff.svg" />
+    <Content Include="Content\svg\si-glyph-sewing-machine.svg" />
+    <Content Include="Content\svg\si-glyph-sewing-roll.svg" />
+    <Content Include="Content\svg\si-glyph-share-1.svg" />
+    <Content Include="Content\svg\si-glyph-share-2.svg" />
+    <Content Include="Content\svg\si-glyph-share-3.svg" />
+    <Content Include="Content\svg\si-glyph-share-5.svg" />
+    <Content Include="Content\svg\si-glyph-sheep.svg" />
+    <Content Include="Content\svg\si-glyph-shield-2.svg" />
+    <Content Include="Content\svg\si-glyph-shield-plus.svg" />
+    <Content Include="Content\svg\si-glyph-shield-star.svg" />
+    <Content Include="Content\svg\si-glyph-shield.svg" />
+    <Content Include="Content\svg\si-glyph-shovel.svg" />
+    <Content Include="Content\svg\si-glyph-shower.svg" />
+    <Content Include="Content\svg\si-glyph-sign-board.svg" />
+    <Content Include="Content\svg\si-glyph-sign-foot.svg" />
+    <Content Include="Content\svg\si-glyph-sign-in.svg" />
+    <Content Include="Content\svg\si-glyph-sign-out.svg" />
+    <Content Include="Content\svg\si-glyph-sign-p.svg" />
+    <Content Include="Content\svg\si-glyph-sign-road-1.svg" />
+    <Content Include="Content\svg\si-glyph-sign-road-2.svg" />
+    <Content Include="Content\svg\si-glyph-signal-1.svg" />
+    <Content Include="Content\svg\si-glyph-signal-2.svg" />
+    <Content Include="Content\svg\si-glyph-signal-3.svg" />
+    <Content Include="Content\svg\si-glyph-site-map-revert.svg" />
+    <Content Include="Content\svg\si-glyph-site-map.svg" />
+    <Content Include="Content\svg\si-glyph-skateboard.svg" />
+    <Content Include="Content\svg\si-glyph-skull.svg" />
+    <Content Include="Content\svg\si-glyph-sleep.svg" />
+    <Content Include="Content\svg\si-glyph-slide-show.svg" />
+    <Content Include="Content\svg\si-glyph-smartphone.svg" />
+    <Content Include="Content\svg\si-glyph-sms.svg" />
+    <Content Include="Content\svg\si-glyph-snow.svg" />
+    <Content Include="Content\svg\si-glyph-soccer-yard.svg" />
+    <Content Include="Content\svg\si-glyph-sock.svg" />
+    <Content Include="Content\svg\si-glyph-socket.svg" />
+    <Content Include="Content\svg\si-glyph-solar-blind.svg" />
+    <Content Include="Content\svg\si-glyph-sos.svg" />
+    <Content Include="Content\svg\si-glyph-sound-mute.svg" />
+    <Content Include="Content\svg\si-glyph-sound.svg" />
+    <Content Include="Content\svg\si-glyph-space-ship.svg" />
+    <Content Include="Content\svg\si-glyph-spanner.svg" />
+    <Content Include="Content\svg\si-glyph-spoon-fork.svg" />
+    <Content Include="Content\svg\si-glyph-spray.svg" />
+    <Content Include="Content\svg\si-glyph-square-checked.svg" />
+    <Content Include="Content\svg\si-glyph-square-dashed-1.svg" />
+    <Content Include="Content\svg\si-glyph-square-dashed-2.svg" />
+    <Content Include="Content\svg\si-glyph-square-delicious.svg" />
+    <Content Include="Content\svg\si-glyph-square-eight-angle-point.svg" />
+    <Content Include="Content\svg\si-glyph-square-four-angle-point.svg" />
+    <Content Include="Content\svg\si-glyph-square-four.svg" />
+    <Content Include="Content\svg\si-glyph-square-plus.svg" />
+    <Content Include="Content\svg\si-glyph-square-star.svg" />
+    <Content Include="Content\svg\si-glyph-square.svg" />
+    <Content Include="Content\svg\si-glyph-stamps.svg" />
+    <Content Include="Content\svg\si-glyph-star-cross.svg" />
+    <Content Include="Content\svg\si-glyph-star-stick.svg" />
+    <Content Include="Content\svg\si-glyph-stele.svg" />
+    <Content Include="Content\svg\si-glyph-stelescope.svg" />
+    <Content Include="Content\svg\si-glyph-stereo-jack.svg" />
+    <Content Include="Content\svg\si-glyph-stethoscope.svg" />
+    <Content Include="Content\svg\si-glyph-store.svg" />
+    <Content Include="Content\svg\si-glyph-stove.svg" />
+    <Content Include="Content\svg\si-glyph-strawberry.svg" />
+    <Content Include="Content\svg\si-glyph-street-2.svg" />
+    <Content Include="Content\svg\si-glyph-strolley-arrow-down.svg" />
+    <Content Include="Content\svg\si-glyph-strolley-arrow-up.svg" />
+    <Content Include="Content\svg\si-glyph-strolley-plus.svg" />
+    <Content Include="Content\svg\si-glyph-strolley-remove.svg" />
+    <Content Include="Content\svg\si-glyph-strolley.svg" />
+    <Content Include="Content\svg\si-glyph-subway.svg" />
+    <Content Include="Content\svg\si-glyph-suitcase-person.svg" />
+    <Content Include="Content\svg\si-glyph-suitcase.svg" />
+    <Content Include="Content\svg\si-glyph-syringe.svg" />
+    <Content Include="Content\svg\si-glyph-t-shirt.svg" />
+    <Content Include="Content\svg\si-glyph-tablet.svg" />
+    <Content Include="Content\svg\si-glyph-tag-1.svg" />
+    <Content Include="Content\svg\si-glyph-tag-one-plus.svg" />
+    <Content Include="Content\svg\si-glyph-tag-price.svg" />
+    <Content Include="Content\svg\si-glyph-tag.svg" />
+    <Content Include="Content\svg\si-glyph-tank.svg" />
+    <Content Include="Content\svg\si-glyph-targer.svg" />
+    <Content Include="Content\svg\si-glyph-tea-cup.svg" />
+    <Content Include="Content\svg\si-glyph-teeth.svg" />
+    <Content Include="Content\svg\si-glyph-telephone-box.svg" />
+    <Content Include="Content\svg\si-glyph-telescope.svg" />
+    <Content Include="Content\svg\si-glyph-television.svg" />
+    <Content Include="Content\svg\si-glyph-tennis-racket-ball.svg" />
+    <Content Include="Content\svg\si-glyph-tent-1.svg" />
+    <Content Include="Content\svg\si-glyph-tent-camp.svg" />
+    <Content Include="Content\svg\si-glyph-test-tube-2.svg" />
+    <Content Include="Content\svg\si-glyph-test-tube-empty.svg" />
+    <Content Include="Content\svg\si-glyph-test-tube.svg" />
+    <Content Include="Content\svg\si-glyph-text-search.svg" />
+    <Content Include="Content\svg\si-glyph-thermometer.svg" />
+    <Content Include="Content\svg\si-glyph-three-ball.svg" />
+    <Content Include="Content\svg\si-glyph-tic-tac-toe.svg" />
+    <Content Include="Content\svg\si-glyph-time-glass.svg" />
+    <Content Include="Content\svg\si-glyph-time-reload.svg" />
+    <Content Include="Content\svg\si-glyph-timer.svg" />
+    <Content Include="Content\svg\si-glyph-toilet.svg" />
+    <Content Include="Content\svg\si-glyph-tool-box.svg" />
+    <Content Include="Content\svg\si-glyph-traffic-light.svg" />
+    <Content Include="Content\svg\si-glyph-train-rail.svg" />
+    <Content Include="Content\svg\si-glyph-train.svg" />
+    <Content Include="Content\svg\si-glyph-trash.svg" />
+    <Content Include="Content\svg\si-glyph-tree.svg" />
+    <Content Include="Content\svg\si-glyph-trees.svg" />
+    <Content Include="Content\svg\si-glyph-triangle-double-arrow-down.svg" />
+    <Content Include="Content\svg\si-glyph-triangle-double-arrow-left.svg" />
+    <Content Include="Content\svg\si-glyph-triangle-double-arrow-right.svg" />
+    <Content Include="Content\svg\si-glyph-triangle-double-arrow-up.svg" />
+    <Content Include="Content\svg\si-glyph-triangle-down.svg" />
+    <Content Include="Content\svg\si-glyph-triangle-left.svg" />
+    <Content Include="Content\svg\si-glyph-triangle-right.svg" />
+    <Content Include="Content\svg\si-glyph-triangle-up.svg" />
+    <Content Include="Content\svg\si-glyph-trolley-2.svg" />
+    <Content Include="Content\svg\si-glyph-trolley-arrow-down.svg" />
+    <Content Include="Content\svg\si-glyph-trolley-arrow-up.svg" />
+    <Content Include="Content\svg\si-glyph-trolley-briefcase.svg" />
+    <Content Include="Content\svg\si-glyph-trolley-error.svg" />
+    <Content Include="Content\svg\si-glyph-trolley-full.svg" />
+    <Content Include="Content\svg\si-glyph-trolley-plus.svg" />
+    <Content Include="Content\svg\si-glyph-trolley-remove.svg" />
+    <Content Include="Content\svg\si-glyph-truck.svg" />
+    <Content Include="Content\svg\si-glyph-trumpet.svg" />
+    <Content Include="Content\svg\si-glyph-turn-off.svg" />
+    <Content Include="Content\svg\si-glyph-two-arrow-down.svg" />
+    <Content Include="Content\svg\si-glyph-two-arrow-in-down-up.svg" />
+    <Content Include="Content\svg\si-glyph-two-arrow-in-left-right.svg" />
+    <Content Include="Content\svg\si-glyph-two-arrow-left.svg" />
+    <Content Include="Content\svg\si-glyph-two-arrow-right.svg" />
+    <Content Include="Content\svg\si-glyph-typewriter.svg" />
+    <Content Include="Content\svg\si-glyph-umberlla-chair.svg" />
+    <Content Include="Content\svg\si-glyph-umbrella-close.svg" />
+    <Content Include="Content\svg\si-glyph-umbrella-open.svg" />
+    <Content Include="Content\svg\si-glyph-umbrella-sea.svg" />
+    <Content Include="Content\svg\si-glyph-upstair.svg" />
+    <Content Include="Content\svg\si-glyph-upwards-arrow-to-bar.svg" />
+    <Content Include="Content\svg\si-glyph-upwards-arrow-with-loop.svg" />
+    <Content Include="Content\svg\si-glyph-usb.svg" />
+    <Content Include="Content\svg\si-glyph-view.svg" />
+    <Content Include="Content\svg\si-glyph-wacom-tablet.svg" />
+    <Content Include="Content\svg\si-glyph-wall.svg" />
+    <Content Include="Content\svg\si-glyph-wallet.svg" />
+    <Content Include="Content\svg\si-glyph-wash-machine-2.svg" />
+    <Content Include="Content\svg\si-glyph-wash-machine.svg" />
+    <Content Include="Content\svg\si-glyph-watch.svg" />
+    <Content Include="Content\svg\si-glyph-webcam.svg" />
+    <Content Include="Content\svg\si-glyph-weight-down.svg" />
+    <Content Include="Content\svg\si-glyph-weight-kilograms.svg" />
+    <Content Include="Content\svg\si-glyph-weight-up.svg" />
+    <Content Include="Content\svg\si-glyph-wheel-chair.svg" />
+    <Content Include="Content\svg\si-glyph-wheel-steel.svg" />
+    <Content Include="Content\svg\si-glyph-wieght.svg" />
+    <Content Include="Content\svg\si-glyph-wifi-1.svg" />
+    <Content Include="Content\svg\si-glyph-wind-turbines.svg" />
+    <Content Include="Content\svg\si-glyph-window.svg" />
+    <Content Include="Content\svg\si-glyph-wood-stove.svg" />
+    <Content Include="Content\svg\si-glyph-wrench-screwdriver.svg" />
+    <Content Include="Content\svg\si-glyph-wrench.svg" />
+    <Content Include="Content\svg\si-glyph-yen.svg" />
+    <Content Include="Content\svg\si-glyph-ying-yang.svg" />
+    <Content Include="Content\svg\si-glyph-zip.svg" />
+    <Content Include="Content\svg\si-glyph-zoom-in.svg" />
+    <Content Include="Content\svg\si-glyph-zoom-out.svg" />
+    <Content Include="Content\template-app.css" />
+    <Content Include="Content\Template_Master\TemplateMaster.css" />
+    <Content Include="Content\tools\alertify.css" />
+    <Content Include="Content\tools\fullcalendar-3.9.0\fullcalendar.css" />
+    <Content Include="Content\tools\fullcalendar-3.9.0\fullcalendar.min.css" />
+    <Content Include="Content\tools\fullcalendar-3.9.0\fullcalendar.print.css" />
+    <Content Include="Content\tools\fullcalendar-3.9.0\fullcalendar.print.min.css" />
+    <Content Include="Content\tools\fullcalendar-3.9.0\scheduler.css" />
+    <Content Include="Content\tools\fullcalendar-3.9.0\scheduler.min.css" />
+    <Content Include="Content\tools\jquery-ui.css" />
+    <Content Include="Content\tools\select2.css" />
+    <Content Include="Content\tools\select2.min.css" />
+    <Content Include="Content\tools\themes\bootstrap.css" />
+    <Content Include="Content\tools\themes\default.css" />
+    <Content Include="Content\tools\tipped.css" />
+    <Content Include="Content\v4-shims.css" />
+    <Content Include="Content\v4-shims.min.css" />
+    <Content Include="Content\webfonts\fa-brands-400.svg" />
+    <Content Include="Content\webfonts\fa-regular-400.svg" />
+    <Content Include="Content\webfonts\fa-solid-900.svg" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\metro.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\alertify.js" />
+    <Content Include="Scripts\alertify.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker.es.js" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Calendar-csj.js" />
+    <Content Include="Scripts\ckeditor\adapters\jquery.js" />
+    <Content Include="Scripts\ckeditor\build-config.js" />
+    <Content Include="Scripts\ckeditor\ckeditor.js" />
+    <Content Include="Scripts\ckeditor\config.js" />
+    <Content Include="Scripts\ckeditor\config1.js" />
+    <Content Include="Scripts\ckeditor\configSupervisionActuacion.js" />
+    <Content Include="Scripts\ckeditor\contents.css" />
+    <Content Include="Scripts\ckeditor\lang\af.js" />
+    <Content Include="Scripts\ckeditor\lang\ar.js" />
+    <Content Include="Scripts\ckeditor\lang\az.js" />
+    <Content Include="Scripts\ckeditor\lang\bg.js" />
+    <Content Include="Scripts\ckeditor\lang\bn.js" />
+    <Content Include="Scripts\ckeditor\lang\bs.js" />
+    <Content Include="Scripts\ckeditor\lang\ca.js" />
+    <Content Include="Scripts\ckeditor\lang\cs.js" />
+    <Content Include="Scripts\ckeditor\lang\cy.js" />
+    <Content Include="Scripts\ckeditor\lang\da.js" />
+    <Content Include="Scripts\ckeditor\lang\de-ch.js" />
+    <Content Include="Scripts\ckeditor\lang\de.js" />
+    <Content Include="Scripts\ckeditor\lang\el.js" />
+    <Content Include="Scripts\ckeditor\lang\en-au.js" />
+    <Content Include="Scripts\ckeditor\lang\en-ca.js" />
+    <Content Include="Scripts\ckeditor\lang\en-gb.js" />
+    <Content Include="Scripts\ckeditor\lang\en.js" />
+    <Content Include="Scripts\ckeditor\lang\eo.js" />
+    <Content Include="Scripts\ckeditor\lang\es-mx.js" />
+    <Content Include="Scripts\ckeditor\lang\es.js" />
+    <Content Include="Scripts\ckeditor\lang\et.js" />
+    <Content Include="Scripts\ckeditor\lang\eu.js" />
+    <Content Include="Scripts\ckeditor\lang\fa.js" />
+    <Content Include="Scripts\ckeditor\lang\fi.js" />
+    <Content Include="Scripts\ckeditor\lang\fo.js" />
+    <Content Include="Scripts\ckeditor\lang\fr-ca.js" />
+    <Content Include="Scripts\ckeditor\lang\fr.js" />
+    <Content Include="Scripts\ckeditor\lang\gl.js" />
+    <Content Include="Scripts\ckeditor\lang\gu.js" />
+    <Content Include="Scripts\ckeditor\lang\he.js" />
+    <Content Include="Scripts\ckeditor\lang\hi.js" />
+    <Content Include="Scripts\ckeditor\lang\hr.js" />
+    <Content Include="Scripts\ckeditor\lang\hu.js" />
+    <Content Include="Scripts\ckeditor\lang\id.js" />
+    <Content Include="Scripts\ckeditor\lang\is.js" />
+    <Content Include="Scripts\ckeditor\lang\it.js" />
+    <Content Include="Scripts\ckeditor\lang\ja.js" />
+    <Content Include="Scripts\ckeditor\lang\ka.js" />
+    <Content Include="Scripts\ckeditor\lang\km.js" />
+    <Content Include="Scripts\ckeditor\lang\ko.js" />
+    <Content Include="Scripts\ckeditor\lang\ku.js" />
+    <Content Include="Scripts\ckeditor\lang\lt.js" />
+    <Content Include="Scripts\ckeditor\lang\lv.js" />
+    <Content Include="Scripts\ckeditor\lang\mk.js" />
+    <Content Include="Scripts\ckeditor\lang\mn.js" />
+    <Content Include="Scripts\ckeditor\lang\ms.js" />
+    <Content Include="Scripts\ckeditor\lang\nb.js" />
+    <Content Include="Scripts\ckeditor\lang\nl.js" />
+    <Content Include="Scripts\ckeditor\lang\no.js" />
+    <Content Include="Scripts\ckeditor\lang\oc.js" />
+    <Content Include="Scripts\ckeditor\lang\pl.js" />
+    <Content Include="Scripts\ckeditor\lang\pt-br.js" />
+    <Content Include="Scripts\ckeditor\lang\pt.js" />
+    <Content Include="Scripts\ckeditor\lang\ro.js" />
+    <Content Include="Scripts\ckeditor\lang\ru.js" />
+    <Content Include="Scripts\ckeditor\lang\si.js" />
+    <Content Include="Scripts\ckeditor\lang\sk.js" />
+    <Content Include="Scripts\ckeditor\lang\sl.js" />
+    <Content Include="Scripts\ckeditor\lang\sq.js" />
+    <Content Include="Scripts\ckeditor\lang\sr-latn.js" />
+    <Content Include="Scripts\ckeditor\lang\sr.js" />
+    <Content Include="Scripts\ckeditor\lang\sv.js" />
+    <Content Include="Scripts\ckeditor\lang\th.js" />
+    <Content Include="Scripts\ckeditor\lang\tr.js" />
+    <Content Include="Scripts\ckeditor\lang\tt.js" />
+    <Content Include="Scripts\ckeditor\lang\ug.js" />
+    <Content Include="Scripts\ckeditor\lang\uk.js" />
+    <Content Include="Scripts\ckeditor\lang\vi.js" />
+    <Content Include="Scripts\ckeditor\lang\zh-cn.js" />
+    <Content Include="Scripts\ckeditor\lang\zh.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\a11yhelp.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\af.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\ar.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\az.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\bg.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\ca.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\cs.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\cy.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\da.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\de-ch.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\de.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\el.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\en-au.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\en-gb.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\en.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\eo.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\es-mx.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\es.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\et.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\eu.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\fa.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\fi.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\fo.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\fr-ca.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\fr.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\gl.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\gu.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\he.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\hi.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\hr.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\hu.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\id.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\it.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\ja.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\km.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\ko.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\ku.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\lt.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\lv.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\mk.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\mn.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\nb.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\nl.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\no.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\oc.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\pl.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\pt-br.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\pt.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\ro.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\ru.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\si.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\sk.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\sl.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\sq.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\sr-latn.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\sr.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\sv.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\th.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\tr.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\tt.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\ug.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\uk.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\vi.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\zh-cn.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\zh.js" />
+    <Content Include="Scripts\ckeditor\plugins\a11yhelp\dialogs\lang\_translationstatus.txt" />
+    <Content Include="Scripts\ckeditor\plugins\about\dialogs\about.js" />
+    <Content Include="Scripts\ckeditor\plugins\about\dialogs\hidpi\logo_ckeditor.png" />
+    <Content Include="Scripts\ckeditor\plugins\about\dialogs\logo_ckeditor.png" />
+    <Content Include="Scripts\ckeditor\plugins\clipboard\dialogs\paste.js" />
+    <Content Include="Scripts\ckeditor\plugins\colordialog\dialogs\colordialog.css" />
+    <Content Include="Scripts\ckeditor\plugins\colordialog\dialogs\colordialog.js" />
+    <Content Include="Scripts\ckeditor\plugins\copyformatting\cursors\cursor-disabled.svg" />
+    <Content Include="Scripts\ckeditor\plugins\copyformatting\cursors\cursor.svg" />
+    <Content Include="Scripts\ckeditor\plugins\copyformatting\styles\copyformatting.css" />
+    <Content Include="Scripts\ckeditor\plugins\dialog\dialogDefinition.js" />
+    <Content Include="Scripts\ckeditor\plugins\div\dialogs\div.js" />
+    <Content Include="Scripts\ckeditor\plugins\find\dialogs\find.js" />
+    <Content Include="Scripts\ckeditor\plugins\flash\dialogs\flash.js" />
+    <Content Include="Scripts\ckeditor\plugins\flash\images\placeholder.png" />
+    <Content Include="Scripts\ckeditor\plugins\forms\dialogs\button.js" />
+    <Content Include="Scripts\ckeditor\plugins\forms\dialogs\checkbox.js" />
+    <Content Include="Scripts\ckeditor\plugins\forms\dialogs\form.js" />
+    <Content Include="Scripts\ckeditor\plugins\forms\dialogs\hiddenfield.js" />
+    <Content Include="Scripts\ckeditor\plugins\forms\dialogs\radio.js" />
+    <Content Include="Scripts\ckeditor\plugins\forms\dialogs\select.js" />
+    <Content Include="Scripts\ckeditor\plugins\forms\dialogs\textarea.js" />
+    <Content Include="Scripts\ckeditor\plugins\forms\dialogs\textfield.js" />
+    <Content Include="Scripts\ckeditor\plugins\forms\images\hiddenfield.gif" />
+    <Content Include="Scripts\ckeditor\plugins\icons.png" />
+    <Content Include="Scripts\ckeditor\plugins\icons_hidpi.png" />
+    <Content Include="Scripts\ckeditor\plugins\iframe\dialogs\iframe.js" />
+    <Content Include="Scripts\ckeditor\plugins\iframe\images\placeholder.png" />
+    <Content Include="Scripts\ckeditor\plugins\image\dialogs\image.js" />
+    <Content Include="Scripts\ckeditor\plugins\image\images\noimage.png" />
+    <Content Include="Scripts\ckeditor\plugins\link\dialogs\anchor.js" />
+    <Content Include="Scripts\ckeditor\plugins\link\dialogs\link.js" />
+    <Content Include="Scripts\ckeditor\plugins\link\images\anchor.png" />
+    <Content Include="Scripts\ckeditor\plugins\link\images\hidpi\anchor.png" />
+    <Content Include="Scripts\ckeditor\plugins\liststyle\dialogs\liststyle.js" />
+    <Content Include="Scripts\ckeditor\plugins\magicline\images\hidpi\icon-rtl.png" />
+    <Content Include="Scripts\ckeditor\plugins\magicline\images\hidpi\icon.png" />
+    <Content Include="Scripts\ckeditor\plugins\magicline\images\icon-rtl.png" />
+    <Content Include="Scripts\ckeditor\plugins\magicline\images\icon.png" />
+    <Content Include="Scripts\ckeditor\plugins\pagebreak\images\pagebreak.gif" />
+    <Content Include="Scripts\ckeditor\plugins\pastefromword\filter\default.js" />
+    <Content Include="Scripts\ckeditor\plugins\preview\preview.html" />
+    <Content Include="Scripts\ckeditor\plugins\scayt\dialogs\options.js" />
+    <Content Include="Scripts\ckeditor\plugins\scayt\dialogs\toolbar.css" />
+    <Content Include="Scripts\ckeditor\plugins\scayt\skins\moono-lisa\scayt.css" />
+    <Content Include="Scripts\ckeditor\plugins\showblocks\images\block_address.png" />
+    <Content Include="Scripts\ckeditor\plugins\showblocks\images\block_blockquote.png" />
+    <Content Include="Scripts\ckeditor\plugins\showblocks\images\block_div.png" />
+    <Content Include="Scripts\ckeditor\plugins\showblocks\images\block_h1.png" />
+    <Content Include="Scripts\ckeditor\plugins\showblocks\images\block_h2.png" />
+    <Content Include="Scripts\ckeditor\plugins\showblocks\images\block_h3.png" />
+    <Content Include="Scripts\ckeditor\plugins\showblocks\images\block_h4.png" />
+    <Content Include="Scripts\ckeditor\plugins\showblocks\images\block_h5.png" />
+    <Content Include="Scripts\ckeditor\plugins\showblocks\images\block_h6.png" />
+    <Content Include="Scripts\ckeditor\plugins\showblocks\images\block_p.png" />
+    <Content Include="Scripts\ckeditor\plugins\showblocks\images\block_pre.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\dialogs\smiley.js" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\angel_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\angel_smile.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\angry_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\angry_smile.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\broken_heart.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\broken_heart.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\confused_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\confused_smile.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\cry_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\cry_smile.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\devil_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\devil_smile.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\embaressed_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\embarrassed_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\embarrassed_smile.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\envelope.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\envelope.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\heart.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\heart.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\kiss.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\kiss.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\lightbulb.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\lightbulb.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\omg_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\omg_smile.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\regular_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\regular_smile.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\sad_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\sad_smile.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\shades_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\shades_smile.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\teeth_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\teeth_smile.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\thumbs_down.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\thumbs_down.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\thumbs_up.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\thumbs_up.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\tongue_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\tongue_smile.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\tounge_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\whatchutalkingabout_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\whatchutalkingabout_smile.png" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\wink_smile.gif" />
+    <Content Include="Scripts\ckeditor\plugins\smiley\images\wink_smile.png" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\af.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\ar.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\az.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\bg.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\ca.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\cs.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\cy.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\da.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\de-ch.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\de.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\el.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\en-au.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\en-ca.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\en-gb.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\en.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\eo.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\es-mx.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\es.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\et.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\eu.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\fa.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\fi.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\fr-ca.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\fr.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\gl.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\he.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\hr.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\hu.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\id.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\it.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\ja.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\km.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\ko.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\ku.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\lt.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\lv.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\nb.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\nl.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\no.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\oc.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\pl.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\pt-br.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\pt.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\ro.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\ru.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\si.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\sk.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\sl.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\sq.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\sv.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\th.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\tr.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\tt.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\ug.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\uk.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\vi.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\zh-cn.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\zh.js" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\lang\_translationstatus.txt" />
+    <Content Include="Scripts\ckeditor\plugins\specialchar\dialogs\specialchar.js" />
+    <Content Include="Scripts\ckeditor\plugins\tableselection\styles\tableselection.css" />
+    <Content Include="Scripts\ckeditor\plugins\tabletools\dialogs\tableCell.js" />
+    <Content Include="Scripts\ckeditor\plugins\table\dialogs\table.js" />
+    <Content Include="Scripts\ckeditor\plugins\templates\dialogs\templates.css" />
+    <Content Include="Scripts\ckeditor\plugins\templates\dialogs\templates.js" />
+    <Content Include="Scripts\ckeditor\plugins\templates\templates\default.js" />
+    <Content Include="Scripts\ckeditor\plugins\templates\templates\images\template1.gif" />
+    <Content Include="Scripts\ckeditor\plugins\templates\templates\images\template2.gif" />
+    <Content Include="Scripts\ckeditor\plugins\templates\templates\images\template3.gif" />
+    <Content Include="Scripts\ckeditor\plugins\wsc\dialogs\ciframe.html" />
+    <Content Include="Scripts\ckeditor\plugins\wsc\dialogs\tmpFrameset.html" />
+    <Content Include="Scripts\ckeditor\plugins\wsc\dialogs\wsc.css" />
+    <Content Include="Scripts\ckeditor\plugins\wsc\dialogs\wsc.js" />
+    <Content Include="Scripts\ckeditor\plugins\wsc\dialogs\wsc_ie.js" />
+    <Content Include="Scripts\ckeditor\plugins\wsc\skins\moono-lisa\wsc.css" />
+    <Content Include="Scripts\ckeditor\skins\moono-lisa\dialog.css" />
+    <Content Include="Scripts\ckeditor\skins\moono-lisa\dialog_ie.css" />
+    <Content Include="Scripts\ckeditor\skins\moono-lisa\dialog_ie8.css" />
+    <Content Include="Scripts\ckeditor\skins\moono-lisa\dialog_iequirks.css" />
+    <Content Include="Scripts\ckeditor\skins\moono-lisa\editor.css" />
+    <Content Include="Scripts\ckeditor\skins\moono-lisa\editor_gecko.css" />
+    <Content Include="Scripts\ckeditor\skins\moono-lisa\editor_ie.css" />
+    <Content Include="Scripts\ckeditor\skins\moono-lisa\editor_ie8.css" />
+    <Content Include="Scripts\ckeditor\skins\moono-lisa\editor_iequirks.css" />
+    <Content Include="Scripts\ckeditor\skins\moono-lisa\icons.png" />
+    <Content Include="Scripts\ckeditor\skins\moono-lisa\icons_hidpi.png" />
+    <Content Include="Scripts\ckeditor\skins\moono-lisa\images\arrow.png" />
+    <Content Include="Scripts\ckeditor\skins\moono-lisa\images\close.png" />
+    <Content Include="Scripts\ckeditor\skins\moono-lisa\images\hidpi\close.png" />
+    <Content Include="Scripts\ckeditor\skins\moono-lisa\images\hidpi\lock-open.png" />
+    <Content Include="Scripts\ckeditor\skins\moono-lisa\images\hidpi\lock.png" />
+    <Content Include="Scripts\ckeditor\skins\moono-lisa\images\hidpi\refresh.png" />
+    <Content Include="Scripts\ckeditor\skins\moono-lisa\images\lock-open.png" />
+    <Content Include="Scripts\ckeditor\skins\moono-lisa\images\lock.png" />
+    <Content Include="Scripts\ckeditor\skins\moono-lisa\images\refresh.png" />
+    <Content Include="Scripts\ckeditor\skins\moono-lisa\images\spinner.gif" />
+    <Content Include="Scripts\ckeditor\styles.js" />
+    <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
+    <Content Include="Scripts\DataTables\autoFill.bootstrap.min.js" />
+    <Content Include="Scripts\DataTables\autoFill.bootstrap4.js" />
+    <Content Include="Scripts\DataTables\autoFill.bootstrap4.min.js" />
+    <Content Include="Scripts\DataTables\autoFill.foundation.js" />
+    <Content Include="Scripts\DataTables\autoFill.foundation.min.js" />
+    <Content Include="Scripts\DataTables\autoFill.jqueryui.js" />
+    <Content Include="Scripts\DataTables\autoFill.jqueryui.min.js" />
+    <Content Include="Scripts\DataTables\autoFill.semanticui.js" />
+    <Content Include="Scripts\DataTables\autoFill.semanticui.min.js" />
+    <Content Include="Scripts\DataTables\buttons.bootstrap.js" />
+    <Content Include="Scripts\DataTables\buttons.bootstrap.min.js" />
+    <Content Include="Scripts\DataTables\buttons.bootstrap4.js" />
+    <Content Include="Scripts\DataTables\buttons.bootstrap4.min.js" />
+    <Content Include="Scripts\DataTables\buttons.colVis.js" />
+    <Content Include="Scripts\DataTables\buttons.colVis.min.js" />
+    <Content Include="Scripts\DataTables\buttons.flash.js" />
+    <Content Include="Scripts\DataTables\buttons.flash.min.js" />
+    <Content Include="Scripts\DataTables\buttons.foundation.js" />
+    <Content Include="Scripts\DataTables\buttons.foundation.min.js" />
+    <Content Include="Scripts\DataTables\buttons.html5.js" />
+    <Content Include="Scripts\DataTables\buttons.html5.min.js" />
+    <Content Include="Scripts\DataTables\buttons.jqueryui.js" />
+    <Content Include="Scripts\DataTables\buttons.jqueryui.min.js" />
+    <Content Include="Scripts\DataTables\buttons.print.js" />
+    <Content Include="Scripts\DataTables\buttons.print.min.js" />
+    <Content Include="Scripts\DataTables\buttons.semanticui.js" />
+    <Content Include="Scripts\DataTables\buttons.semanticui.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.autoFill.js" />
+    <Content Include="Scripts\DataTables\dataTables.autoFill.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.bootstrap.js" />
+    <Content Include="Scripts\DataTables\dataTables.bootstrap.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.bootstrap4.js" />
+    <Content Include="Scripts\DataTables\dataTables.bootstrap4.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.buttons.js" />
+    <Content Include="Scripts\DataTables\dataTables.buttons.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.colReorder.js" />
+    <Content Include="Scripts\DataTables\dataTables.colReorder.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.fixedColumns.js" />
+    <Content Include="Scripts\DataTables\dataTables.fixedColumns.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.fixedHeader.js" />
+    <Content Include="Scripts\DataTables\dataTables.fixedHeader.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.foundation.js" />
+    <Content Include="Scripts\DataTables\dataTables.foundation.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.jqueryui.js" />
+    <Content Include="Scripts\DataTables\dataTables.jqueryui.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.keyTable.js" />
+    <Content Include="Scripts\DataTables\dataTables.keyTable.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.material.js" />
+    <Content Include="Scripts\DataTables\dataTables.material.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.responsive.js" />
+    <Content Include="Scripts\DataTables\dataTables.responsive.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.rowGroup.js" />
+    <Content Include="Scripts\DataTables\dataTables.rowGroup.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.rowReorder.js" />
+    <Content Include="Scripts\DataTables\dataTables.rowReorder.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.scroller.js" />
+    <Content Include="Scripts\DataTables\dataTables.scroller.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.select.js" />
+    <Content Include="Scripts\DataTables\dataTables.select.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.semanticui.js" />
+    <Content Include="Scripts\DataTables\dataTables.semanticui.min.js" />
+    <Content Include="Scripts\DataTables\dataTables.uikit.js" />
+    <Content Include="Scripts\DataTables\dataTables.uikit.min.js" />
+    <Content Include="Scripts\DataTables\jquery.dataTables.js" />
+    <Content Include="Scripts\DataTables\jquery.dataTables.min.js" />
+    <Content Include="Scripts\DataTables\jszip.min.js" />
+    <Content Include="Scripts\DataTables\pdfmake.min.js" />
+    <Content Include="Scripts\DataTables\responsive.bootstrap.js" />
+    <Content Include="Scripts\DataTables\responsive.bootstrap.min.js" />
+    <Content Include="Scripts\DataTables\responsive.bootstrap4.js" />
+    <Content Include="Scripts\DataTables\responsive.bootstrap4.min.js" />
+    <Content Include="Scripts\DataTables\responsive.foundation.js" />
+    <Content Include="Scripts\DataTables\responsive.foundation.min.js" />
+    <Content Include="Scripts\DataTables\responsive.jqueryui.js" />
+    <Content Include="Scripts\DataTables\responsive.jqueryui.min.js" />
+    <Content Include="Scripts\DataTables\responsive.semanticui.js" />
+    <Content Include="Scripts\DataTables\responsive.semanticui.min.js" />
+    <Content Include="Scripts\DataTables\vfs_fonts.js" />
+    <Content Include="Scripts\dexie.js" />
+    <Content Include="Scripts\Dexie.Nicaraolocal.DAL.js" />
+    <Content Include="Scripts\es.js" />
+    <Content Include="Scripts\esm\popper-utils.js" />
+    <Content Include="Scripts\esm\popper-utils.min.js" />
+    <Content Include="Scripts\esm\popper.js" />
+    <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\filepond-plugin-file-validate-type.js" />
+    <Content Include="Scripts\filepond-plugin-get-file.js" />
+    <Content Include="Scripts\filepond-plugin-get-file.min.js" />
+    <Content Include="Scripts\filepond.js" />
+    <Content Include="Scripts\fontawesome\all.js" />
+    <Content Include="Scripts\fontawesome\all.min.js" />
+    <Content Include="Scripts\fontawesome\brands.js" />
+    <Content Include="Scripts\fontawesome\brands.min.js" />
+    <Content Include="Scripts\fontawesome\conflict-detection.js" />
+    <Content Include="Scripts\fontawesome\conflict-detection.min.js" />
+    <Content Include="Scripts\fontawesome\fontawesome.js" />
+    <Content Include="Scripts\fontawesome\fontawesome.min.js" />
+    <Content Include="Scripts\fontawesome\regular.js" />
+    <Content Include="Scripts\fontawesome\regular.min.js" />
+    <Content Include="Scripts\fontawesome\solid.js" />
+    <Content Include="Scripts\fontawesome\solid.min.js" />
+    <Content Include="Scripts\fontawesome\v4-shims.js" />
+    <Content Include="Scripts\fontawesome\v4-shims.min.js" />
+    <Content Include="Scripts\fullcalendar-3.9.0\CHANGELOG.txt" />
+    <Content Include="Scripts\fullcalendar-3.9.0\CONTRIBUTING.txt" />
+    <Content Include="Scripts\fullcalendar-3.9.0\fullcalendar.css" />
+    <Content Include="Scripts\fullcalendar-3.9.0\fullcalendar.js" />
+    <Content Include="Scripts\fullcalendar-3.9.0\fullcalendar.min.css" />
+    <Content Include="Scripts\fullcalendar-3.9.0\fullcalendar.min.js" />
+    <Content Include="Scripts\fullcalendar-3.9.0\fullcalendar.print.css" />
+    <Content Include="Scripts\fullcalendar-3.9.0\fullcalendar.print.min.css" />
+    <Content Include="Scripts\fullcalendar-3.9.0\gcal.js" />
+    <Content Include="Scripts\fullcalendar-3.9.0\gcal.min.js" />
+    <Content Include="Scripts\fullcalendar-3.9.0\LICENSE.txt" />
+    <Content Include="Scripts\fullcalendar-3.9.0\locale-all.js" />
+    <Content Include="Scripts\fullcalendar-3.9.0\scheduler.min.css" />
+    <Content Include="Scripts\fullcalendar-3.9.0\scheduler.min.js" />
+    <Content Include="Scripts\i18n\af.js" />
+    <Content Include="Scripts\i18n\ar.js" />
+    <Content Include="Scripts\i18n\az.js" />
+    <Content Include="Scripts\i18n\bg.js" />
+    <Content Include="Scripts\i18n\bs.js" />
+    <Content Include="Scripts\i18n\ca.js" />
+    <Content Include="Scripts\i18n\cs.js" />
+    <Content Include="Scripts\i18n\da.js" />
+    <Content Include="Scripts\i18n\de.js" />
+    <Content Include="Scripts\i18n\dsb.js" />
+    <Content Include="Scripts\i18n\el.js" />
+    <Content Include="Scripts\i18n\en.js" />
+    <Content Include="Scripts\i18n\es.js" />
+    <Content Include="Scripts\i18n\et.js" />
+    <Content Include="Scripts\i18n\eu.js" />
+    <Content Include="Scripts\i18n\fa.js" />
+    <Content Include="Scripts\i18n\fi.js" />
+    <Content Include="Scripts\i18n\fr.js" />
+    <Content Include="Scripts\i18n\gl.js" />
+    <Content Include="Scripts\i18n\he.js" />
+    <Content Include="Scripts\i18n\hi.js" />
+    <Content Include="Scripts\i18n\hr.js" />
+    <Content Include="Scripts\i18n\hsb.js" />
+    <Content Include="Scripts\i18n\hu.js" />
+    <Content Include="Scripts\i18n\hy.js" />
+    <Content Include="Scripts\i18n\id.js" />
+    <Content Include="Scripts\i18n\is.js" />
+    <Content Include="Scripts\i18n\it.js" />
+    <Content Include="Scripts\i18n\ja.js" />
+    <Content Include="Scripts\i18n\km.js" />
+    <Content Include="Scripts\i18n\ko.js" />
+    <Content Include="Scripts\i18n\lt.js" />
+    <Content Include="Scripts\i18n\lv.js" />
+    <Content Include="Scripts\i18n\mk.js" />
+    <Content Include="Scripts\i18n\ms.js" />
+    <Content Include="Scripts\i18n\nb.js" />
+    <Content Include="Scripts\i18n\nl.js" />
+    <Content Include="Scripts\i18n\pl.js" />
+    <Content Include="Scripts\i18n\ps.js" />
+    <Content Include="Scripts\i18n\pt-BR.js" />
+    <Content Include="Scripts\i18n\pt.js" />
+    <Content Include="Scripts\i18n\ro.js" />
+    <Content Include="Scripts\i18n\ru.js" />
+    <Content Include="Scripts\i18n\sk.js" />
+    <Content Include="Scripts\i18n\sl.js" />
+    <Content Include="Scripts\i18n\sr-Cyrl.js" />
+    <Content Include="Scripts\i18n\sr.js" />
+    <Content Include="Scripts\i18n\sv.js" />
+    <Content Include="Scripts\i18n\th.js" />
+    <Content Include="Scripts\i18n\tr.js" />
+    <Content Include="Scripts\i18n\uk.js" />
+    <Content Include="Scripts\i18n\vi.js" />
+    <Content Include="Scripts\i18n\zh-CN.js" />
+    <Content Include="Scripts\i18n\zh-TW.js" />
+    <Content Include="Scripts\inputmask.js" />
+    <Content Include="Scripts\inputmask\bindings\inputmask.binding.js" />
+    <Content Include="Scripts\inputmask\bindings\inputmask.binding.min.js" />
+    <Content Include="Scripts\inputmask\dependencyLibs\inputmask.dependencyLib.jqlite.js" />
+    <Content Include="Scripts\inputmask\dependencyLibs\inputmask.dependencyLib.jqlite.min.js" />
+    <Content Include="Scripts\inputmask\dependencyLibs\inputmask.dependencyLib.jquery.js" />
+    <Content Include="Scripts\inputmask\dependencyLibs\inputmask.dependencyLib.jquery.min.js" />
+    <Content Include="Scripts\inputmask\dependencyLibs\inputmask.dependencyLib.js" />
+    <Content Include="Scripts\inputmask\dependencyLibs\inputmask.dependencyLib.min.js" />
+    <Content Include="Scripts\inputmask\global\document.js" />
+    <Content Include="Scripts\inputmask\global\document.min.js" />
+    <Content Include="Scripts\inputmask\global\window.js" />
+    <Content Include="Scripts\inputmask\global\window.min.js" />
+    <Content Include="Scripts\inputmask\inputmask.date.extensions.js" />
+    <Content Include="Scripts\inputmask\inputmask.date.extensions.min.js" />
+    <Content Include="Scripts\inputmask\inputmask.extensions.js" />
+    <Content Include="Scripts\inputmask\inputmask.extensions.min.js" />
+    <Content Include="Scripts\inputmask\inputmask.js" />
+    <Content Include="Scripts\inputmask\inputmask.min.js" />
+    <Content Include="Scripts\inputmask\inputmask.numeric.extensions.js" />
+    <Content Include="Scripts\inputmask\inputmask.numeric.extensions.min.js" />
+    <Content Include="Scripts\inputmask\inputmask.phone.extensions.js" />
+    <Content Include="Scripts\inputmask\inputmask.phone.extensions.min.js" />
+    <Content Include="Scripts\inputmask\inputmask.regex.extensions.js" />
+    <Content Include="Scripts\inputmask\inputmask.regex.extensions.min.js" />
+    <Content Include="Scripts\inputmask\jquery.inputmask.js" />
+    <Content Include="Scripts\inputmask\jquery.inputmask.min.js" />
+    <Content Include="Scripts\inputmask\phone-codes\phone-be.js" />
+    <Content Include="Scripts\inputmask\phone-codes\phone-be.min.js" />
+    <Content Include="Scripts\inputmask\phone-codes\phone-nl.js" />
+    <Content Include="Scripts\inputmask\phone-codes\phone-nl.min.js" />
+    <Content Include="Scripts\inputmask\phone-codes\phone-ru.js" />
+    <Content Include="Scripts\inputmask\phone-codes\phone-ru.min.js" />
+    <Content Include="Scripts\inputmask\phone-codes\phone-uk.js" />
+    <Content Include="Scripts\inputmask\phone-codes\phone-uk.min.js" />
+    <Content Include="Scripts\inputmask\phone-codes\phone.js" />
+    <Content Include="Scripts\inputmask\phone-codes\phone.min.js" />
+    <Content Include="Json\Spanish.json" />
+    <Content Include="..\..\..\Gaia\Gaia.Seguridad\Views\Home\CerrarSesion.cshtml">
+      <Link>Views\Home\CerrarSesion.cshtml</Link>
+    </Content>
+    <Content Include="..\..\..\Gaia\Gaia.Seguridad\Views\Home\Index.cshtml">
+      <Link>Views\Home\Index.cshtml</Link>
+    </Content>
+    <Content Include="..\..\..\Gaia\Gaia.Seguridad\Views\Home\_ChangePassword.cshtml">
+      <Link>Views\Home\_ChangePassword.cshtml</Link>
+    </Content>
+    <Content Include="..\..\..\Gaia\Gaia.Seguridad\Views\Rol\Redirigir.cshtml">
+      <Link>Views\Rol\Redirigir.cshtml</Link>
+    </Content>
+    <Content Include="..\..\..\Gaia\Gaia.Seguridad\Views\Rol\RedirigirAInicio.cshtml">
+      <Link>Views\Rol\RedirigirAInicio.cshtml</Link>
+    </Content>
+    <Content Include="..\..\..\Gaia\Gaia.Seguridad\Views\Rol\RolPorUsuario.cshtml">
+      <Link>Views\Rol\RolPorUsuario.cshtml</Link>
+    </Content>
+    <Content Include="..\..\..\Gaia\Gaia.Seguridad\Views\Usuario\Error.cshtml">
+      <Link>Views\Usuario\Error.cshtml</Link>
+    </Content>
+    <Content Include="..\..\..\Gaia\Gaia.Seguridad\Views\Usuario\Login.cshtml">
+      <Link>Views\Usuario\Login.cshtml</Link>
+    </Content>
+    <Content Include="..\..\..\Gaia\Gaia.Seguridad\Views\Usuario\_Autorizar.cshtml">
+      <Link>Views\Usuario\_Autorizar.cshtml</Link>
+    </Content>
+    <Content Include="..\..\..\Gaia\Gaia.Seguridad\Views\Usuario\_FormularioAutorizacion.cshtml">
+      <Link>Views\Usuario\_FormularioAutorizacion.cshtml</Link>
+    </Content>
+    <Content Include="..\..\..\Gaia\Gaia.Seguridad\Views\Usuario\_FormularioCredenciales.cshtml">
+      <Link>Views\Usuario\_FormularioCredenciales.cshtml</Link>
+    </Content>
+    <Content Include="..\..\..\Gaia\Gaia.Seguridad\Views\Usuario\_ModificarPassword.cshtml">
+      <Link>Views\Usuario\_ModificarPassword.cshtml</Link>
+    </Content>
+    <Content Include="..\..\..\Gaia\Gaia.Seguridad\Views\Shared\_DatosUsuario.cshtml">
+      <Link>Views\Shared\_DatosUsuario.cshtml</Link>
+    </Content>
+    <Content Include="..\..\..\Gaia\Gaia.Seguridad\Views\Shared\_Layout.cshtml">
+      <Link>Views\Shared\_Layout.cshtml</Link>
+    </Content>
+    <Content Include="..\..\..\Gaia\Gaia.Seguridad\Views\Shared\_OpcionesPorRol.cshtml">
+      <Link>Views\Shared\_OpcionesPorRol.cshtml</Link>
+    </Content>
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\metro.eot" />
+    <Content Include="fonts\metro.ttf" />
+    <Content Include="fonts\metro.woff" />
+    <Content Include="fonts\selection.json" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Scripts\index.js.flow" />
+    <Content Include="Scripts\esm\popper.min.js.map" />
+    <Content Include="Scripts\esm\popper.js.map" />
+    <Content Include="Scripts\esm\popper-utils.min.js.map" />
+    <Content Include="Scripts\esm\popper-utils.js.map" />
+    <Content Include="Scripts\ckeditor\plugins\scayt\LICENSE.md" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <None Include="Scripts\jquery-2.1.4\jquery-2.1.4.intellisense.js" />
+    <Content Include="Scripts\jquery-2.1.4\jquery-2.1.4.js" />
+    <Content Include="Scripts\jquery-2.1.4\jquery-2.1.4.min.js" />
+    <Content Include="Scripts\jquery-2.1.4\jquery.base64.js" />
+    <Content Include="Scripts\jquery-2.1.4\jquery.formatDateTime.js" />
+    <Content Include="Scripts\jquery-2.1.4\jquery.formatDateTime.min.js" />
+    <Content Include="Scripts\jquery-2.1.4\jquery.scrollTo.js" />
+    <Content Include="Scripts\jquery-2.1.4\jquery.scrollTo.min.js" />
+    <Content Include="Scripts\jquery-2.1.4\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery-2.1.4\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery-2.1.4\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery-2.1.4\jquery.validate.unobtrusive.min.js" />
+    <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
+    <Content Include="Scripts\jquery-3.0.0.js" />
+    <Content Include="Scripts\jquery-3.0.0.min.js" />
+    <Content Include="Scripts\jquery-3.0.0.slim.js" />
+    <Content Include="Scripts\jquery-3.0.0.slim.min.js" />
+    <None Include="Scripts\jquery-3.2.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.2.1.js" />
+    <Content Include="Scripts\jquery-3.2.1.min.js" />
+    <Content Include="Scripts\jquery-3.2.1.slim.js" />
+    <Content Include="Scripts\jquery-3.2.1.slim.min.js" />
+    <Content Include="Scripts\jquery.base64.js" />
+    <Content Include="Scripts\jquery.formatDateTime.js" />
+    <Content Include="Scripts\jquery.formatDateTime.min.js" />
+    <Content Include="Scripts\jquery.inputmask.bundle.js" />
+    <Content Include="Scripts\jquery.inputmask.bundle.min.js" />
+    <Content Include="Scripts\jquery.inputmask\bindings\inputmask.binding.js" />
+    <Content Include="Scripts\jquery.inputmask\bindings\inputmask.binding.min.js" />
+    <Content Include="Scripts\jquery.inputmask\dependencyLibs\inputmask.dependencyLib.jqlite.js" />
+    <Content Include="Scripts\jquery.inputmask\dependencyLibs\inputmask.dependencyLib.jqlite.min.js" />
+    <Content Include="Scripts\jquery.inputmask\dependencyLibs\inputmask.dependencyLib.jquery.js" />
+    <Content Include="Scripts\jquery.inputmask\dependencyLibs\inputmask.dependencyLib.jquery.min.js" />
+    <Content Include="Scripts\jquery.inputmask\dependencyLibs\inputmask.dependencyLib.js" />
+    <Content Include="Scripts\jquery.inputmask\dependencyLibs\inputmask.dependencyLib.min.js" />
+    <Content Include="Scripts\jquery.inputmask\global\document.js" />
+    <Content Include="Scripts\jquery.inputmask\global\document.min.js" />
+    <Content Include="Scripts\jquery.inputmask\global\window.js" />
+    <Content Include="Scripts\jquery.inputmask\global\window.min.js" />
+    <Content Include="Scripts\jquery.inputmask\inputmask.date.extensions.min.js" />
+    <Content Include="Scripts\jquery.inputmask\inputmask.extensions.min.js" />
+    <Content Include="Scripts\jquery.inputmask\inputmask.min.js" />
+    <Content Include="Scripts\jquery.inputmask\inputmask.numeric.extensions.min.js" />
+    <Content Include="Scripts\jquery.inputmask\inputmask.phone.extensions.min.js" />
+    <Content Include="Scripts\jquery.inputmask\inputmask.regex.extensions.min.js" />
+    <Content Include="Scripts\jquery.inputmask\jquery.inputmask.bundle.js" />
+    <Content Include="Scripts\jquery.inputmask\jquery.inputmask.min.js" />
+    <Content Include="Scripts\jquery.inputmask\phone-codes\phone-be.js" />
+    <Content Include="Scripts\jquery.inputmask\phone-codes\phone-be.min.js" />
+    <Content Include="Scripts\jquery.inputmask\phone-codes\phone-nl.js" />
+    <Content Include="Scripts\jquery.inputmask\phone-codes\phone-nl.min.js" />
+    <Content Include="Scripts\jquery.inputmask\phone-codes\phone-ru.js" />
+    <Content Include="Scripts\jquery.inputmask\phone-codes\phone-ru.min.js" />
+    <Content Include="Scripts\jquery.inputmask\phone-codes\phone-uk.js" />
+    <Content Include="Scripts\jquery.inputmask\phone-codes\phone-uk.min.js" />
+    <Content Include="Scripts\jquery.inputmask\phone-codes\phone.js" />
+    <Content Include="Scripts\jquery.inputmask\phone-codes\phone.min.js" />
+    <Content Include="Scripts\jquery.scrollTo.js" />
+    <Content Include="Scripts\jquery.scrollTo.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jsnlog.js" />
+    <Content Include="Scripts\jsnlog.min.js" />
+    <Content Include="Scripts\main-nicarao.js" />
+    <Content Include="Scripts\main.js" />
+    <Content Include="Scripts\mainsol.js" />
+    <Content Include="Scripts\metro.js" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\npm.js" />
+    <Content Include="Scripts\popper-utils.js" />
+    <Content Include="Scripts\popper-utils.min.js" />
+    <Content Include="Scripts\popper.js" />
+    <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\select2.js" />
+    <Content Include="Scripts\select2.min.js" />
+    <Content Include="Scripts\src\index.js" />
+    <Content Include="Scripts\src\methods\defaults.js" />
+    <Content Include="Scripts\src\methods\destroy.js" />
+    <Content Include="Scripts\src\methods\disableEventListeners.js" />
+    <Content Include="Scripts\src\methods\enableEventListeners.js" />
+    <Content Include="Scripts\src\methods\placements.js" />
+    <Content Include="Scripts\src\methods\update.js" />
+    <Content Include="Scripts\src\modifiers\applyStyle.js" />
+    <Content Include="Scripts\src\modifiers\arrow.js" />
+    <Content Include="Scripts\src\modifiers\computeStyle.js" />
+    <Content Include="Scripts\src\modifiers\flip.js" />
+    <Content Include="Scripts\src\modifiers\hide.js" />
+    <Content Include="Scripts\src\modifiers\index.js" />
+    <Content Include="Scripts\src\modifiers\inner.js" />
+    <Content Include="Scripts\src\modifiers\keepTogether.js" />
+    <Content Include="Scripts\src\modifiers\offset.js" />
+    <Content Include="Scripts\src\modifiers\preventOverflow.js" />
+    <Content Include="Scripts\src\modifiers\shift.js" />
+    <Content Include="Scripts\src\utils\clockwise.js" />
+    <Content Include="Scripts\src\utils\computeAutoPlacement.js" />
+    <Content Include="Scripts\src\utils\debounce.js" />
+    <Content Include="Scripts\src\utils\find.js" />
+    <Content Include="Scripts\src\utils\findCommonOffsetParent.js" />
+    <Content Include="Scripts\src\utils\findIndex.js" />
+    <Content Include="Scripts\src\utils\getBordersSize.js" />
+    <Content Include="Scripts\src\utils\getBoundaries.js" />
+    <Content Include="Scripts\src\utils\getBoundingClientRect.js" />
+    <Content Include="Scripts\src\utils\getClientRect.js" />
+    <Content Include="Scripts\src\utils\getFixedPositionOffsetParent.js" />
+    <Content Include="Scripts\src\utils\getOffsetParent.js" />
+    <Content Include="Scripts\src\utils\getOffsetRect.js" />
+    <Content Include="Scripts\src\utils\getOffsetRectRelativeToArbitraryNode.js" />
+    <Content Include="Scripts\src\utils\getOppositePlacement.js" />
+    <Content Include="Scripts\src\utils\getOppositeVariation.js" />
+    <Content Include="Scripts\src\utils\getOuterSizes.js" />
+    <Content Include="Scripts\src\utils\getParentNode.js" />
+    <Content Include="Scripts\src\utils\getPopperOffsets.js" />
+    <Content Include="Scripts\src\utils\getReferenceNode.js" />
+    <Content Include="Scripts\src\utils\getReferenceOffsets.js" />
+    <Content Include="Scripts\src\utils\getRoot.js" />
+    <Content Include="Scripts\src\utils\getRoundedOffsets.js" />
+    <Content Include="Scripts\src\utils\getScroll.js" />
+    <Content Include="Scripts\src\utils\getScrollParent.js" />
+    <Content Include="Scripts\src\utils\getStyleComputedProperty.js" />
+    <Content Include="Scripts\src\utils\getSupportedPropertyName.js" />
+    <Content Include="Scripts\src\utils\getViewportOffsetRectRelativeToArtbitraryNode.js" />
+    <Content Include="Scripts\src\utils\getWindow.js" />
+    <Content Include="Scripts\src\utils\getWindowSizes.js" />
+    <Content Include="Scripts\src\utils\includeScroll.js" />
+    <Content Include="Scripts\src\utils\index.js" />
+    <Content Include="Scripts\src\utils\isBrowser.js" />
+    <Content Include="Scripts\src\utils\isFixed.js" />
+    <Content Include="Scripts\src\utils\isFunction.js" />
+    <Content Include="Scripts\src\utils\isIE.js" />
+    <Content Include="Scripts\src\utils\isModifierEnabled.js" />
+    <Content Include="Scripts\src\utils\isModifierRequired.js" />
+    <Content Include="Scripts\src\utils\isNumeric.js" />
+    <Content Include="Scripts\src\utils\isOffsetContainer.js" />
+    <Content Include="Scripts\src\utils\removeEventListeners.js" />
+    <Content Include="Scripts\src\utils\runModifiers.js" />
+    <Content Include="Scripts\src\utils\setAttributes.js" />
+    <Content Include="Scripts\src\utils\setStyles.js" />
+    <Content Include="Scripts\src\utils\setupEventListeners.js" />
+    <Content Include="Scripts\tableExport.js" />
+    <Content Include="Scripts\tipped.js" />
+    <Content Include="Scripts\umd\popper-utils.js" />
+    <Content Include="Scripts\umd\popper-utils.min.js" />
+    <Content Include="Scripts\umd\popper.js" />
+    <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Scripts\umd\popper.min.js.map" />
+    <Content Include="Scripts\umd\popper.js.map" />
+    <Content Include="Scripts\umd\popper.js.flow" />
+    <Content Include="Scripts\umd\popper-utils.min.js.map" />
+    <Content Include="Scripts\umd\popper-utils.js.map" />
+    <Content Include="Scripts\README.md" />
+    <Content Include="Scripts\popper.min.js.map" />
+    <Content Include="Scripts\popper.js.map" />
+    <Content Include="Scripts\popper-utils.min.js.map" />
+    <Content Include="Scripts\popper-utils.js.map" />
+    <None Include="Scripts\_references.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="webfonts\fa-brands-400.svg" />
+    <Content Include="webfonts\fa-regular-400.svg" />
+    <Content Include="webfonts\fa-solid-900.svg" />
+    <Content Include="webfonts\fa-solid-900.woff2" />
+    <Content Include="webfonts\fa-solid-900.woff" />
+    <Content Include="webfonts\fa-solid-900.ttf" />
+    <Content Include="webfonts\fa-solid-900.eot" />
+    <Content Include="webfonts\fa-regular-400.woff2" />
+    <Content Include="webfonts\fa-regular-400.woff" />
+    <Content Include="webfonts\fa-regular-400.ttf" />
+    <Content Include="webfonts\fa-regular-400.eot" />
+    <Content Include="webfonts\fa-brands-400.woff2" />
+    <Content Include="webfonts\fa-brands-400.woff" />
+    <Content Include="webfonts\fa-brands-400.ttf" />
+    <Content Include="webfonts\fa-brands-400.eot" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\Gaia\Gaia.Seguridad\Controllers\HomeController.cs">
+      <Link>Controllers\HomeController.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\Gaia\Gaia.Seguridad\Controllers\RolController.cs">
+      <Link>Controllers\RolController.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\Gaia\Gaia.Seguridad\Controllers\RouterController.cs">
+      <Link>Controllers\RouterController.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\Gaia\Gaia.Seguridad\Controllers\SessionHelper.cs">
+      <Link>Controllers\SessionHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\Gaia\Gaia.Seguridad\Controllers\UsuarioController.cs">
+      <Link>Controllers\UsuarioController.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\Gaia\Gaia.Seguridad\Filters\AuthenticateUser.cs">
+      <Link>Filters\AuthenticateUser.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\Gaia\Gaia.Seguridad\Filters\CachingFilterAttribute.cs">
+      <Link>Filters\CachingFilterAttribute.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\Gaia\Gaia.Seguridad\Filters\Excepciones.cs">
+      <Link>Filters\Excepciones.cs</Link>
+    </Compile>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CensoencuestaController.cs" />
+    <Compile Include="Controllers\CodificarCPController.cs" />
+    <Compile Include="Controllers\UserMantController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CatalogoBase.cs" />
+    <Compile Include="Models\formato\Formato.cs" />
+    <Compile Include="Models\formato\Marca.cs" />
+    <Compile Include="Helpers\Validaciones\DatosAbogadoHelper.cs" />
+    <Compile Include="Helpers\Validaciones\DetalleCapacitacionFechasHelper.cs" />
+    <Compile Include="Helpers\Validaciones\DetalleCapacitacionHelper.cs" />
+    <Compile Include="Helpers\Validaciones\DetalleCompensacionPermisoFechasHelper.cs" />
+    <Compile Include="Helpers\Validaciones\DetalleSubsidioFechasHelper.cs" />
+    <Compile Include="Models\vwCamposExtendidos.cs" />
+    <Compile Include="Permisos\ValidarSesionAttribute.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <Content Include="packages.config" />
+    <Content Include="Content\bootstrap-float-label-master\LICENSE" />
+    <Content Include="Content\bootstrap-float-label-master\package.json" />
+    <Content Include="Content\bootstrap-float-label-master\README.md" />
+    <Content Include="Content\bootstrap\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap\bootstrap.css.map" />
+    <Content Include="Content\DataTables\css\common.scss" />
+    <Content Include="Content\DataTables\css\mixins.scss" />
+    <Content Include="Content\DataTables\css\semanticui.scss" />
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Content\fonts\metro.eot" />
+    <Content Include="Content\fonts\metro.ttf" />
+    <Content Include="Content\fonts\metro.woff" />
+    <Content Include="Content\fonts\selection.json" />
+    <Content Include="Content\webfonts\fa-brands-400.eot" />
+    <Content Include="Content\webfonts\fa-brands-400.ttf" />
+    <Content Include="Content\webfonts\fa-brands-400.woff" />
+    <Content Include="Content\webfonts\fa-brands-400.woff2" />
+    <Content Include="Content\webfonts\fa-regular-400.eot" />
+    <Content Include="Content\webfonts\fa-regular-400.ttf" />
+    <Content Include="Content\webfonts\fa-regular-400.woff" />
+    <Content Include="Content\webfonts\fa-regular-400.woff2" />
+    <Content Include="Content\webfonts\fa-solid-900.eot" />
+    <Content Include="Content\webfonts\fa-solid-900.ttf" />
+    <Content Include="Content\webfonts\fa-solid-900.woff" />
+    <Content Include="Content\webfonts\fa-solid-900.woff2" />
+    <Content Include="Scripts\ckeditor\CHANGES.md" />
+    <Content Include="Scripts\ckeditor\LICENSE.md" />
+    <Content Include="Scripts\ckeditor\package.json" />
+    <Content Include="Scripts\ckeditor\plugins\scayt\CHANGELOG.md" />
+    <Content Include="Scripts\ckeditor\plugins\scayt\README.md" />
+    <Content Include="Scripts\ckeditor\plugins\wsc\LICENSE.md" />
+    <Content Include="Scripts\ckeditor\plugins\wsc\README.md" />
+    <Content Include="Scripts\ckeditor\README.md" />
+    <Content Include="Scripts\ckeditor\skins\moono-lisa\readme.md" />
+    <Content Include="Scripts\filepond-plugin-get-file.js.orig" />
+    <Content Include="Scripts\jquery-2.1.4\jquery-2.1.4.min.map" />
+    <Content Include="Scripts\jquery-3.0.0.min.map" />
+    <Content Include="Scripts\jquery-3.0.0.slim.min.map" />
+    <Content Include="Scripts\jquery-3.2.1.min.map" />
+    <Content Include="Scripts\jquery-3.2.1.slim.min.map" />
+    <Content Include="Scripts\jsnlog.js.map" />
+    <Content Include="Views\Shared\_SelectOptions.cshtml" />
+    <Content Include="Views\Home\Widget.cshtml" />
+    <Content Include="Views\CodificarCP\_ListaAsignacion.cshtml" />
+    <Content Include="Views\Shared\_LayoutS.cshtml" />
+    <Content Include="Views\UserMant\_mttoGaia.cshtml" />
+    <Content Include="Views\UserMant\ListaUsuario.cshtml" />
+    <Content Include="Views\UserMant\_UsuarioMant.cshtml" />
+    <Content Include="Views\UserMant\_ListaUsuario.cshtml" />
+    <Content Include="Views\UserMant\ListaRol.cshtml" />
+    <Content Include="Views\UserMant\_ListaRol.cshtml" />
+    <Content Include="Views\UserMant\_RolMant.cshtml" />
+    <Content Include="Views\UserMant\_ListaUsuarioR.cshtml" />
+    <Content Include="Views\UserMant\_UsuarioR.cshtml" />
+    <Content Include="Views\CodificarCP\ConfAsignacion.cshtml" />
+    <Content Include="Views\Shared\_LayoutC.cshtml" />
+    <Content Include="Views\Shared\_LayoutZ.cshtml" />
+    <Content Include="Views\CodificarCP\_CodificarTrazas.cshtml" />
+    <Content Include="Views\CodificarCP\_ListaCatalogoFiltro.cshtml" />
+    <Content Include="Views\CodificarCP\_ListaPreguntaCaracteristicaPersonaTrabajo.cshtml" />
+    <Content Include="Views\UserMant\_mttoEncuesta.cshtml" />
+    <Content Include="Views\UserMant\_SeccionMant.cshtml" />
+    <Content Include="Views\UserMant\ListaSeccion.cshtml" />
+    <Content Include="Views\UserMant\_ListaSeccion.cshtml" />
+    <Content Include="Views\UserMant\_SeccionR.cshtml" />
+    <Content Include="Views\UserMant\_ListaSeccionR.cshtml" />
+    <Content Include="Views\UserMant\_VariableMant.cshtml" />
+    <Content Include="Views\UserMant\_ListaVariable.cshtml" />
+    <Content Include="Views\UserMant\ListaVariable.cshtml" />
+    <Content Include="Views\UserMant\_mttoVariableControl.cshtml" />
+    <Content Include="Views\UserMant\ListaVariableControl.cshtml" />
+    <Content Include="Views\UserMant\_ListaVariableControl.cshtml" />
+    <Content Include="Views\UserMant\_VariableControlMant.cshtml" />
+    <Content Include="Views\CodificarCP\_ListaPreguntaMigracionProfesion.cshtml" />
+    <Content Include="Views\CodificarCP\_ListaPreguntaMigracionPais.cshtml" />
+    <Content Include="Views\CodificarCP\_ListaPreguntaCaracteristicaPersonaDedicaEstablecimiento.cshtml" />
+    <Content Include="Views\CodificarCP\_ListaPreguntaCaracteristicaPersonaNaceExtranjero.cshtml" />
+    <Content Include="Views\CodificarCP\_ListaPreguntaCaracteristicaPersonaNaceNacional.cshtml" />
+    <Content Include="Views\CodificarCP\_NaceExtranjero.cshtml" />
+    <Content Include="Views\CodificarCP\_NaceNacional.cshtml" />
+    <Content Include="Views\CodificarCP\_ListaPreguntaEconomicoActividadEstEmpHog.cshtml" />
+    <Content Include="Views\CodificarCP\_ListaPreguntaEconomicoActividadMunicipio.cshtml" />
+    <Content Include="Views\CodificarCP\_EconomicaActividadMunicipio.cshtml" />
+    <Content Include="Views\CodificarCP\_ListaActividadAgropecuariaHogar.cshtml" />
+    <Content Include="Views\CodificarCP\_ActividadAgropecuariaMunComCom.cshtml" />
+    <Content Include="Views\CodificarCP\_ListaCaracteristicaPersonaCarrera.cshtml" />
+    <Content Include="Views\CodificarCP\_ListaPreguntaCaracteristicaPersonaNaceExtranjeroFive.cshtml" />
+    <Content Include="Views\CodificarCP\_ListaPreguntaCaracteristicaPersonaNaceNacionalFive.cshtml" />
+    <Content Include="Views\Shared\_LayoutJ.cshtml" />
+    <Content Include="Views\CodificarCP\_JefSubMant.cshtml" />
+    <Content Include="Views\CodificarCP\PowerBi.cshtml" />
+    <Content Include="Views\UserMant\ListaOpcAso.cshtml" />
+    <Content Include="Views\UserMant\_ListaOpcAso.cshtml" />
+    <Content Include="Views\UserMant\_OpcAsoMant.cshtml" />
+    <Content Include="Views\UserMant\_OpcionR.cshtml" />
+    <Content Include="Views\UserMant\_ListaOpcAsoR.cshtml" />
+    <Content Include="Views\UserMant\ListaCenEnc.cshtml" />
+    <Content Include="Views\UserMant\_ListaCenEnc.cshtml" />
+    <Content Include="Views\UserMant\_CenEncMant.cshtml" />
+    <Content Include="Views\CodificarCP\DescargaManual.cshtml" />
+    <Content Include="Views\CodificarCP\ConfAsignacionP.cshtml" />
+    <Content Include="Views\CodificarCP\_ListaAsignaPersonal.cshtml" />
+    <Content Include="Views\CodificarCP\RptAsignacionCargaLocalizacionFecha.cshtml" />
+    <Content Include="Views\CodificarCP\_ConsistenciaValidacion.cshtml" />
+    <Content Include="Views\Censoencuesta\ContenedorCensoPoblacionVivienda.cshtml" />
+    <Content Include="Views\Censoencuesta\IdentificacionUbicacionUsoEdificacion.cshtml" />
+    <Content Include="Views\Censoencuesta\ResidentesViviendaIdentificacionHogares.cshtml" />
+    <Content Include="Views\Censoencuesta\DatosViviendaHogarPrincipal.cshtml" />
+    <Content Include="Views\Censoencuesta\CaracteristicasHogar.cshtml" />
+    <Content Include="Views\Censoencuesta\PersonasHogar.cshtml" />
+    <Content Include="Views\Censoencuesta\ListaMiembrosHogar.cshtml" />
+    <Content Include="Views\Censoencuesta\CaracteristicasPersonas.cshtml" />
+    <Content Include="Views\Censoencuesta\_ListaMiembrosHogar.cshtml" />
+    <Content Include="Views\Censoencuesta\EmigracionInternacionalHogar.cshtml" />
+    <Content Include="Views\Censoencuesta\_ListaEmigracionInternacionalHogar.cshtml" />
+    <Content Include="Views\Censoencuesta\ListaEmigracionInternacionalHogar.cshtml" />
+    <Content Include="Views\Censoencuesta\_ListaDefuncionesHogar.cshtml" />
+    <Content Include="Views\Censoencuesta\DefuncionesHogar.cshtml" />
+    <Content Include="Views\Censoencuesta\ListaDefuncionesHogar.cshtml" />
+    <Content Include="Views\Censoencuesta\ActividadAgropecuariaHogar.cshtml" />
+    <Content Include="Views\Censoencuesta\_ListaActividadAgropecuariaHogar.cshtml" />
+    <Content Include="Views\Censoencuesta\ListaActividadAgropecuariaHogar.cshtml" />
+    <Content Include="Views\Censoencuesta\ContenedorCensoEconomico.cshtml" />
+    <Content Include="Views\Censoencuesta\ResultadoEntrevistaHogar.cshtml" />
+    <Content Include="Views\Censoencuesta\IdentificacionUbicacionEstablecimiento.cshtml" />
+    <Content Include="Views\Censoencuesta\ResultadoEntrevistaEconomica.cshtml" />
+    <Content Include="Views\Censoencuesta\CaracteristicasEstablecimientoEconomico.cshtml" />
+    <Content Include="Views\Censoencuesta\ListaPersonasTrabajanEstablecimiento.cshtml" />
+    <Content Include="Views\Censoencuesta\_ListaPersonasTrabajanEstablecimiento.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Content\docvideo\" />
+    <Folder Include="Properties\PublishProfiles\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Gaia\Gaia.BLL\Gaia.BLL.csproj">
+      <Project>{a8ce81dd-bd60-4028-8e91-49a488fe5693}</Project>
+      <Name>Gaia.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Gaia\Gaia.DAL\Gaia.DAL.csproj">
+      <Project>{cd27eb21-4cb6-442e-8784-0c8bd6b28d77}</Project>
+      <Name>Gaia.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Gaia\Gaia.Helpers\Gaia.Helpers.csproj">
+      <Project>{0076f19f-04e6-4231-83ba-68fb8f579a99}</Project>
+      <Name>Gaia.Helpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Gaia\Gaia.Seguridad\Gaia.Seguridad.csproj">
+      <Project>{fe434494-c8d8-40b3-b2d0-bfb298604490}</Project>
+      <Name>Gaia.Seguridad</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Nicarao.Dal\Nicarao.DAL\Nicarao.DAL.csproj">
+      <Project>{4accec94-dd70-4a22-9c60-8ce6d3944386}</Project>
+      <Name>Nicarao.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\PJN\PJN.DAL\PJN.DAL.csproj">
+      <Project>{fed1df22-050c-46cf-96ff-7e8f2aa0990b}</Project>
+      <Name>PJN.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\tael.dal\TAEL.Dal\TAEL.Dal.csproj">
+      <Project>{B213874F-B133-4C75-887C-E8996C5A9701}</Project>
+      <Name>TAEL.Dal</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>59656</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:59657/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.TypeScript.MSBuild.5.3.3\build\Microsoft.TypeScript.MSBuild.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.TypeScript.MSBuild.5.3.3\build\Microsoft.TypeScript.MSBuild.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.TypeScript.MSBuild.5.3.3\build\Microsoft.TypeScript.MSBuild.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.TypeScript.MSBuild.5.3.3\build\Microsoft.TypeScript.MSBuild.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
+  </Target>
+  <Target Name="CopyLinkedContentFiles" BeforeTargets="Build">
+    <Copy SourceFiles="%(Content.Identity)" DestinationFiles="%(Content.Link)" SkipUnchangedFiles="true" OverwriteReadOnlyFiles="true" Condition="'%(Content.Link)' != ''" />
+  </Target>
+  <Import Project="..\packages\Microsoft.TypeScript.MSBuild.5.3.3\build\Microsoft.TypeScript.MSBuild.targets" Condition="Exists('..\packages\Microsoft.TypeScript.MSBuild.5.3.3\build\Microsoft.TypeScript.MSBuild.targets')" />
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

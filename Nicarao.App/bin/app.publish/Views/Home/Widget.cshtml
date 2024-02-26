@@ -1,0 +1,20 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string ActionDefault = (string)ViewBag.ActionDefault;
+    //string Lay = ViewBag.sRol;
+    //if (Lay == "Administrador") { Layout = "~/Views/Shared/_LayoutZ.cshtml"; }
+    //else if (Lay == "Supervisor") { Layout = "~/Views/Shared/_LayoutS.cshtml"; }
+    //else if (Lay == "JefeTurno") { Layout = "~/Views/Shared/_LayoutJ.cshtml"; }
+    //else { Layout = "~/Views/Shared/_LayoutC.cshtml"; }
+}
+
+@{
+    if (!string.IsNullOrEmpty(ActionDefault))
+    {
+        string Controlador = ActionDefault.Split("/".ToCharArray())[0];
+        string Accion = ActionDefault.Split("/".ToCharArray())[1];
+
+        Html.RenderAction(Accion, Controlador);
+    }
+}

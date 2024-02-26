@@ -1,0 +1,101 @@
+﻿@using Gaia.Helpers;
+@model Gaia.DAL.Model.Persona
+
+@{
+    string addres = "apiAlexaLocal";
+}
+
+<div class="content">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0">Sección VIII. DEFUNCIONES EN EL HOGAR</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Desde el 1 de Enero del 2023 hasta este momento ¿Fallecio alguna persona que era miembro de este hogar?</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Fallecimientos">
+                            <select id="ddlFallecimientos" class="form-control sel"></select>
+                            <span>Fallecimientos</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Cuántas">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtCuantas", PlaceHolder = "Cuántas", @class = "form-control mask", Value = "0" })
+                            <span>Cuántas</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    <label>No olvide anotar las defunciones de recién nacidos y ancianos</label>
+                </div>
+            </div>
+            <div class="row" id="rowControls2">
+                @{Html.RenderAction("ObtenerListaDefuncionesHogar", "Censoencuesta");}
+            </div>
+            <br />
+        </div>
+    </div>
+</div>
+@using (Html.BeginScriptContext())
+{
+    Html.AddScriptBlock(
+@<script type="text/javascript">
+    var datos;
+     $(document).ready(function () {
+         $(".sel").select2({
+             placeholder: "Seleccione Opción",
+             allowClear: true,
+         });
+
+         $(".mask").inputmask('Regex', { regex: "^[0-9]+$" });
+
+         cargaTipoObjeto();
+     })
+
+     function cargaTipoObjeto() {
+        $.ajax({
+            url: obtenerURL('@HtmlEncriptUrl.EncodeUrl(addres, "catalogos/Listar/{seccion}", "get")'),
+            type: "get",
+            dataType: "json",
+            data: { "seccion": "DefuncionesHogar" },
+            success: function (result) {
+                dato = result[0].JsonDatos;
+                $(dato.JsonSiNo).each(function () {
+                    $("#ddlFallecimientos").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                });
+            },
+            error: function (data) {
+                alertify.alert().destroy();
+                alertify.alert('Confirmación', data.Mensaje);
+                alertify.alert().setting('modal', true);
+            }
+        })
+    };
+
+    $("#ddlFallecimientos").on("select2:select", function (a) {
+        var strFallecidos = $(this).val();
+        if (strFallecidos == 2) {
+            $('#rowControls2').prop("disabled", true);
+            alertify.error('Pase a Sección VIII', 'warning', 3, function () { });
+            $('#cell-content22').empty();
+            $("#cell-content22").load(obtenerURL("/CensoEncuesta/ActividadAgropecuariaHogar"));
+        }
+        else { $('#rowControls2').prop("disabled", false); }
+    });
+</script>
+, true);
+}
+
+
+

@@ -1,0 +1,100 @@
+﻿<style>
+    .dataTables_empty {
+        display: none;
+    }
+
+    table.cell-border {
+        width: 100%;
+        clear: both;
+    }
+
+        table.cell-border th {
+            padding: 5px;
+            border: 1px solid #fff;
+        }
+
+        table.cell-border thead th {
+            text-align: center;
+            background: #66a9bd;
+        }
+
+        table.cell-border tbody td {
+            text-align: center;
+        }
+
+    td {
+        font-size: 12px;
+    }
+</style>
+
+<div id="documentosJefSup">
+    <table id="dtListasJefSup" class="cell-border" cellspacing="0" style="width:100%;">
+        <thead>
+            <tr>
+                <th class="sortable-column"></th>
+                <th class="sortable-column"></th>
+                <th class="sortable-column">Responsable</th>
+                <th class="sortable-column">Personal a Cargo</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@using (Html.BeginScriptContext())
+{
+    Html.AddScriptBlock(
+@<script type="text/javascript">
+            function obtenerAsignaPersonal(obj) {
+                var vrelGuid = $(obj).attr('id');
+                var url = obtenerURL('/CodificarCP/ObtenerListadoPersonalAsignado?relGUID=' + vrelGuid);
+                $.getJSON(url)
+                    .done(function (data) {
+                        encabezdo = data;
+                        iniciarValoresAsignacionPersonal();
+                    })
+            }
+
+            function iniciarValoresAsignacionPersonal() {
+                $.each(encabezdo, function (i, item) {
+                    $("#txtrelGUID").val(item.relGUID);
+                    $("#ddlSubalterno").val(item.SUsuarioId).trigger("change");
+                });
+
+                $('#btnGuardaJS').hide();
+                $('#btnActualizarJS').show();
+                encabezdo = "";
+            };
+
+            function eliminaAsignaPersonal(obj) {
+                    showalertify();
+                    var vrelguid = $(obj).attr('id').split('/');
+                    alertify.defaults.theme.ok = "button warning";
+                    alertify.defaults.theme.cancel = "button primary";
+                    alertify.confirm().destroy();
+                    alertify.confirm('Advertencia', 'Esta seguro de querer Eliminar la Relacion?'
+                    , function () { //onOk
+                        showalertify();
+                        var url = obtenerURL('/CodificarCP/eliminatablarel?tabla=sde.relAsignacionPersonal' + '&Id=' + vrelguid[0] + '&Id2=' + vrelguid[1]);
+                        $.post(url)
+                           .done(function (data) {
+                               var listado = JSON.parse(data);
+                               if (listado.Resultado === "true") {
+                                   cargaGridPersonalAsignado();
+                                   alertify.alert().destroy();
+                                   alertify.alert('Confirmación', listado.Mensaje);
+                                   alertify.alert().setting('modal', true);
+                               }
+                               else {
+                                   alertify.alert().destroy();
+                                   alertify.alert('Advertencia', listado.Mensaje);
+                                   alertify.alert().setting('modal', true);
+                               }
+                           })
+                        closealertify();
+                    }
+                    , function () { })//onCancel
+                    .set('labels', { ok: '< Si >', cancel: '< No >' });
+                }
+</script>
+, true);
+}

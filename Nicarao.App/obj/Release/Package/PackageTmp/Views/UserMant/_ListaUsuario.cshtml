@@ -1,0 +1,90 @@
+﻿<style>
+    .dataTables_empty {
+        display: none;
+    }
+
+    table.cell-border {
+        width: 100%;
+        clear: both;
+    }
+
+        table.cell-border th {
+            padding: 5px;
+            border: 1px solid #fff;
+        }
+
+        table.cell-border thead th {
+            text-align: center;
+            background: #66a9bd;
+        }
+
+        table.cell-border tbody td {
+            text-align: center;
+        }
+
+    td {
+        font-size: 12px;
+    }
+</style>
+
+<div id="documentosUsuario">
+    <table id="dtListasUsuario" class="cell-border" cellspacing="0" style="width:100%;">
+        <thead>
+            <tr>
+                <th class="sortable-column"></th>
+                <th class="sortable-column">Id</th>
+                <th class="sortable-column">Email</th>
+                <th class="sortable-column">Nombres</th>                
+                <th class="sortable-column">Apellidos</th>
+                <th class="sortable-column">Activo</th>            
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@using (Html.BeginScriptContext())
+{
+    Html.AddScriptBlock(
+        @<script type="text/javascript">
+            function obtenerUsuario(obj) {
+                vusuarioId = $(obj).attr('id');
+                var url = obtenerURL('/UserMant/ObtenerUsuario?UsuarioId=' + vusuarioId);
+                $.getJSON(url)
+                    .done(function (data) {
+                        encabezdo = data;
+                        iniciarValoresUsuario();
+                    })
+            }
+
+            function iniciarValoresUsuario() {
+                $.each(encabezdo, function (i, item) {
+                    $('#txtUsuarioId').prop("disabled", true);
+                    $("#txtUsuarioId").val(item.UsuarioId);
+                    $("#txtNombres").val(item.Nombres);
+                    $("#txtApellidos").val(item.Apellidos);
+                    var spass = item.Password;
+                    $("#txtPassword").val(Base64.decode(spass));
+                    $("#txtCorreo").val(item.Correo);
+                    if (item.Activo === true) {
+                        document.getElementById("activousu").checked = true;
+                        document.getElementById("inactivousu").checked = false;
+                    }
+                    else {
+                        document.getElementById("activousu").checked = false;
+                        document.getElementById("inactivousu").checked = true;
+                    }
+                });
+
+                $('#btnGuardaUsuario').hide();
+                $('#btnActualizarUsuario').show();
+                encabezdo = "";
+            };
+        </script>
+     , true);
+}
+
+
+
+
+
+

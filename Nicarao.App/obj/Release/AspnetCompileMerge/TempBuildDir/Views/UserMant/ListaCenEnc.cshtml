@@ -1,0 +1,78 @@
+﻿<div class="container" id="gridDetalleCenEnc">
+</div>
+
+<div class="content">
+    <div class="card">
+        <div class="card-body">
+            <ul class="nav nav-tabs mb-3" id="pills-tab2" role="tablist">
+                <li class="nav-item" id="tabDatosDetalleCenEnc">
+                    <a class="nav-link active" id="frDetCenEnc-tab" data-toggle="pill" href="#frDetCenEnc" role="tab" aria-controls="frDetCenEnc" aria-selected="true">Detalle</a>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="pills-tabContent2">
+                <div class="tab-pane fade show active" id="frDetCenEnc" role="tabpanel" aria-labelledby="frDetCenEnc-tab">
+                    @Html.Partial("_CenEncMant")
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginScriptContext())
+{
+    Html.AddScriptBlock(
+@<script type="text/javascript">
+
+            $(document).ready(function () {
+                $('#gridDetalleCenEnc').empty();
+                $("#gridDetalleCenEnc").load(obtenerURL("/UserMant/ObtenerListaCenEnc"), function (response, status, xhr) {
+                    if (status === "success") {
+                        table = $('#dtListasCenEnc').DataTable({
+                            ajax: {
+                                url: obtenerURL('/UserMant/ObtenerCenEnc'),
+                                dataSrc: "",
+                            },
+                            rowId: 'Id',
+                            retrieve: true,
+                            columns: [
+                                        {
+                                            'data': null,
+                                            'render': function (data, type, row) {
+                                                return '<span id="' + row.Id + '" class="fa fa-pencil" style="color: blue; font-size: 1rem;cursor: pointer;" onclick="obtenerCenEnc(this)"></span>'
+                                            }
+                                        },
+                                        {
+                                            'data': null,
+                                            'render': function (data, type, row) {
+                                                return '<span id="' + row.Id + '" class="fa fa-close" style="color: red; font-size: 1rem;cursor: pointer;" onclick="eliminaCenEnc(this)"></span>'
+                                            }
+                                        },
+                                        { data: "Id" },                                        
+                                        { data: "Descripcion" },
+                                        {
+                                            data: "Activo",
+                                            render: function (data, type, row) {
+                                                if (data == "1") { return "Activo"; } else { return "Inactivo"; }
+                                            }
+                                        }
+                            ],
+                            columnDefs: [],
+                            dom: 'Bfrtip',
+                            buttons: [{ extend: 'pdfHtml5', title: 'PDF', text: 'Exportar Pdf', orientation: 'landscape', pageSize: 'LEGAL' }, { extend: 'excelHtml5', title: 'EXCEL', text: 'Exportar Excel' }],
+                            language: { url: obtenerURL("/Json/Spanish.json") },
+                            lengthMenu: [5],
+                            bLengthChange: false,
+                            searching: true
+                        });
+
+                        $('#dtListasCenEnc tbody').on('click', 'tr', function () {
+                            $("#dtListasCenEnc tr.selected").removeClass();
+                            $(this).addClass('selected');
+                        });
+                    }
+                })
+            })
+</script>
+, true);
+}

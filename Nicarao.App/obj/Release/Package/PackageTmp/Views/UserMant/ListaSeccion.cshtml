@@ -1,0 +1,87 @@
+﻿<div class="container" id="gridDetalleSeccion">
+</div>
+
+<div class="content">
+    <div class="card">
+        <div class="card-body">
+            <ul class="nav nav-tabs mb-3" id="pills-tab2" role="tablist">
+                <li class="nav-item" id="tabDatosDetalleSeccion">
+                    <a class="nav-link active" id="frDetSeccion-tab" data-toggle="pill" href="#frDetSeccion" role="tab" aria-controls="frDetSeccion" aria-selected="true">Detalle</a>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="pills-tabContent2">
+                <div class="tab-pane fade show active" id="frDetSeccion" role="tabpanel" aria-labelledby="frDetSeccion-tab">
+                    @Html.Partial("_SeccionMant")
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginScriptContext())
+{
+    Html.AddScriptBlock(
+        @<script type="text/javascript">
+            $(document).ready(function () {
+                $('#gridDetalleSeccion').empty();
+                $("#gridDetalleSeccion").load(obtenerURL("/UserMant/ObtenerListaSeccion"), function (response, status, xhr) {
+                    if (status === "success") {
+                        table = $('#dtListasSeccion').DataTable({
+                            ajax: {
+                                url: obtenerURL('/UserMant/ObtenerSeccion'),
+                                dataSrc: "",
+                            },
+                            rowId: 'relGUID',
+                            retrieve: true,
+                            columns: [
+                                        {
+                                            'data': null,
+                                            'render': function (data, type, row) {
+                                                return '<span id="' + row.relGUID + '" class="fa fa-pencil" style="color: blue; font-size: 1rem;cursor: pointer;" onclick="obtenerSeccion(this)"></span>'
+                                            }
+                                        },
+                                         {
+                                            'data': null,
+                                            'render': function (data, type, row) {
+                                                return '<span id="' + row.relGUID + '" class="fa fa-close" style="color: red; font-size: 1rem;cursor: pointer;" onclick="eliminaSeccion(this)"></span>'
+                                            }
+                                        },
+                                        { data: "SeccionId" },
+                                        { data: "Descripcion" },
+                                        { data: "CenEnc" },
+                                        {
+                                            data: "Activo",
+                                            render: function (data, type, row) {
+                                                if (data == "1") { return "Activo"; } else { return "Inactivo"; }
+                                            }
+                                        }
+                            ],
+                            columnDefs: [],
+                            dom: 'Bfrtip',
+                            buttons: [{ extend: 'pdfHtml5', title: 'PDF', text: 'Exportar Pdf', orientation: 'landscape', pageSize: 'LEGAL' }, { extend: 'excelHtml5', title: 'EXCEL', text: 'Exportar Excel' }],
+                            language: { url: obtenerURL("/Json/Spanish.json") },
+                            lengthMenu: [5],
+                            bLengthChange: false,
+                            searching: true
+                        });
+
+                        $('#dtListasSeccion tbody').on('click', 'tr', function () {
+                            $("#dtListasSeccion tr.selected").removeClass();
+                            $(this).addClass('selected');
+                        });
+                    }
+                })
+            })
+        </script>
+, true);
+}
+
+
+
+
+
+
+
+
+

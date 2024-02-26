@@ -1,0 +1,101 @@
+﻿@using Gaia.Helpers;
+@model Gaia.DAL.Model.Persona
+
+@{
+    string addres = "apiAlexaLocal";
+}
+
+<div class="content">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0">Sección VII. EMIGRACION INTERNACIONAL EN EL HOGAR</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Desde el año 2005, alguna persona que era miembro de este hogar, ¿Vive actualmente en otro país?</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Vive Otro País">
+                            <select id="ddlViveOtroPais" class="form-control sel"></select>
+                            <span>Vive Otro País</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Cuántas">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtCuantas", PlaceHolder = "Cuántas", @class = "form-control mask", Value = "0" })
+                            <span>Cuántas</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Inicie la lista con la última persona que se fue de Nicaragua</label>
+                </div>
+            </div>
+            <div class="row" id="rowControls2">
+                @{Html.RenderAction("ObtenerListaEmigracionInternacionalHogar", "Censoencuesta");}
+            </div>
+            <br />
+        </div>
+    </div>    
+</div>
+@using (Html.BeginScriptContext())
+{
+    Html.AddScriptBlock(
+@<script type="text/javascript">
+    var datos;
+     $(document).ready(function () {
+         $(".sel").select2({
+             placeholder: "Seleccione Opción",
+             allowClear: true,
+         });
+
+         $(".mask").inputmask('Regex', { regex: "^[0-9]+$" });
+
+         cargaTipoObjeto();
+     })
+
+     function cargaTipoObjeto() {
+        $.ajax({
+            url: obtenerURL('@HtmlEncriptUrl.EncodeUrl(addres, "catalogos/Listar/{seccion}", "get")'),
+            type: "get",
+            dataType: "json",
+            data: { "seccion": "EmigracionInternacionalHogar" },
+            success: function (result) {
+                dato = result[0].JsonDatos;
+                $(dato.JsonSiNo).each(function () {
+                    $("#ddlViveOtroPais").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                });
+            },
+            error: function (data) {
+                alertify.alert().destroy();
+                alertify.alert('Confirmación', data.Mensaje);
+                alertify.alert().setting('modal', true);
+            }
+        })
+    };
+
+    $("#ddlViveOtroPais").on("select2:select", function (a) {
+        var strviveOtroPais = $(this).val();
+        if (strviveOtroPais == 2) {
+            $('#rowControls2').prop("disabled", true);
+            alertify.error('Pase a Sección VIII', 'warning', 3, function () { });
+            $('#cell-content22').empty();
+            $("#cell-content22").load(obtenerURL("/CensoEncuesta/DefuncionesHogar"));
+        }
+        else { $('#rowControls2').prop("disabled", false); }
+    }); 
+    
+</script>
+, true);
+}
+
+

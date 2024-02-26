@@ -1,0 +1,431 @@
+﻿@using Gaia.Helpers;
+@model Gaia.DAL.Model.Persona
+
+@{
+    string addres = "apiAlexaLocal";
+}
+
+<div class="content">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0">Sección IV. CARACTERISTICAS DEL HOGAR (PARA TODOS LOS HOGARES)</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-2">
+                    <label>¿De cuántos cuartos dispone este hogar solo para dormir?</label>
+                </div>
+                <div class="col-md-4">
+                    <label>En este hogar, el combustible usado principalmete para cocinar es </label>
+                </div>
+                <div class="col-md-2">
+                    <label>El tipo de servicio higiénico que tiene este hogar es </label>
+                </div>
+                <div class="col-md-4">
+                    <label>En este hogar, ¿Cómo eliminan la mayor parte de la basura?</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Total cuartos">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtTotalCuartos", PlaceHolder = "Total cuartos", @class = "form-control mask", Value = "0" })
+                            <span>Total Cuartos</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Combustible usado para cocinar">
+                            <select id="ddlCombustibleUsadoCocinar" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Cuál">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtCualCombustibleUsaCocinar", PlaceHolder = "Cuál", @class = "form-control", disabled = "disabled", autocomplete = "off" })
+                            <span>Cuál</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Tipo servicio higiénico">
+                            <select id="ddlTipoServicioHigienico" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Cómo elimina basura">
+                            <select id="ddlEliminarBasura" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Cuál">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtCualEliminaBasura", PlaceHolder = "Cuál", @class = "form-control", disabled = "disabled", autocomplete = "off" })
+                            <span>Cuál</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-9">
+                    <label>En este hogar, ¿Cuántos bienes o servicios tienen que sean de su propiedad, tales como </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Radio Grabadora">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtRadioGrabadora", PlaceHolder = "Radio Grabadora", @class = "form-control mask", Value = "0" })
+                            <span>Radio Grabadora</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Equipo de Sonido">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtEquipoSonido", PlaceHolder = "Equipo de Sonido", @class = "form-control mask", Value = "0" })
+                            <span>Equipo de Sonido</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Radio">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtRadio", PlaceHolder = "Radio", @class = "form-control mask", Value = "0" })
+                            <span>Radio</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Cocina (Butano / Eléctrica">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtCocinaButanoElectrica", PlaceHolder = "Cocina (Butano / Eléctrica", @class = "form-control mask", Value = "0" })
+                            <span>Cocina Butano / Eléctrica</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Refrigeradora">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtRefrigeradora", PlaceHolder = "Refrigeradora", @class = "form-control mask", Value = "0" })
+                            <span>Refrigeradora</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Abanico">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtAbanico", PlaceHolder = "Abanico", @class = "form-control mask", Value = "0" })
+                            <span>Abanico</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Licuadora">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtLicuadora", PlaceHolder = "Licuadora", @class = "form-control mask", Value = "0" })
+                            <span>Licuadora</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Microondas">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtMicroondas", PlaceHolder = "Microondas", @class = "form-control mask", Value = "0" })
+                            <span>Microondas</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Aire Acondicionado">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtAireAcondicionado", PlaceHolder = "Aire Acondicionado", @class = "form-control mask", Value = "0" })
+                            <span>Aire Acondicionado</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Lavadora de Ropa">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtLavadoraRopa", PlaceHolder = "Lavadora de Ropa", @class = "form-control mask", Value = "0" })
+                            <span>Lavadora Ropa</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Máquina de Coser">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtMaquinaCoser", PlaceHolder = "Máquina de Coser", @class = "form-control mask", Value = "0" })
+                            <span>Máquina Coser</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Plancha Eléctrica">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtPlanchaElectrica", PlaceHolder = "Plancha Eléctrica", @class = "form-control mask", Value = "0" })
+                            <span>Plancha Eléctrica</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Televisor Plasma, LCD, LED">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtTelevisorPlasmaLCDLED", PlaceHolder = "Televisor Plasma, LCD, LED", @class = "form-control mask", Value = "0" })
+                            <span>Televisor Plasma, LCD, LED</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Televisor Convencional">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtTelevisorConvencional", PlaceHolder = "Televisor Convencional", @class = "form-control mask", Value = "0" })
+                            <span>Televisor Convencional</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Teléfono Convencional">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtTelefonoConvencional", PlaceHolder = "Teléfono Convencional", @class = "form-control mask", Value = "0" })
+                            <span>Teléfono Convencional</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Teléfono Celular">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtTelefonoCelular", PlaceHolder = "Teléfono Celular", @class = "form-control mask", Value = "0" })
+                            <span>Teléfono Celular</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Computadora Escritorio">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtComputadoraEscritorio", PlaceHolder = "Computadora Escritorio", @class = "form-control mask", Value = "0" })
+                            <span>Computadora Escritorio</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Computadora Portatil">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtComputadoraPortatil", PlaceHolder = "Computadora Portatil", @class = "form-control mask", Value = "0" })
+                            <span>Computadora Portatil</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Tablet">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtTablet", PlaceHolder = "Tablet", @class = "form-control mask", Value = "0" })
+                            <span>Tablet</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Servicio Cable TV / Satelital">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtCableTVSatelital", PlaceHolder = "Servicio Cable TV / Satelital", @class = "form-control mask", Value = "0" })
+                            <span>Cable TV / Satelital</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Internet">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtInternet", PlaceHolder = "Internet", @class = "form-control mask", Value = "0" })
+                            <span>Internet</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-9">
+                    <label>Este hogar, cuántos medios de transporte tienen (uso particular y/o trabajo) tales como </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Carro Camioneta Jeep">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtCarroCamionetaJeep", PlaceHolder = "Carro Camioneta Jeep", @class = "form-control mask", Value = "0" })
+                            <span>Carro Camioneta Jeep</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Moto Cuadraciclo">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtMotoCuadraciclo", PlaceHolder = "Moto Cuadraciclo", @class = "form-control mask", Value = "0" })
+                            <span>Moto Cuadraciclo</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Bicicleta">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtBicicleta", PlaceHolder = "Bicicleta", @class = "form-control mask", Value = "0" })
+                            <span>Bicicleta</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Bestia">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtBestia", PlaceHolder = "Bestia Caballo Mula", @class = "form-control mask", Value = "0" })
+                            <span>Bestia</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Canoa cayuco">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtCanoaCayuco", PlaceHolder = "Canoa Cayuco", @class = "form-control mask", Value = "0" })
+                            <span>Canoa Cayuco</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Lancha Panga Bote">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtLanchaPangaBote", PlaceHolder = "Lancha Panga Bote", @class = "form-control mask", Value = "0" })
+                            <span>Lancha Panga Bote</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Yate">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtYate", PlaceHolder = "Yate", @class = "form-control mask", Value = "0" })
+                            <span>Yate</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <label>¿Recibe este hogar remesas del exterior?</label>
+                </div>
+                <div class="col-md-3">
+                    <label>¿Cuánto es el monto mensual que recibe?</label>
+                </div>
+                <div class="col-md-3">
+                    <label>En los últimos 12 meses ¿Este hogar recibío dinero de otros hogares dentro del país?</label>
+                </div>
+                <div class="col-md-3">
+                    <label>En los últimos 12 meses ¿Este hogar ha sido beneficiado con algún programa que impulsa el gobierno?</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Remesas del exterior">
+                            <select id="ddlRemesasExterior" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Mónto dólares">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtMontoMensual", PlaceHolder = "Mónto dólares", @class = "form-control mask", Value = "0" })
+                            <span>Dólares</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Remesas locales">
+                            <select id="ddlRemesasHogaresPais" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Beneficio progrma de gobierno">
+                            <select id="ddlBeneficioProgramaGobierno" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@using (Html.BeginScriptContext())
+{
+    Html.AddScriptBlock(
+@<script type="text/javascript">
+     $(document).ready(function () {
+         $(".sel").select2({
+             placeholder: "Seleccione Opción",
+             allowClear: true,
+         });
+
+         $(".mask").inputmask('Regex', { regex: "^[0-9]+$" });
+
+         cargaTipoObjeto();
+     })
+
+     function cargaTipoObjeto() {
+         $.ajax({
+             url: obtenerURL('@HtmlEncriptUrl.EncodeUrl(addres, "catalogos/Listar/{seccion}", "get")'),
+             type: "get",
+             dataType: "json",
+             data: { "seccion": "CaracteristicasHogar" },
+             success: function (result) {
+                 dato = result[0].JsonDatos;
+                 $(dato.JsonCombustibleCocinar).each(function () {
+                     $("#ddlCombustibleUsadoCocinar").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                 });
+                 $(dato.JsonTipoServicioHigienico).each(function () {
+                     $("#ddlTipoServicioHigienico").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                 });
+                 $(dato.JsonEliminaBasura).each(function () {
+                     $("#ddlEliminarBasura").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                 });             
+                 $(dato.JsonSiNo).each(function () {
+                     $("#ddlRemesasExterior").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                     $("#ddlRemesasHogaresPais").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                     $("#ddlBeneficioProgramaGobierno").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca"); 
+                 });             
+             
+             },
+             error: function (data) {
+                 alertify.alert().destroy();
+                 alertify.alert('Confirmación', data.Mensaje);
+                 alertify.alert().setting('modal', true);
+             }
+         })
+    };
+
+    $("#ddlCombustibleUsadoCocinar").on("select2:select", function (a) {
+        var strcombustibleUsadoCocinar = $(this).val();
+        if (strcombustibleUsadoCocinar == 6) {
+            $('#txtCualCombustibleUsaCocinar').prop("disabled", false);
+        }
+        else { $('#txtCualCombustibleUsaCocinar').prop("disabled", true); }
+    }); 
+
+    $("#ddlEliminarBasura").on("select2:select", function (a) {
+        var strcombustibleUsadoCocinar = $(this).val();
+        if (strcombustibleUsadoCocinar == 9) {
+            $('#txtCualEliminaBasura').prop("disabled", false);
+        }
+        else { $('#txtCualEliminaBasura').prop("disabled", true); }
+    }); 
+    
+</script>
+, true);
+}
+

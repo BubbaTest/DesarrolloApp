@@ -1,0 +1,253 @@
+﻿@using Gaia.Helpers;
+
+@{
+    string addres = "apiAlexaLocal";
+}
+
+<style>
+    .dataTables_empty {
+        display: none;
+    }
+
+    table.cell-border {
+        width: 100%;
+        clear: both;
+    }
+
+    #dtRequerimiento.cell-border th {
+        padding: 5px;
+        border: 1px solid #fff;
+    }
+
+    #dtRequerimiento.cell-border thead th {
+        text-align: center;
+        background: #e0e0e0;
+        color: dodgerblue;
+    }
+
+    #dtRequerimiento.cell-border tbody td {
+        text-align: center;
+    }
+</style>
+
+<div class="container" id="contentListaPersonas">
+</div>
+
+@using (Html.BeginScriptContext())
+{
+    Html.AddScriptBlock(
+@<script type="text/javascript">
+     var datos;
+     function cargaTipoObjeto2() {
+        $.ajax({
+            url: obtenerURL('@HtmlEncriptUrl.EncodeUrl(addres, "catalogos/Listar/{seccion}", "get")'),
+            type: "get",
+            dataType: "json",
+            data: { "seccion": "PersonasHogarTabla" },
+            success: function (result) {
+                datos = result[0].JsonDatos;    
+                TablaListaPersonas();
+            },
+            error: function (data) {
+                alertify.alert().destroy();
+                alertify.alert('Confirmación', data.Mensaje);
+                alertify.alert().setting('modal', true);
+            }
+        })
+    };
+
+    $(document).ready(function () {
+        $(".mask").inputmask('Regex', { regex: "^[0-9]+$" });
+
+        cargaTipoObjeto2();
+    })
+
+    function TablaListaPersonas() {
+        $('#contentListaPersonas').empty();
+        $('#contentListaPersonas').load(obtenerURL("/Censoencuesta/_ListaMiembrosHogar"), function (response, status, xhr) {
+            if (status === "success") {
+                //$(document).ready(function () {
+                var table = $('#example').DataTable({
+                    responsive: true,
+                    autoWidth: false,
+                    scrollX: true,
+                    columnDefs: [
+                        {
+                            targets: [0],
+                            render: function (d, t, r) {
+                                return '<input type="text" class="form-control" id="txt" autocomplete = "off"></input>'
+                            }, orderable: false, searchable: false
+
+                        },
+                        {
+                            targets: [1],
+                            render: function (d, t, r) {
+                                var $select = $('<select class="form-control sel" id="ddlvm"></select>',);
+                                var $option = $("<option></option>", {
+                                    "text": "",
+                                    "value": ""
+                                });
+                                $select.append($option);
+
+                                $.each(datos.JsonVaronMujer, function (k, v) {
+                                    var $option = $("<option></option>", {
+                                        "text": v.Descripcion,
+                                        "value": v.Id
+                                    });
+                                    //if (d.CodDepartamento === v.CodDepartamento) {
+                                    //    $option.attr("selected", "selected")
+                                    //}
+
+
+                                    $select.append($option);
+                                });
+                                current_row = this;
+                                return $select.prop("outerHTML");                                    
+                            }
+                        },
+                        {
+                            targets: [2],
+                            render: function (d, t, r) {
+                                return '<input type="text" class="form-control mask" id="txtEdad" maxlength="3" Value="0"></input>'
+                            }, orderable: false, searchable: false
+
+                        },
+                        {
+                            targets: [3],
+                            render: function (d, t, r) {
+                                return '<input type="date" class="form-control" id="txtFecha"></input>'
+                            }, orderable: false, searchable: false
+
+                        },
+                        { //JsonParentesco
+                            targets: [4],
+                            render: function (d, t, r) {
+                                var $select = $('<select class="form-control sel" id="ddlpa"></select>',);
+                                var $option = $("<option></option>", {
+                                    "text": "",
+                                    "value": ""
+                                });
+                                $select.append($option);
+
+                                $.each(datos.JsonParentesco, function (k, v) {
+                                    var $option = $("<option></option>", {
+                                        "text": v.Descripcion,
+                                        "value": v.Id
+                                    });
+                                    //if (d.CodDepartamento === v.CodDepartamento) {
+                                    //    $option.attr("selected", "selected")
+                                    //}
+
+
+                                    $select.append($option);
+                                });
+                                current_row = this;
+                                return $select.prop("outerHTML");
+                            }
+                        },
+                        {
+                            targets: [5],
+                            render: function (data, type, row) {
+                                return '<button class="btn btn-primary" style="margin-right:10px" data-tabcontinuar="data-tabcontinuar" id="btnGuardaCaracteristica"><span class="fa fa-floppy-o"></span></button>';
+                            }
+                        }
+                    ],
+                    fnInitComplete: function (settings, json) {
+                        $(".sel").select2({
+                            placeholder: "Seleccione Opción",
+                            allowClear: true,
+                        });
+
+                        $(".mask").inputmask('Regex', { regex: "^[0-9]+$" });
+                    },
+                    fnRowCallback: function (row, data, index) { //null
+                            
+                    },
+                    language: { url: obtenerURL("/Json/Spanish.json") }, lengthMenu: [5], bLengthChange: false, searching: true
+                });
+                //});
+            }
+        });
+    }
+
+    function ListarPersonasMiembro2() {
+        //$('#gridRequerimientos').empty();
+        //$("#gridRequerimientos").load(obtenerURL("/Autorizacion/ObtenerListaRequerimiento"), function (response, status, xhr) {
+        //    if (status === "success") {
+                var table = $('#dtRequerimiento').DataTable({
+                    ajax: {
+                        url: obtenerURL("/Autorizacion/ObtenerRequerimientos?TransaccionGUID=" + $("#hfTransaccionGUID").val()),
+                        dataSrc: "",
+                    },
+                    rowId: 'TransaccionRequerimientoId',
+                    columns: [
+                        { data: "RequerimientoDescripcion" },
+                        {
+                            'data': null,
+                            'render': function (d, t, r) {
+                                var $select = $('<select class="tet" id="ddl' + r.TransaccionRequerimientoId + '"></select>',);
+                                var $option = $("<option></option>", {
+                                    "text": "",
+                                    "value": ""
+                                });
+                                $select.append($option);
+
+                                $.each(times, function (k, v) {
+                                    var $option = $("<option></option>", {
+                                        "text": v.NomDepartamento,
+                                        "value": v.CodDepartamento
+                                    });
+                                    if (d.CodDepartamento === v.CodDepartamento) {
+                                        $option.attr("selected", "selected")
+                                    }
+
+
+                                    $select.append($option);
+                                });
+                                current_row = this;
+                                return $select.prop("outerHTML");
+                            }
+                        },
+                        {
+                            'data': null,
+                            'render': function (data, type, row) {
+                                return '<textarea class="f2" id=txt' + row.TransaccionRequerimientoId + '>' + row.Observaciones + '</textarea>'
+                            }, orderable: false, searchable: false
+                        },
+                        {
+                            'data': null,
+                            'render': function (data, type, row) {
+                                return '<span id="' + row.TransaccionRequerimientoId + '" class="icon mif-floppy-disk mif-1x fg-blue" onclick="obtenerRelTransaccionrequerimiento(this)"></span>'
+                            }, orderable: false, searchable: false
+                        },
+                    ],
+                    columnDefs: [],
+                    fnInitComplete: function () {
+                        $(".tet").select2({ dropdownAutoWidth: true, tags: true, width: '100%', });
+
+                        $(".f2").keydown(function (e) {
+                            if (e.keyCode == 113) {
+                                var Control = $(this).attr('id');
+                                var modal = alertify.confirm()
+                                    .set('basic', true)
+                                    .setContent($("#" + Control).val())
+                                    .set({ 'resizable': true, 'maximizable': false })
+                                    .resizeTo(900, 650)
+                                    .show();
+                            }
+                        })
+                    },
+                    language: { url: obtenerURL("/Json/Spanish.json") }, lengthMenu: [5], bLengthChange: false, searching: false
+                });
+
+                $('#dtRequerimiento tbody').on('click', 'tr', function () {
+                    $('.selected').removeClass('selected');
+                    $(this).addClass('selected');
+                });
+        //    }
+        //})
+    }
+</script>
+, true);
+}
+

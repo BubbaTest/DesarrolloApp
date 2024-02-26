@@ -1,0 +1,306 @@
+﻿<div class="container" id="gridDetalleRol">
+</div>
+
+<div class="content">
+    <div class="card">
+        <div class="card-body">
+            <ul class="nav nav-tabs mb-3" id="pills-tab3" role="tablist">
+                <li class="nav-item" id="tabDatosDetalleRol">
+                    <a class="nav-link active" id="frDetRol-tab" data-toggle="pill" href="#frDetRol" role="tab" aria-controls="frDetRol" aria-selected="true">Detalle</a>
+                </li>
+                <li class="nav-item" id="rolusu" style="display: none">
+                    <a class="nav-link" id="frRelRolesU-tab" data-toggle="pill" href="#frRelRolesU" role="tab" aria-controls="frRelRolesU" aria-selected="true">Asociar Usuario</a>
+                </li>
+                <li class="nav-item" id="rolopc" style="display: none">
+                    <a class="nav-link" id="frRelOpcAso-tab" data-toggle="pill" href="#frRelOpcAso" role="tab" aria-controls="frRelOpcAso" aria-selected="true">Asociar Opciones</a>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="pills-tabContent3">
+                <div class="tab-pane fade show active" id="frDetRol" role="tabpanel" aria-labelledby="frDetRol-tab">
+                    @Html.Partial("_RolMant")
+                </div>
+                <div class="tab-pane fade" id="frRelRolesU" role="tabpanel" aria-labelledby="frRelRolesU-tab">
+                    <div class="container">
+                        <h5 style="align-self:center" id="btnrUsuario">
+
+                            <button class="btn btn-primary" style="margin-right:10px;" data-tabcontinuar="data-tabcontinuar" id="btnrelUsuario" onclick="relRolUsuario()">
+                                <span>Agregar</span>
+                                <span class="fa fa-plus"></span>
+                            </button>
+                        </h5>
+                        <div class="row justify-content-center">
+                            <div class="col-md-8" id="rru">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="frRelOpcAso" role="tabpanel" aria-labelledby="frRelOpcAso-tab">
+                    <div class="container">
+                        <h5 style="align-self:center" id="btnrOpcAso">
+
+                            <button class="btn btn-primary" style="margin-right:10px;" data-tabcontinuar="data-tabcontinuar" id="btnRelOpcAso" onclick="relRolOpcAso()">
+                                <span>Agregar</span>
+                                <span class="fa fa-plus"></span>
+                            </button>
+                        </h5>
+                        <div class="row justify-content-center">
+                            <div class="col-md-8" id="rroa">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginScriptContext())
+{
+    Html.AddScriptBlock(
+        @<script type="text/javascript">
+            $(document).ready(function () {
+                $('#gridDetalleRol').empty();
+                $("#gridDetalleRol").load(obtenerURL("/UserMant/ObtenerListaRol"), function (response, status, xhr) {
+                    if (status === "success") {
+                        table = $('#dtListasRol').DataTable({
+                            ajax: {
+                                url: obtenerURL("/UserMant/ObtenerRol"),
+                                dataSrc: "",
+                            },
+                            rowId: 'RolId',
+                            retrieve: true,
+                            columns: [
+                                        {
+                                            'data': null,
+                                            'render': function (data, type, row) {
+                                                return '<span id="' + row.RolId + '" class="fa fa-pencil" style="color: blue; font-size: 1rem;cursor: pointer;" onclick="obtenerRol(this)"></span>'
+                                            }
+                                        },
+                                        {
+                                            'data': null,
+                                            'render': function (data, type, row) {
+                                                return '<span id="' + row.RolId + '" class="fa fa-close" style="color: red; font-size: 1rem;cursor: pointer;" onclick="eliminaRol(this)"></span>'
+                                            }
+                                        },
+                                        { data: "RolId" },
+                                        { data: "Descripcion" },
+                                        {
+                                            data: "Activo",
+                                            render: function (data, type, row) {
+                                                if (data == "1") { return "Activo"; } else { return "Inactivo"; }
+                                            }
+                                        }
+                            ],
+                            columnDefs: [],
+                            dom: 'Bfrtip',
+                            buttons: [{extend: 'pdfHtml5', title: 'PDF', text: 'Exportar Pdf',orientation: 'landscape', pageSize: 'LEGAL'} ,{ extend: 'excelHtml5', title: 'EXCEL', text: 'Exportar Excel' }],
+                            language: { url: obtenerURL("/Json/Spanish.json") },
+                            lengthMenu: [5],
+                            bLengthChange: false,
+                            searching: true
+                        });
+
+                        $('#dtListasRol tbody').on('click', 'tr', function () {
+                            $("#dtListasRol tr.selected").removeClass();
+                            $(this).addClass('selected');
+                        });
+                    }
+                })
+            })
+
+            function relRolUsuario() {
+                    var contenido;
+                    var div = $("#ModalGenerico");
+                    alertify.confirm().destroy();
+                    div.load(obtenerURL("/UserMant/_UsuarioRol?rolId=" + vrolId), function () {
+                        contenido = div.html();
+                        div.empty();
+                        alertify.defaults.maintainFocus = false;
+                        alertify.defaults.theme.ok = "button warning";
+                        alertify.defaults.theme.cancel = "button primary";
+                        var modal = alertify.confirm()
+                            .setContent(contenido)
+                            .set({ 'startMaximized': false, 'maximizable': false, 'resizable': true, 'labels': { ok: '< Guardar >', cancel: '< Salir >' } })
+                                    .resizeTo(320, 260)
+                            .set('oncancel', function (closeEvent) {})
+                            .set('onok', function (closeEvent) {GuardaRolUsuario();})
+                            .show();
+
+                        $(".ajs-reset").remove();
+                        $(".ajs-commands").remove();
+                        $(".ajs-header").remove();
+                        $("div").remove(".ajs-commands, .ajs-header, .ajs-reset");
+                        var select2 = $(modal.elements.root).find("select");
+                        select2.select2().on("select2:open", function (e) {
+                            var id = e.target.id;
+                            var div_results = "#select2-" + id + "-results";
+                            $(div_results).parents(".select2-container").css({ 'z-index': '3000' });
+                        });
+
+                        $(".sel").select2({
+                            placeholder: "Seleccione Opción",
+                            allowClear: true,
+                        });
+                    })
+                }
+
+            function GuardaRolUsuario() {
+                showalertify();
+                var reljson = JSON.stringify({ "UsuarioId": $('#ddlrelUsuarioid').val().toString(), "RolId": vrolId});
+                var url = obtenerURL('/UserMant/GuardarRelUsuarioRol?reljson=' + reljson);
+                $.post(url)
+                    .done(function (data) {
+                        var listado = JSON.parse(data);
+                        if (listado.Resultado === "true") {
+                            alertify.alert().destroy();
+                            alertify.alert('Confirmación', listado.Mensaje);
+                            alertify.alert().setting('modal', true);
+                            var url = obtenerURL("/UserMant/_ListaUsuarioR");
+                                $('#rru').empty();
+                                $('#rru').load(url, function (response, status, xhr) {
+                                    if (status === "success") {
+                                        table = $('#dtListasUsuarioR').DataTable({
+                                            ajax: {
+                                                url: obtenerURL('/UserMant/ObtenerRelacionUsuario?RolId=' + vrolId),
+                                                dataSrc: "",
+                                            },
+                                            rowId: 'UsuarioId',
+                                            retrieve: true,
+                                            columns: [
+                                                {
+                                                    'data': null,
+                                                    'render': function (data, type, row) {
+                                                        return '<span id="' + row.UsuarioId + ";" + '" class="fa fa-close" style="color: red; font-size: 1rem;cursor: pointer;" onclick="eliminarelRolUsuario(this)"></span>'
+                                                    }
+                                                },
+                                                { data: "UsuarioId" },
+                                                { data: "NombreCompleto" }
+                                            ],
+                                            columnDefs: [],
+                                            dom: 'Bfrtip',
+                                            buttons: [{ extend: 'pdfHtml5', title: 'PDF', text: 'Exportar Pdf', orientation: 'landscape', pageSize: 'LEGAL' }, { extend: 'excelHtml5', title: 'EXCEL', text: 'Exportar Excel' }],
+                                            language: { url: obtenerURL("/Json/Spanish.json") },
+                                            lengthMenu: [5],
+                                            bLengthChange: false,
+                                            searching: true,
+                                            rowGroup: true,
+                                        });
+
+                                        $('#dtListasUsuarioR tbody').on('click', 'tr', function () {
+                                            $("#dtListasUsuarioR tr.selected").removeClass();
+                                            $(this).addClass('selected');
+                                        });
+                                    }
+                                })
+                        }
+                        else {
+                            alertify.alert().destroy();
+                            alertify.alert('Advertencia', listado.Mensaje);
+                            alertify.alert().setting('modal', true);
+                        }
+                    })
+                closealertify();
+            }
+
+            function GuardaRolOpcAso() {
+                var Activo;
+                showalertify();
+                
+                var reljson = JSON.stringify({ "RolId": vrolId, "OpcionId": $('#ddlrelOpcion').val().toString(), "[Default]": false });
+
+                var url = obtenerURL('/UserMant/GuardarRelRolOpcion?reljson=' + reljson);
+                $.post(url)
+                    .done(function (data) {
+                        var listado = JSON.parse(data);
+                        if (listado.Resultado === "true") {
+                            alertify.alert().destroy();
+                            alertify.alert('Confirmación', listado.Mensaje);
+                            alertify.alert().setting('modal', true);
+                            $('#rroa').empty();
+                            var url = obtenerURL("/UserMant/_ListaOpcAsoR");
+                            $("#rroa").load(url, function (response, status, xhr) {
+                                if (status === "success") {
+                                    table = $('#dtListasOpcAsoR').dataTable({
+                                        ajax: {
+                                            url: obtenerURL('/UserMant/ObtenerRelacionOpcAso?RolId=' + vrolId),
+                                            dataSrc: "",
+                                        },
+                                        rowId: 'OpcionId',
+                                        retrieve: true,
+                                        columns: [
+                                            {
+                                                'data': null,
+                                                'render': function (data, type, row) {
+                                                    return '<span id="' + row.OpcionId + '" class="fa fa-close" style="color: red; font-size: 1rem;cursor: pointer;" onclick="eliminarelOpcAsoR(this)"></span>'
+                                                }
+                                            },
+                                            { data: "OpcionId" },
+                                            { data: "Opcion" }
+                                        ],
+                                        columnDefs: [],
+                                        dom: 'Bfrtip',
+                                        buttons: [{ extend: 'pdfHtml5', title: 'PDF', text: 'Exportar Pdf', orientation: 'landscape', pageSize: 'LEGAL' }, { extend: 'excelHtml5', title: 'EXCEL', text: 'Exportar Excel' }],
+                                        language: { url: obtenerURL("/Json/Spanish.json") },
+                                        lengthMenu: [5],
+                                        bLengthChange: false,
+                                        searching: true
+                                    });
+
+                                    $('#dtListasOpcAsoR tbody').on('click', 'tr', function () {
+                                        $("#dtListasOpcAsoR tr.selected").removeClass();
+                                        $(this).addClass('selected');
+                                    });
+                                }
+                            })
+
+                            $('#frOpcAso').empty();
+                            $('#frOpcAso').load(obtenerURL("/UserMant/ListaOpcAso"))
+                        }
+                        else {
+
+                            alertify.alert().destroy();
+                            alertify.alert('Advertencia', listado.Mensaje);
+                            alertify.alert().setting('modal', true);
+                        }
+                    })
+                closealertify();
+            }
+
+            function relRolOpcAso() {
+                var contenido;
+                var div = $("#ModalGenerico");
+                alertify.defaults.theme.ok = "success button";
+                alertify.defaults.theme.cancel = "danger button";
+                alertify.confirm().destroy();
+                div.load(obtenerURL("/UserMant/_OpcAsoRol?rolId=" + vrolId), function () {
+                    contenido = div.html();
+                    div.empty();
+                    var modal = alertify.confirm()
+                        .setContent(contenido)
+                        .set({ 'startMaximized': false, 'maximizable': true, 'resizable': true, 'labels': { ok: '< Guardar >', cancel: '< Salir >' } })
+                        .resizeTo(400, 230)
+                        .set('oncancel', function (closeEvent) { })
+                        .set('onok', function (closeEvent) { GuardaRolOpcAso(); })
+                        .show();
+
+                    $(".ajs-reset").remove();
+                    $(".ajs-commands").remove();
+                    $(".ajs-header").remove();
+                    $("div").remove(".ajs-commands, .ajs-header, .ajs-reset");
+                    var select2 = $(modal.elements.root).find("select");
+                    select2.select2().on("select2:open", function (e) {
+                        var id = e.target.id;
+                        var div_results = "#select2-" + id + "-results";
+                        $(div_results).parents(".select2-container").css({ 'z-index': '3000' });
+                    });
+
+                    $(".sel").select2({
+                        placeholder: "Seleccione Opción",
+                        allowClear: true,
+                    });
+                })
+            }  
+        </script>
+    , true);
+}

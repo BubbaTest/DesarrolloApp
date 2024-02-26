@@ -1,0 +1,215 @@
+﻿@model  PJN.DAL.Model.GENERAL.Usuario
+
+@Html.Hidden("txtrelGUID")
+@Html.Hidden("txtUsuario", (object)ViewBag.Usuario.ToString())
+@Html.Hidden("txtRol", (object)ViewBag.Rol.ToString())
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Personal a Cargo">
+                            @Html.DropDownListFor(x => x.Apellidos, new SelectList(ViewBag.Subalterno as System.Collections.IEnumerable, "UsuarioId", "NombreCompleto"),
+                                "", new { id = "ddlSubalterno", @class = "form-control sel", @style = "width:100%;" })
+                            <span>Personal a Cargo:</span>
+                        </label>
+                        @Html.ValidationMessage("supervisor", "* Campo Requerido *", new { id = "lblsupervisor", @style = "color:red; display: none;" })
+                    </div>
+                </div>
+            </div>
+            @*<div class="row justify-content-center">
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Default file input example</label>
+                        <input class="form-control input-file-wrappe" type="file" name="file" id="file">
+                    </div>
+                </div>*@
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row" style=" height: 100px; align-content: center;">
+                        <div class="col-md-12 d-flex justify-content-center" id="rowButtons">
+                            <button class="btn btn-primary" style="margin-right:10px;" data-tabcontinuar="data-tabcontinuar" id="btnGuardaJS" onclick="AgregarJS()">
+                                <span>Guardar</span>
+                                <span class="fa fa-database"></span>
+                            </button>
+                            <button class="btn btn-secondary" style="margin-right:10px; display:none" data-tabcontinuar="data-tabcontinuar" id="btnActualizarJS" onclick="ActualizarJS('Actualiza')">
+                                <span>Actualizar</span>
+                                <span class="fa fa-database"></span>
+                            </button>
+                            <button class="btn btn-success" style="margin-right:10px;" data-tabcontinuar="data-tabcontinuar" id="btnNuevoJS" onclick="NuevaJS()">
+                                <span>Nuevo</span>
+                                <span class="fa fa-plus"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginScriptContext())
+{
+    Html.AddScriptBlock(
+@<script type="text/javascript">
+     function ActualizarJS(estado) {
+         var bandera = true;
+         if ($('#ddlSubalterno').val() == "" || $('#ddlSubalterno').val() == null) {
+             $("#lblsupervisor").show();
+             bandera = false;
+         }
+
+         if (bandera == true) {
+             $("#lblsupervisor").hide();
+
+             var jsjson = JSON.stringify({ "JUsuarioId": $('#txtUsuario').val(), "SUsuarioId": $('#ddlSubalterno').val(), "relGUID": $("#txtrelGUID").val(), RolId: $("#txtRol").val() });
+             var url = obtenerURL('/CodificarCP/ActualizarJS?jsjson=' + jsjson);
+             $.post(url)
+                 .done(function (data) {
+                     var listado = JSON.parse(data);
+                     if (listado.Resultado === "true") {
+                         cargaGridPersonalAsignado();
+                         alertify.alert().destroy();
+                         alertify.alert('Confirmación', listado.Mensaje);
+                         alertify.alert().setting('modal', true);
+                     }
+                     else {
+                         alertify.alert().destroy();
+                         alertify.alert('Advertencia', listado.Mensaje);
+                         alertify.alert().setting('modal', true);
+                     }
+                 })
+             closealertify();
+         }
+         else {
+             alertify.confirm().destroy();
+             alertify.confirm('Llenar todos los campos obligatorios!').set('basic', true);
+             alertify.confirm().setting('modal', true);
+         }
+     }
+
+     function AgregarJS() {
+         var bandera = true;
+         if ($('#ddlSubalterno').val() == "" || $('#ddlSubalterno').val() == null) {
+             $("#lblsupervisor").show();
+             bandera = false;
+         }
+
+         if (bandera == true) {
+             $("#lblsupervisor").hide();
+
+             var jsjson = JSON.stringify({ "JUsuarioId": $('#txtUsuario').val(), "SUsuarioId": $('#ddlSubalterno').val(), RolId: $("#txtRol").val() });
+             var url = obtenerURL('/CodificarCP/AgregarJS?jsjson=' + jsjson);
+             $.post(url)
+                 .done(function (data) {
+                     var listado = JSON.parse(data);
+                     if (listado.Resultado === "true") {
+                         cargaGridPersonalAsignado();
+                         alertify.alert().destroy();
+                         alertify.alert('Confirmación', listado.Mensaje);
+                         alertify.alert().setting('modal', true);
+                     }
+                     else {
+                         alertify.alert().destroy();
+                         alertify.alert('Advertencia', listado.Mensaje);
+                         alertify.alert().setting('modal', true);
+                     }
+                 })
+             closealertify();
+         }
+         else {
+             alertify.confirm().destroy();
+             alertify.confirm('Llenar todos los campos obligatorios!').set('basic', true);
+             alertify.confirm().setting('modal', true);
+         }
+     }
+
+     function NuevaJS() {
+         $("#txtrelGUID").val("");
+         $('#ddlSubalterno').select2("val", "ca");
+         $('#btnActualizarJS').hide();
+         $('#btnGuardaJS').show();
+     }
+
+     $(document).ready(function () {
+         $(".sel").select2({
+             placeholder: "Seleccione Opción",
+             allowClear: true,
+         });
+     })
+
+     // function test() {
+     //        var filename = $('input[type=file]').val().split('\\').pop();
+     //        var Names = filename.split('.');
+     //        var Name = Names[0];
+     //        var Ext = Names[1];
+     //        var archivojson = JSON.stringify({ "Archivo": "", "Nombre": Name, "Ext": Ext });
+     //        var Data = new FormData();
+
+     //        var files = $("#file").get(0).files;
+     //        Data.append("file", files[0]);
+
+     //        $.ajax({
+     //            url: obtenerURL("/CodificarCP/AgregarArchivo?archivojson=" + archivojson),
+     //            data: Data,
+     //            type: "post",
+     //            dataType: "json",
+     //            contentType: false,
+     //            processData: false,
+     //        }).done(function (strData) {
+     //            if (strData.Resultado === "true") {
+     //                //ListarDocumentosSoporte();
+     //                $('input[type=file]').val("");
+     //                alertify.alert().destroy();
+     //                alertify.alert('Confirmación', "Guardado Realizado con Exito");
+     //                alertify.alert().setting('modal', true);
+     //            }
+     //            else {
+     //                alertify.alert().destroy();
+     //                alertify.alert('Advertencia', listado.Mensaje);
+     //                alertify.alert().setting('modal', true);
+     //            }
+     //        })
+     //}
+
+     //function test2() {
+     //          var parmeter = {
+     //                     "Archivo": "4",
+     //                     "Nombre": "cc"
+     //                 };
+
+
+     //                     DescargarArchivo(obtenerURL("CodificarCP/DescargaArchivo/"), parmeter);
+
+     //     //function descargadoc(obj) {
+     //     //    var documentobase64 = $(obj).attr('id').split(';');
+     //     //    var nombres = documentobase64[0];
+     //     //    var archivo = documentobase64[1];
+
+     //     //    $.ajax({
+     //     //        url: obtenerURL('/CodificarCP/DescargaArchivo'),
+     //     //        method: 'POST',
+     //     //        xhrFields: {
+     //     //            responseType: 'blob'
+     //     //        },
+     //     //        data: { "Archivo": "4", "nombre": "cc" },
+     //     //        success: function (data) {
+     //     //            var a = document.createElement('a');
+     //     //            var url = window.URL.createObjectURL(data);
+     //     //            a.href = url;
+     //     //            a.download = nombres + ".pdf";
+     //     //            a.click();
+     //     //            window.URL.revokeObjectURL(url);
+     //     //        }
+     //     //    });
+     //     //}
+     // }
+
+</script>
+, true);
+}
+
+
+
+

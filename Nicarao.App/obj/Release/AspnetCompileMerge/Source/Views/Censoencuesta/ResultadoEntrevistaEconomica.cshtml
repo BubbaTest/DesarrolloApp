@@ -1,0 +1,118 @@
+﻿@using Gaia.Helpers;
+@model Gaia.DAL.Model.Persona
+
+@{
+    string addres = "apiAlexaLocal";
+}
+
+<div class="content">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0">Sección II. RESULTADO DE LA ENTREVISTA</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Resultado Entrevista">
+                            <select id="ddlResultadoEntrevista" class="form-control sel"></select>
+                            <span>Resultado Entrevista</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Cuál">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtCualOtro", PlaceHolder = "Cuál", @class = "form-control", disabled = "disable", autocomplete = "off" })
+                            <span>Cuál</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Fecha 1ra. Visita">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtFechaPrimeraVisita", PlaceHolder = "Primera Visita", @class = "form-control" })
+                            <span>Primera Visita</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Fecha 2da. Visita">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtFechaSegundaVisita", PlaceHolder = "Segunda Visita", @class = "form-control" })
+                            <span>Segunda Visita</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Fecha 3ra. Visita">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtFechaTerceraVisita", PlaceHolder = "Tercera Visita", @class = "form-control" })
+                            <span>Tercera Visita</span>
+                        </label>
+                    </div>
+                </div>
+            </div>           
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Observaciones">
+                            @Html.TextAreaFor(model => model.Identificador, new { id = "txtObservaciones", PlaceHolder = "Observaciones", @class = "form-control", autocomplete = "off" })
+                            <span>Observaciones</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginScriptContext())
+{
+    Html.AddScriptBlock(
+@<script type="text/javascript">
+    var dato;
+     $(document).ready(function () {
+         $(".sel").select2({
+             placeholder: "Seleccione Opción",
+             allowClear: true,
+         });
+
+         $("#txtFechaPrimeraVisita").inputmask("99/99/9999");
+         $("#txtFechaSegundaVisita").inputmask("99/99/9999");
+         $("#txtFechaTerceraVisita").inputmask("99/99/9999");
+
+         cargaTipoObjeto();
+     })
+
+     function cargaTipoObjeto() {
+        $.ajax({
+            url: obtenerURL('@HtmlEncriptUrl.EncodeUrl(addres, "catalogos/Listar/{seccion}", "get")'),
+            type: "get",
+            dataType: "json",
+            data: { "seccion": "ResultadoEntrevistaEconomica" },
+            success: function (result) {
+                dato = result[0].JsonDatos;
+                $(dato.JsonResultadoEntrevista).each(function () {
+                    $("#ddlResultadoEntrevista").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                });
+            },
+            error: function (data) {
+                alertify.alert().destroy();
+                alertify.alert('Confirmación', data.Mensaje);
+                alertify.alert().setting('modal', true);
+            }
+        })
+    };
+
+    $("#ddlResultadoEntrevista").on("select2:select", function (a) {
+        var strresultadoEntrevista = $(this).val();
+        if (strresultadoEntrevista > 3) {
+            if (strresultadoEntrevista == 8) { $('#txtCualOtro').prop("disabled", false); }
+        }
+        else { $('#txtCualOtro').prop("disabled", true); }
+    });
+</script>
+, true);
+}
+

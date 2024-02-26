@@ -1,0 +1,193 @@
+﻿<style>
+    .dataTables_empty {
+        display: none;
+    }
+
+    table.cell-border {
+        width: 100%;
+        clear: both;
+    }
+
+        table.cell-border th {
+            padding: 5px;
+            border: 1px solid #fff;
+        }
+
+        table.cell-border thead th {
+            text-align: center;
+            background: #66a9bd;
+        }
+
+        table.cell-border tbody td {
+            text-align: center;
+        }
+
+    td {
+        font-size: 12px;
+    }
+</style>
+
+<div id="documentosRol">
+    <table id="dtListasRol" class="cell-border" cellspacing="0" style="width:100%;">
+        <thead>
+            <tr>
+                <th class="sortable-column"></th>
+                <th class="sortable-column"></th>
+                <th class="sortable-column">Id</th>
+                <th class="sortable-column">Descripcion</th>
+                <th class="sortable-column">Activo</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@using (Html.BeginScriptContext())
+{
+    Html.AddScriptBlock(
+        @<script type="text/javascript">
+                function eliminaRol(obj) {
+                    alertify.defaults.theme.ok = "button warning";
+                    alertify.defaults.theme.cancel = "button primary";
+                    alertify.confirm().destroy();
+                    alertify.confirm('Advertencia', 'Esta seguro de querer Eliminar el Rol?'
+                    , function () { //onOk
+                        showalertify();
+                        vrolId = $(obj).attr('id');
+                        var url = obtenerURL('/UserMant/eliminaRol?roljson=' + vrolId);
+                        $.post(url)
+                            .done(function (data) {
+                                var listado = JSON.parse(data);
+                                if (listado.Resultado === "true") {
+                                    $('#frRoles').empty();
+                                    $('#frRoles').load(obtenerURL("/UserMant/ListaRol"));
+                                    alertify.alert().destroy();
+                                    alertify.alert('Confirmación', listado.Mensaje);
+                                    alertify.alert().setting('modal', true);
+                                }
+                                else {
+                                    alertify.alert().destroy();
+                                    alertify.alert('Advertencia', listado.Mensaje);
+                                    alertify.alert().setting('modal', true);
+                                }
+                            })
+                        closealertify();
+                     }
+                    , function () { })//onCancel
+                    .set('labels', { ok: '< Si >', cancel: '< No >' });
+                }
+
+                function obtenerRol(obj) {
+                    showalertify();
+                    vrolId = $.trim($(obj).attr('id'));
+                    var url = obtenerURL('/UserMant/ObtenerRol?RolId=' + vrolId);
+                    $.getJSON(url)
+                        .done(function (data) {
+                            encabezdo = data;
+                            iniciarValoresRol();
+
+                            var url = obtenerURL("/UserMant/_ListaUsuarioR");
+                            $('#rru').empty();
+                            $('#rru').load(url, function (response, status, xhr) {
+                                if (status === "success") {
+                                    table = $('#dtListasUsuarioR').DataTable({
+                                        ajax: {
+                                            url: obtenerURL('/UserMant/ObtenerRelacionUsuario?RolId=' + vrolId),
+                                            dataSrc: "",
+                                        },
+                                        rowId: 'UsuarioId',
+                                        retrieve: true,
+                                        columns: [
+                                            {
+                                                'data': null,
+                                                'render': function (data, type, row) {
+                                                    return '<span id="' + row.UsuarioId + '" class="fa fa-close" style="color: red; font-size: 1rem;cursor: pointer;" onclick="eliminarelRolUsuario(this)"></span>'
+                                                }
+                                            },
+                                            { data: "UsuarioId" },
+                                            { data: "NombreCompleto" }
+                                        ],
+                                        columnDefs: [],
+                                        dom: 'Bfrtip',
+                                        buttons: [{ extend: 'pdfHtml5', title: 'PDF', text: 'Exportar Pdf', orientation: 'landscape', pageSize: 'LEGAL' }, { extend: 'excelHtml5', title: 'EXCEL', text: 'Exportar Excel' }],
+                                        language: { url: obtenerURL("/Json/Spanish.json") },
+                                        lengthMenu: [5],
+                                        bLengthChange: false,
+                                        searching: true,
+                                        rowGroup: true,
+                                    });
+
+                                    $('#dtListasUsuarioR tbody').on('click', 'tr', function () {
+                                        $("#dtListasUsuarioR tr.selected").removeClass();
+                                        $(this).addClass('selected');
+                                    });
+                                }
+                            })
+
+                            $('#rroa').empty();
+                            var url = obtenerURL("/UserMant/_ListaOpcAsoR");
+                            $("#rroa").load(url, function (response, status, xhr) {
+                                if (status === "success") {
+                                    table = $('#dtListasOpcAsoR').dataTable({
+                                        ajax: {
+                                            url: obtenerURL('/UserMant/ObtenerRelacionOpcAso?RolId=' + vrolId),
+                                            dataSrc: "",
+                                        },
+                                        rowId: 'OpcionId',
+                                        retrieve: true,
+                                        columns: [
+                                            {
+                                                'data': null,
+                                                'render': function (data, type, row) {
+                                                    return '<span id="' + row.OpcionId + '" class="fa fa-close" style="color: red; font-size: 1rem;cursor: pointer;" onclick="eliminarelOpcAsoR(this)"></span>'
+                                                }
+                                            },
+                                            { data: "OpcionId" },
+                                            { data: "Opcion" }
+                                        ],
+                                        columnDefs: [],
+                                        dom: 'Bfrtip',
+                                        buttons: [{ extend: 'pdfHtml5', title: 'PDF', text: 'Exportar Pdf', orientation: 'landscape', pageSize: 'LEGAL' }, { extend: 'excelHtml5', title: 'EXCEL', text: 'Exportar Excel' }],
+                                        language: { url: obtenerURL("/Json/Spanish.json") },
+                                        lengthMenu: [5],
+                                        bLengthChange: false,
+                                        searching: true
+                                    });
+
+                                    $('#dtListasOpcAsoR tbody').on('click', 'tr', function () {
+                                        $("#dtListasOpcAsoR tr.selected").removeClass();
+                                        $(this).addClass('selected');
+                                    });
+                                }
+                            })
+                        })
+                    $("#rolusu").show();
+                    $("#rolopc").show();
+                    closealertify();
+                }
+
+                function iniciarValoresRol() {
+                    $.each(encabezdo, function (i, item) {
+                        $('#txtRolId').prop("disabled", true);
+                        $("#txtRolId").val(item.RolId);
+                        $("#txtDescripcionR").val(item.Descripcion);
+                        if (item.Activo === true) {
+                            document.getElementById("activorol").checked = true;
+                            document.getElementById("inactivorol").checked = false;
+                        }
+                        else {
+                            document.getElementById("activorol").checked = false;
+                            document.getElementById("inactivorol").checked = true;
+                        }
+                    });
+
+                    $('#btnGuardaRol').hide();
+                    $('#btnActualizarRol').show();
+
+                    encabezdo = "";
+                };
+        </script>
+    , true);
+}
+
+
+

@@ -1,0 +1,29 @@
+﻿
+<div class="content">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0">Mantenimiento Variables de Control</h5>
+        </div>
+        <div class="card-body">
+            <ul class="nav nav-tabs mb-3" id="pills-tab1" role="tablist">
+                <li class="nav-item" id="tabDatosVC">
+                    <a class="nav-link active" id="frVariableControl-tab" data-toggle="pill" href="#frVariableControl" role="tab" aria-controls="frVariableControl" aria-selected="true">Variable de Control</a>
+                </li>                
+            </ul>
+
+            <div class="tab-content" id="pills-tabContent1">
+                <div class="tab-pane fade show active" id="frVariableControl" role="tabpanel" aria-labelledby="frVariableControl-tab">
+                    @Html.Partial("ListaVariableControl")
+                </div>                
+            </div>
+        </div>
+    </div>
+</div>
+@using (Html.BeginScriptContext())
+{
+    Html.AddScriptBlock(
+        @<script type="text/javascript">
+            var vvariableId;
+        </script>
+    , true);
+}

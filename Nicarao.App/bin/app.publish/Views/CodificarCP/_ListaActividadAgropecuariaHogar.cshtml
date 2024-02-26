@@ -1,0 +1,75 @@
+﻿<div class="container-sm">
+    <table id="dtListasPreFiltro" class="display cell-border" cellspacing="0">
+        <thead>
+            <tr>
+                <th></th>
+                <th class="sortable-column">Area</th>
+                <th class="sortable-column">Edificación</th>
+                <th class="sortable-column">Vivienda</th>
+                <th class="sortable-column">Hogar</th>
+                <th class="sortable-column">Productor</th>
+                <th class="sortable-column">Nombre Finca</th>
+                @*<th class="sortable-column">Dirección</th>*@
+                <th class="sortable-column">Municipio</th>
+                <th class="sortable-column">Código</th>
+                <th class="sortable-column">Comarca</th>
+                <th class="sortable-column">Comunidad</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@using (Html.BeginScriptContext())
+{
+    Html.AddScriptBlock(
+        @<script type="text/javascript">
+            $(document).ready(function () {
+                ListaAgropecuariaActividad();
+            })
+
+            function ListaAgropecuariaActividad() {
+                var url = obtenerURL('/CodificarCP/ObtenerPreguntaListaGenerico?Pregunta=s08p01o7o8&Dep=' + $("#ddlDepartamento").val() + '&Mun=' + $("#ddlMunicipio").val() + '&Seg=' + $("#ddlSegmento").val());
+                table = $('#dtListasPreFiltro').DataTable({
+                            ajax: {
+                                    url: url,
+                                    dataSrc: "",
+                                },
+                            rowId: 'GDB_ARCHIVE_OID',
+                            retrieve: true,
+                            columns: [
+                                {
+                                    'data': null,
+                                    'render': function (data, type, row) {
+                                        return '<input type="checkbox" id=' + row.GDB_ARCHIVE_OID + '>';
+                                    },
+                                },
+                                { data: "AreaResidencia" },
+                                { data: "s1_q13" },
+                                { title: "Vivienda", data: "s02v00" },
+                                { data: "s03h00", width: "60px" },
+                                { data: "s08p02" },
+                                { data: "s08p03" },
+                                { data: "NomMunicipio" },
+                                { data: "s08p06" },
+                                { data: "s08p07" },
+                                { data: "s08p08" }
+                            ],
+                            fnInitComplete: function (settings, json) {
+                               if (vescatalogo==true) { cargaCatalogoFiltro(vcatalogo); }
+                               else { cargaFormularioFiltro(vcatalogo);}
+                            },
+                            fnRowCallback: function (row, data, index) {
+                                if (data["s08p06"] != "" && data["s08p07"] != "") { $(row).addClass("text-primary"); }
+                            },
+                            language: { url: obtenerURL("/Json/Spanish.json") }, lengthMenu: [5], bLengthChange: false, searching: true
+                        });
+
+                        $('#dtListasPreFiltro tbody').on('click', 'tr', function () {
+                            $("#dtListasPreFiltro tr.selected").removeClass();
+                            $(this).addClass('selected');
+                        });
+            }
+        </script>
+    , true);
+}
+

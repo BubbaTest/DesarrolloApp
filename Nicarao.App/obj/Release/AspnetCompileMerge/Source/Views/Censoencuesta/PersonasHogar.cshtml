@@ -1,0 +1,237 @@
+﻿@using Gaia.Helpers;
+@model Gaia.DAL.Model.Persona
+
+@{
+    string addres = "apiAlexaLocal";
+}
+
+<div class="content">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0">Sección V-A. LISTA DE LAS PERSONAS QUE CONFORMAN EL HOGAR</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Señor(a), teniendo en cuenta que RESIDENTE HABITUAL, es la persona que ha vivido habitualmente en el hogar por seis meses o más o que teniendo menos tiempo, tiene la intención de vivir en este hogar, díga: </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <label>¿Cuántas personas viven habitualmente en este hogar, incluyendo a recien nacidos y ancianos </label>
+                </div>
+            </div>
+            <div class="row" id="rowControl1">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Total">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtTotal", PlaceHolder = "Total", @class = "form-control mask", Value = "0", disabled="disabled" })
+                            <span>Total</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Varones">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtVarones", PlaceHolder = "Varones", @class = "form-control mask", Value = "0" })
+                            <span>Varones</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Mujeres">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtMujeres", PlaceHolder = "Mujeres", @class = "form-control mask", Value = "0" })
+                            <span>Mujeres</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Comenzando con el Jefe(a) del hogar, ¿Cuáles son los nombres y apellidos de cada una de las personas del hogar?</label>
+                </div>
+                <div class="col-md-9">
+                    <label>Solicite al informante los nombres de cada miembro respetando el siguiente orden: </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label style="font-size: 0.8rem;">a) Jefe(a) del Hogar</label>
+                </div>
+                <div class="col-md-2">
+                    <label style="font-size: 0.8rem;">b) Esposa(o) o Compañera(o)</label>
+                </div>
+                <div class="col-md-2">
+                    <label style="font-size: 0.8rem;">c) Hijos(as)/ Hijastros(as) Solteros(as)</label>
+                </div>
+                <div class="col-md-4">
+                    <label style="font-size: 0.8rem;">d) Hijos(as)/ Hijastros(as) Casados(as) con su Contuge e Hijos</label>
+                </div>
+                <div class="col-md-2">
+                    <label style="font-size: 0.8rem;">e) Nietos(as)/ Bisnietos(as)</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label style="font-size: 0.8rem;">f) Madre/Padre</label>
+                </div>
+                <div class="col-md-2">
+                    <label style="font-size: 0.8rem;">g) Abuelo/Abuela</label>
+                </div>
+                <div class="col-md-2">
+                    <label style="font-size: 0.8rem;">h) Suegro(a)</label>
+                </div>
+                <div class="col-md-2">
+                    <label style="font-size: 0.8rem;">i) Hermano(a)/ Cuñado(a)</label>
+                </div>
+                <div class="col-md-2">
+                    <label style="font-size: 0.8rem;">j) Otro Pariente</label>
+                </div>
+                <div class="col-md-2">
+                    <label style="font-size: 0.8rem;">k) Sin Parentezco</label>
+                </div>
+            </div>
+            <br />
+            <div class="row" id="rowControl2">
+                @{Html.RenderAction("ObtenerListaMiembrosHogar", "Censoencuesta");}
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-6">
+                    <label>¿Se le ólvido declarar algún recién nacido, anciano u otra persona que este internada en algún hospital, clínica u otro lugar?</label>
+                </div>
+                <div class="col-md-6">
+                    <label>¿Cuantas personas que eran miembros de este hogar estudian actualmente fuera del país?</label>
+                </div>
+            </div>
+            <div class="row" id="rowControl3">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Olvidó algún miembro del hogar">
+                            <select id="ddlNoDeclaroAlgunMiembro" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Personas estudian fuera del país">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtPersonasEstudianFuera", PlaceHolder = "Estudian Fuera", @class = "form-control mask", Value = "0" })
+                            <span>Estudian Fuera</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0">Sección V-B. Total de personas en viviendas colectivas y sin viviendas</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <label>Si en la vivieda colectiva no hay residentes habituales, anote 00 en Total. </label>
+                </div>
+            </div>
+            <div class="row" id="rowControl4">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Total">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtTotalColectivo", PlaceHolder = "Total cuartos", @class = "form-control mask", Value = "0", disabled="disabled" })
+                            <span>Total</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Varones">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtVaronesColectivo", PlaceHolder = "Varones", @class = "form-control mask", Value = "0", disabled = "disabled" })
+                            <span>Varones</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Mujeres">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtMujeresColectivo", PlaceHolder = "Mujeres", @class = "form-control mask", Value = "0", disabled = "disabled" })
+                            <span>Mujeres</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@using (Html.BeginScriptContext())
+{
+    Html.AddScriptBlock(
+@<script type="text/javascript">
+    var datos;
+     $(document).ready(function () {
+         $(".sel").select2({
+             placeholder: "Seleccione Opción",
+             allowClear: true,
+         });
+
+         $(".mask").inputmask('Regex', { regex: "^[0-9]+$" });
+
+         cargaTipoObjeto();
+     })
+
+     function cargaTipoObjeto() {
+        $.ajax({
+            url: obtenerURL('@HtmlEncriptUrl.EncodeUrl(addres, "catalogos/Listar/{seccion}", "get")'),
+            type: "get",
+            dataType: "json",
+            data: { "seccion": "PersonasHogar" },
+            success: function (result) {
+                dato = result[0].JsonDatos;
+                $(dato.JsonSiNo).each(function () {
+                    $("#ddlNoDeclaroAlgunMiembro").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                });                
+            },
+            error: function (data) {
+                alertify.alert().destroy();
+                alertify.alert('Confirmación', data.Mensaje);
+                alertify.alert().setting('modal', true);
+            }
+        })
+    };
+
+    $("#txtVarones").focusout(function () {
+        var vTotal = (parseFloat($("#txtVarones").val()) + parseFloat($("#txtMujeres").val()));
+        $("#txtTotal").val(vTotal);
+
+    })
+
+    $("#txtMujeres").focusout(function () {
+        var vTotal = (parseFloat($("#txtVarones").val()) + parseFloat($("#txtMujeres").val()));
+        $("#txtTotal").val(vTotal);
+    })
+
+    $("#txtVaronesColectivo").focusout(function () {
+        var vTotal = (parseFloat($("#txtVaronesColectivo").val()) + parseFloat($("#txtMujeresColectivo").val()));
+        $("#txtTotalColectivo").val(vTotal);
+
+    })
+
+    $("#txtMujeresColectivo").focusout(function () {
+        var vTotal = (parseFloat($("#txtVaronesColectivo").val()) + parseFloat($("#txtMujeresColectivo").val()));
+        $("#txtTotalColectivo").val(vTotal);
+    })
+
+    $("#txtTotalColectivo").focusout(function () {
+        var strtotalColectivo = $(this).val();
+        if (strtotalColectivo =="00") {
+            $('#cell-content22').empty();
+            $("#cell-content22").load(obtenerURL("/Censoencuesta/CensoEconomico"));
+        }
+    }) 
+</script>
+, true);
+}
+
+

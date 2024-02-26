@@ -1,0 +1,128 @@
+﻿<style>
+    .dataTables_empty {
+        display: none;
+    }
+
+    table.cell-border {
+        width: 100%;
+        clear: both;
+    }
+
+        table.cell-border th {
+            padding: 5px;
+            border: 1px solid #fff;
+        }
+
+        table.cell-border thead th {
+            text-align: center;
+            background: #66a9bd;
+        }
+
+        table.cell-border tbody td {
+            text-align: center;
+        }
+
+    td {
+        font-size: 12px;
+    }
+</style>
+
+<div id="documentosVariableControl">
+    <table id="dtListasVariableControl" class="cell-border" cellspacing="0" style="width:100%;">
+        <thead>
+            <tr>
+                <th class="sortable-column"></th>
+                <th class="sortable-column"></th>
+                <th class="sortable-column">VariableId</th>
+                <th class="sortable-column">Cadena</th>
+                <th class="sortable-column">Se Clasifica</th>
+                <th class="sortable-column">Catalogo</th>
+                <th class="sortable-column">Censo/Encuesta</th>
+                <th class="sortable-column">Vista</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@using (Html.BeginScriptContext())
+{
+    Html.AddScriptBlock(
+        @<script type="text/javascript">
+            function eliminaVariableControl(obj) {
+                alertify.defaults.theme.ok = "button warning";
+                alertify.defaults.theme.cancel = "button primary";
+                alertify.confirm().destroy();
+                alertify.confirm('Advertencia', 'Esta seguro de querer Eliminar la Variable de Control?'
+                    , function () { //onOk  
+                        showalertify();
+                        vvariableId = $(obj).attr('id');
+                        var url = obtenerURL('/UserMant/eliminaVariableControl?vcjson=' + vvariableId);
+                        $.post(url)
+                        .done(function (data) {
+                            var listado = JSON.parse(data);
+                            if (listado.Resultado === "true") {
+                                $('#frVariableControl').empty();
+                                $('#frVariableControl').load(obtenerURL("/UserMant/ListaVariableControl"));
+                                alertify.alert().destroy();
+                                alertify.alert('Confirmación', listado.Mensaje);
+                                alertify.alert().setting('modal', true);
+                            }
+                            else {
+                                alertify.alert().destroy();
+                                alertify.alert('Advertencia', listado.Mensaje);
+                                alertify.alert().setting('modal', true);
+                            }
+                        })
+                        closealertify();
+                    }
+                    , function () { })//onCancel
+                    .set('labels', { ok: '< Si >', cancel: '< No >' });
+            }
+
+            function obtenerVariableControl(obj) {
+                vvariableId = $(obj).attr('id');
+                var url = obtenerURL('/UserMant/ObtenerVariableControl?VariableId=' + vvariableId);
+                $.getJSON(url)
+                    .done(function (data) {
+                        encabezdo = data;
+                        iniciarValoresVariableControl();
+                    })
+            }
+
+            function iniciarValoresVariableControl() {
+                $.each(encabezdo, function (i, item) {
+                    $('#txtVCId').prop("disabled", true);
+                    $("#txtVCId").val(item.VariableId);
+                    var sValore = item.Cadena.split("/");
+                    $("#txtTabla").val(sValore[0]);
+                    $("#txtCampo").val(sValore[1]);
+                    $("#txtCampo2").val(sValore[2]);
+                    $("#txtCampo3").val(sValore[3]);
+                    if (item.EsCatalogo === true) {
+                        document.getElementById("activoes").checked = true;
+                        document.getElementById("inactivoes").checked = false;
+                    }
+                    else {
+                        document.getElementById("activoes").checked = false;
+                        document.getElementById("inactivoes").checked = true;
+                    }
+                    $("#txtCatalogo").val(item.Catalogo);
+                    $("#ddlVCenEnc").val(item.CenEnc).trigger("change");
+                    $("#txtVista").val(item.Vista);
+                });
+
+                $('#btnGuardaVC').hide();
+                $('#btnActualizaVC').show();
+                encabezdo = "";
+            };
+        </script>
+     , true);
+}
+
+
+
+
+
+
+
+

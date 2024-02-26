@@ -1,0 +1,529 @@
+﻿@using Gaia.Helpers;
+@model Gaia.DAL.Model.Persona
+
+@{
+    string addres = "apiAlexaLocal";
+}
+
+<div class="content">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0">Sección III. DATOS DE LA VIVIENDA (HOGAR PRINCIPAL)</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <label>Tipo Vivienda Particular</label>
+                </div>
+                <div class="col-md-3">
+                    <label>En este hogar ¿Se realiza alguna actividad económica?</label>
+                </div>
+                <div class="col-md-4">
+                    <label>¿De que material es la mayor parte de las paredes exteriores?</label>
+                </div>                
+            </div>
+            <div class="row" id="rowControl1">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Tipo de Vivienda Particular">
+                            <select id="ddlTipoViviendaParticular" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Se realiza actividad económica">
+                            <select id="ddlRealizaActividadEconomica" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Material de las paredes">
+                            <select id="ddlMaterialParedes" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Cuál">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtCualMaterialParedes", PlaceHolder = "Cuál", @class = "form-control", disabled = "disabled", autocomplete = "off" })
+                            <span>Cuál</span>
+                        </label>
+                    </div>
+                </div>                
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <label>¿De que material es la mayor parte del techo?</label>
+                </div>
+                <div class="col-md-4">
+                    <label>¿De que material es la mayor parte del piso?</label>
+                </div>
+                <div class="col-md-4">
+                    <label>El alumbrado que tiene esta vivienda es</label>
+                </div>                
+            </div>
+            <div class="row" id="rowControl2">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Material del techo">
+                            <select id="ddlMaterialTecho" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Cuál">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtCualMaterialTecho", PlaceHolder = "Cuál", @class = "form-control", disabled = "disabled", autocomplete = "off" })
+                            <span>Cuál</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Material piso">
+                            <select id="ddlMaterialPiso" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Cuál">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtCualMaterialPiso", PlaceHolder = "Cuál", @class = "form-control", disabled = "disabled", autocomplete = "off" })
+                            <span>Cuál</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Alumbrado Vivienda">
+                            <select id="ddlAlumbradoVivienda" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <label>Esta vivienda tiene luminaria de tipo</label>
+                </div>
+                <div class="col-md-4">
+                    <label>Esta vivienda se abastece de agua principalmente de</label>
+                </div>
+                <div class="col-md-4">
+                    <label>Esta vivienda que ocupan es</label>
+                </div>
+                <div class="col-md-2">
+                    <label>¿Cuántos años de antiguedad tiene?</label>
+                </div>                
+            </div>
+            <div class="row" id="rowControl3">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Luminaria tipo">
+                            <select id="ddlLuminariaTipo" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Se abastece de agua">
+                            <select id="ddlAbasteceAgua" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Cuál">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtCualAbasteceAgua", PlaceHolder = "Cuál", @class = "form-control", disabled = "disabled", autocomplete = "off" })
+                            <span>Cuál</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Vivienda Ocupan es">
+                            <select id="ddlViviendaOcupan" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Cuál">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtCualViviendaOcupan", PlaceHolder = "Cuál", @class = "form-control", disabled = "disabled", autocomplete = "off" })
+                            <span>Cuál</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Años antiguedad">
+                            <select id="ddlAnosAntiguedad" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <label>¿Cuál es el valor de esta vivienda?</label>
+                </div>
+                <div class="col-md-3">
+                    <label>¿Cuánto paga al mes por concepto de alquiler de esta vivienda?</label>
+                </div>
+                <div class="col-md-2">
+                    <label>¿Cuántos pisos o plantas tiene esta vivienda?</label>
+                </div>
+                <div class="col-md-4">
+                    <label>¿Cuál es la superficie del terreno y el área construida de la vivienda?</label>
+                </div>
+
+            </div>
+            <div class="row" id="rowControl4">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Valor vivienda">
+                            <select id="ddlValorVivienda" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Valor vivienda">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtValorVivienda", PlaceHolder = "Valor", @class = "form-control mask", Value = "0" })
+                            <span>Valor</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Pago alquiler">
+                            <select id="ddlPagoAlquiler" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Valor alquiler">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtValorAlquiler", PlaceHolder = "Valor", @class = "form-control mask", Value = "0" })
+                            <span>Valor</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Pisos plantas">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtPisosPlantas", PlaceHolder = "Cantidad", @class = "form-control mask", Value = "0" })
+                            <span>Pisos/Plantas</span>
+                        </label>
+                    </div>
+                </div>               
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Superficie terreno">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtSuperficieTerreno", PlaceHolder = "M2", @class = "form-control mask", Value = "0" })
+                            <span>Terreno m2</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Area construida">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtAreaConstruida", PlaceHolder = "M2", @class = "form-control mask", Value = "0" })
+                            <span>Construcción m2</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <label>En esta vivienda, cuántos cuartos o ambientes tiene para</label>
+                </div>
+            </div>
+            <div class="row" id="rowControl5">
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Dormitorios">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtDormitorios", PlaceHolder = "Dormitorios", @class = "form-control mask", Value = "0" })
+                            <span>Dormitorios</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Sala">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtSala", PlaceHolder = "Sala", @class = "form-control mask", Value = "0" })
+                            <span>Sala</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Cocina solo para cocinar">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtCocina", PlaceHolder = "Sala", @class = "form-control mask", Value = "0" })
+                            <span>Cocina</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Comedor">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtComedor", PlaceHolder = "Comedor", @class = "form-control mask", Value = "0" })
+                            <span>Comedor</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Sala Comedor">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtSalaComedor", PlaceHolder = "Sala Comedor", @class = "form-control mask", Value = "0" })
+                            <span>Sala Comedor</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Porche">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtPorche", PlaceHolder = "Porche", @class = "form-control mask", Value = "0" })
+                            <span>Porche</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Garage">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtGarage", PlaceHolder = "Porche", @class = "form-control mask", Value = "0" })
+                            <span>Garage</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Terraza">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtTerraza", PlaceHolder = "Porche", @class = "form-control mask", Value = "0" })
+                            <span>Terraza</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Ducha">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtDucha", PlaceHolder = "Ducha", @class = "form-control mask", Value = "0" })
+                            <span>Ducha</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Inodoro">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtInodoro", PlaceHolder = "Inodoro", @class = "form-control mask", Value = "0" })
+                            <span>Inodoro</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="rowControl6">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Lavanderia plancha">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtLavanaderiaPlancha", PlaceHolder = "Lavanderia Plancha", @class = "form-control mask", Value = "0" })
+                            <span>Lavanderia Plancha</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Bodega">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtBodega", PlaceHolder = "Bodega", @class = "form-control mask", Value = "0" })
+                            <span>Bodega</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Un solo ambiente">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtUnAmbiente", PlaceHolder = "Un solo ambiente", @class = "form-control mask", Value = "0" })
+                            <span>Un solo ambiente</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <label>Tipo de vivienda colectiva</label>
+                </div>
+            </div>
+            <div class="row" id="rowControl7">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Vivienda colectiva">
+                            <select id="ddlViviendaColectiva" class="form-control sel"></select>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginScriptContext())
+{
+    Html.AddScriptBlock(
+    @<script type="text/javascript">
+        var dato;
+        $(document).ready(function () {
+             $(".sel").select2({
+                 placeholder: "Seleccione Opción",
+                 allowClear: true,
+             });
+
+             $("#txtIdentificacion").inputmask("999-999999-9999A");
+
+             $(".mask").inputmask('Regex', { regex: "^[0-9]+$" });
+
+             cargaTipoObjeto();
+         })
+
+        function cargaTipoObjeto() {
+        $.ajax({
+            url: obtenerURL('@HtmlEncriptUrl.EncodeUrl(addres, "catalogos/Listar/{seccion}", "get")'),
+            type: "get",
+            dataType: "json",
+            data: { "seccion": "DatosVivienda" },
+            success: function (result) {
+                dato = result[0].JsonDatos;
+                $(dato.JsonTipoViviendaParticular).each(function () {
+                    $("#ddlTipoViviendaParticular").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                });
+                $(dato.JsonRealizaActividadEconomica).each(function () {
+                    $("#ddlRealizaActividadEconomica").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                });
+                $(dato.JsonMaterialParedes).each(function () {
+                    $("#ddlMaterialParedes").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                });
+                $(dato.JsonMaterialTecho).each(function () {
+                    $("#ddlMaterialTecho").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                });
+                $(dato.JsonMaterialPiso).each(function () {
+                    $("#ddlMaterialPiso").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                });
+                $(dato.JsonAlumbradoVivienda).each(function () {
+                    $("#ddlAlumbradoVivienda").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                });
+                $(dato.JsonLuminariaTipo).each(function () {
+                    $("#ddlLuminariaTipo").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                });
+                $(dato.JsonAbasteceAgua).each(function () {
+                    $("#ddlAbasteceAgua").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                });
+                $(dato.JsonViviendaOcupan).each(function () {
+                    $("#ddlViviendaOcupan").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                });
+                $(dato.JsonAnosAntiguedad).each(function () {
+                    $("#ddlAnosAntiguedad").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                });
+                $(dato.JsonValorVivienda).each(function () {
+                    $("#ddlValorVivienda").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                });
+                $(dato.JsonAlquiler).each(function () {
+                    $("#ddlPagoAlquiler").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                });
+                $(dato.JsonViviendaColectiva).each(function () {
+                    $("#ddlViviendaColectiva").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                });
+            },
+            error: function (data) {
+                alertify.alert().destroy();
+                alertify.alert('Confirmación', data.Mensaje);
+                alertify.alert().setting('modal', true);
+            }
+        })
+        };
+
+        //$("#ddlTipoViviendaParticular").on("select2:select", function (a) {
+        //    var strtipoViviendaParticular = $(this).val();
+        //    if (strtipoViviendaParticular == 3) {
+        //        $('#txtPisosPlantas').prop("disabled", true);
+        //    }
+        //    else { $('#txtPisosPlantas').prop("disabled", false); }
+        //}); 
+        
+        $("#ddlAlumbradoVivienda").on("select2:select", function (a) {
+            var strcondicionOcupacion = $(this).val();
+            if (strcondicionOcupacion == 4) {
+                alertify.error('Pase a esta vivienda se abastece de agua principalmente', 'warning', 3, function () { });
+                $('#ddlLuminariaTipo').prop("disabled", true);
+            }
+            else { $('#ddlLuminariaTipo').prop("disabled", false); }
+        }); 
+
+        $("#ddlMaterialParedes").on("select2:select", function (a) {
+            var strmatParedes = $(this).val();
+            if (strmatParedes == 11) {
+                $('#txtCualMaterialParedes').prop("disabled", false);
+            }
+            else { $('#txtCualMaterialParedes').prop("disabled", true); }
+        });
+
+        $("#ddlMaterialTecho").on("select2:select", function (a) {
+            var strmatTecho = $(this).val();
+            if (strmatTecho == 6) {
+                $('#txtCualMaterialTecho').prop("disabled", false);
+            }
+            else { $('#txtCualMaterialTecho').prop("disabled", true); }
+        });
+
+        $("#ddlMaterialPiso").on("select2:select", function (a) {
+            var strmatPiso = $(this).val();
+            if (strmatPiso == 7) {
+                $('#txtCualMaterialPiso').prop("disabled", false);
+            }
+            else { $('#txtCualMaterialPiso').prop("disabled", true); }
+        });
+
+        $("#ddlAbasteceAgua").on("select2:select", function (a) {
+            var strabasteceAgua = $(this).val();
+            if (strabasteceAgua == 6) {
+                $('#txtCualAbasteceAgua').prop("disabled", false);
+            }
+            else { $('#txtCualAbasteceAgua').prop("disabled", true); }
+        });    
+
+        $("#ddlViviendaOcupan").on("select2:select", function (a) {
+            var strviviendaOcupan = $(this).val();            
+            if (strviviendaOcupan == 4) {
+                alertify.error('Pase a cuanto paga al mes por concepto de alquiler', 'warning', 3, function () { });
+                $('#txtCualViviendaOcupan').prop("disabled", true);
+                $('#ddlAnosAntiguedad').prop("disabled", true);
+                $('#ddlValorVivienda').prop("disabled", true);
+                $('#txtValorVivienda').prop("disabled", true);
+            }
+            else if (strviviendaOcupan == 5 || strviviendaOcupan == 6) {
+                alertify.error('Pase a cuantos pisos o plantas tiene', 'warning', 3, function () { });
+                if (strviviendaOcupan == 6) {
+                    $('#txtCualViviendaOcupan').prop("disabled", false);
+                }
+                else { $('#txtCualViviendaOcupan').prop("disabled", true); }                
+                $('#ddlAnosAntiguedad').prop("disabled", true);
+                $('#ddlValorVivienda').prop("disabled", true);
+                $('#txtValorVivienda').prop("disabled", true);
+                $('#ddlPagoAlquiler').prop("disabled", true);
+                $('#txtValorAlquiler').prop("disabled", true);                
+            }
+            else {
+                $('#txtCualViviendaOcupan').prop("disabled", true);
+            }
+        }); 
+
+        $("#ddlValorVivienda").on("select2:select", function (a) {
+            alertify.error('Pase a cuantos pisos o plantas tiene', 'warning', 3, function () { });
+            var strvalorVivienda = $(this).val();
+            if (strvalorVivienda == 3) {                
+                $('#txtValorVivienda').prop("disabled", true);
+            }
+            else { $('#txtValorVivienda').prop("disabled", false); }
+        }); 
+        
+    </script>
+, true);
+}

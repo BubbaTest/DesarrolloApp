@@ -1,0 +1,265 @@
+﻿@model  PJN.DAL.Model.GENERAL.catOpcion
+
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <div class="row justify-content-center">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="OpcionId">
+                            @Html.TextBoxFor(model => model.OpcionId, new { id = "txtOpcionId", PlaceHolder = "OpcionId", @class = "form-control", autocomplete = "off" })
+                            <span>OpcionId</span>
+                        </label>
+                        @Html.ValidationMessage("opcionid", "* Campo Requerido *", new { id = "lblopcionid", @style = "color:red; display: none;" })
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Nivel">
+                            @Html.TextBoxFor(model => model.Nivel, new { id = "txtNivel", PlaceHolder = "Nivel", @class = "form-control" })
+                            <span>Nivel</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="PadreId">
+                            @Html.TextBoxFor(model => model.Padre, new { id = "txtPadreId", PlaceHolder = "PadreId", @class = "form-control" })
+                            <span>PadreId</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Opcion">
+                            @Html.TextBoxFor(model => model.Opcion, new { id = "txtOpcion", PlaceHolder = "Opcion", @class = "form-control" })
+                            <span>Opcion</span>
+                        </label>
+                        @Html.ValidationMessage("opcion", "* Campo Requerido *", new { id = "lblopcion", @style = "color:red; display: none;" })
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="OpcionTipo">
+                            @Html.TextBoxFor(model => model.OpcionTipo, new { id = "txtOpcionTipo", PlaceHolder = "OpcionTipo", @class = "form-control" })
+                            <span>OpcionTipo</span>
+                        </label>
+                        @Html.ValidationMessage("opciontipo", "* Campo Requerido *", new { id = "lblopcion", @style = "color:red; display: none;" })
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Mapeo">
+                            @Html.TextBoxFor(model => model.Mapeo, new { id = "txtMapeo", PlaceHolder = "Mapeo", @class = "form-control" })
+                            <span>Mapeo</span>
+                        </label>
+                        @Html.ValidationMessage("mapeo", "* Campo Requerido *", new { id = "lblmapeo", @style = "color:red; display: none;" })
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Descripción">
+                            @Html.TextBoxFor(model => model.DescripcionGeneral, new { id = "txtDesGen", PlaceHolder = "Descripción", @class = "form-control" })
+                            <span>Descripción</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center" id="ActivoOpc">
+                <label class="input-control checkbox small-check">
+                    <input type="checkbox" id="activoopc" value="true" checked>
+                    <span class="check"></span>
+                    <span class="caption">Activo</span>
+                </label>
+                <label class="input-control checkbox small-check">
+                    <input type="checkbox" id="inactivoopc" value="false">
+                    <span class="check"></span>
+                    <span class="caption">Inactivo</span>
+                </label>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row" style=" height: 100px; align-content: center;">
+                        <div class="col-md-12 d-flex justify-content-center" id="rowButtons">
+                            <button class="btn btn-primary" style="margin-right:10px;" data-tabcontinuar="data-tabcontinuar" id="btnGuardaOpcAso" onclick="AgregarOpcAso()">
+                                <span>Guardar</span>
+                                <span class="fa fa-database"></span>
+                            </button>
+                            <button class="btn btn-secondary" style="margin-right:10px; display:none" data-tabcontinuar="data-tabcontinuar" id="btnActualizarOpcAso" onclick="ActualizarOpcAso('Actualiza')">
+                                <span>Actualizar</span>
+                                <span class="fa fa-database"></span>
+                            </button>
+                            <button class="btn btn-success" style="margin-right:10px;" data-tabcontinuar="data-tabcontinuar" id="btnNuevoOpcAso" onclick="NuevaOpcAso()">
+                                <span>Nuevo</span>
+                                <span class="fa fa-plus"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginScriptContext())
+{
+    Html.AddScriptBlock(
+@<script type="text/javascript">
+        function ActualizarOpcAso() {
+            var bandera = true;
+            var FechaBaja = null;
+            if ($('#txtOpcionId').val().toString().length < 1) {
+                $("#lblopcionid").show();
+                bandera = false;
+            }
+            if ($('#txtOpcion').val().toString().length < 1) {
+                $("#lblopcion").show();
+                bandera = false;
+            }
+            if ($('#txtOpcionTipo').val().toString().length < 1) {
+                $("#lblopciontipo").show();
+                bandera = false;
+            }
+            if (bandera == true) {
+                showalertify();
+                $("#lblopcionid").hide();
+                $("#lblopcion").hide();
+                $("#lblopciontipo").hide();
+
+                var listaCheck = $("#ActivoOpc input[type='checkbox']");
+                $.each(listaCheck, function (index, value) {
+                    if ($(value).prop('checked') === true) {
+                        Activo = value.value                        
+                    }
+                })
+
+                var opcionjson = JSON.stringify({ "OpcionId": $('#txtOpcionId').val().toString(), "Opcion": $('#txtOpcion').val().toString(), "OpcionTipo": $('#txtOpcionTipo').val().toString(), "Mapeo": $.trim($('#txtMapeo').val()), "DescripcionGeneral": $("#txtDesGen").val(), "Activo": Activo });
+                        
+                var data = new FormData();
+                data.append("Id", $('#txtOpcionId').val().toString());
+                data.append("opcionjson", opcionjson);
+
+                request = $.ajax({
+                    url: '@Url.Action("ActualizarOpcAso", "UserMant")',
+                    type: "POST",
+                    processData: false,
+                    contentType: false,
+                    data: data
+                });
+                request.done(function (response, textStatus, jqXHR) {
+                    var listado = JSON.parse(response);
+                    if (listado.Resultado === "true") {
+                            alertify.alert().destroy();
+                            alertify.alert('Confirmación', listado.Mensaje);
+                            alertify.alert().setting('modal', true);
+                            $('#frOpcAso').empty();
+                            $('#frOpcAso').load(obtenerURL("/UserMant/ListaOpcAso"))
+                    }
+                    else {
+                        alertify.alert().destroy();
+                        alertify.alert('Advertencia', listado.Mensaje);
+                        alertify.alert().setting('modal', true);
+                    }
+                });
+                closealertify();
+            }
+        }
+
+        function AgregarOpcAso() {
+            var bandera = true;
+            var FechaBaja = null;
+            if ($('#txtOpcionId').val().toString().length < 1) {
+                $("#lblopcionid").show();
+                bandera = false;
+            }
+            if ($('#txtOpcion').val().toString().length < 1) {
+                $("#lblopcion").show();
+                bandera = false;
+            }
+            if ($('#txtOpcionTipo').val().toString().length < 1) {
+                $("#lblopciontipo").show();
+                bandera = false;
+            }
+            if (bandera == true) {
+                showalertify();
+                $("#lblopcionid").hide();
+                $("#lblopcion").hide();
+                $("#lblopciontipo").hide();
+
+                var listaCheck = $("#ActivoOpc input[type='checkbox']");
+                $.each(listaCheck, function (index, value) {
+                    if ($(value).prop('checked') === true) {
+                        Activo = value.value                       
+                    }
+                })
+
+                //$('#OpcionIdtxt').val()
+                var opcionjson = JSON.stringify({ "OpcionId": '/1/' + $('#txtOpcionId').val().toString().substring(1), "Nivel": $('#txtNivel').val().toString(), "Padre": $('#txtPadreId').val(), "Opcion": $('#txtOpcion').val().toString(), "OpcionTipo": $('#txtOpcionTipo').val().toString(), "Mapeo": $.trim($('#txtMapeo').val()), "DescripcionGeneral": $("#txtDesGen").val(), "Activo": Activo });
+                    
+                var data = new FormData();
+                data.append("opcionjson", opcionjson);
+
+                request = $.ajax({
+                    url: '@Url.Action("AgregarOpcAso", "UserMant")',
+                    type: "POST",
+                    processData: false,
+                    contentType: false,
+                    data: data
+                });
+                request.done(function (response, textStatus, jqXHR) {
+                    var listado = JSON.parse(response);
+                    if (listado.Resultado === "true") {
+                            alertify.alert().destroy();
+                            alertify.alert('Confirmación', listado.Mensaje);
+                            alertify.alert().setting('modal', true);
+                            $('#frOpcAso').empty();
+                            $('#frOpcAso').load(obtenerURL("/UserMant/ListaOpcAso"))
+                    }
+                    else {
+                        alertify.alert().destroy();
+                        alertify.alert('Advertencia', listado.Mensaje);
+                        alertify.alert().setting('modal', true);
+                    }
+                });                      
+                closealertify();
+            }
+        }
+
+        function NuevaOpcAso() {
+            $('#txtOpcionId').prop("disabled", false);
+            $('#txtOpcionId').val("");
+            $('#txtNivel').val("");
+            $('#txtPadreId').val("");
+            $('#txtOpcion').val("");
+            $('#txtOpcionTipo').val("");
+            $('#txtMapeo').val("");
+            $('#txtNombreIcono').val("");
+            $('#txtDesGen').val("");
+            $('#btnActualizarOpcAso').hide();
+            $('#btnGuardaOpcAso').show();
+            $('#ActivoOpc input[type=checkbox]').prop("checked", false);
+            $('#activoopc').prop('checked', true);
+        }
+
+        $(document).ready(function () {           
+
+            $('#ActivoOpc input[type=checkbox]').click(function () {
+                $('#ActivoOpc input[type=checkbox]').prop("checked", false);
+                $(this).prop("checked", true);
+            });
+        })
+</script>
+, true);
+}

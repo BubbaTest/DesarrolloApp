@@ -1,0 +1,75 @@
+﻿<div class="container" id="gridDetalleAsignaPersonal">
+</div>
+
+<div class="content">
+    <div class="card">
+        <div class="card-body">
+            <ul class="nav nav-tabs mb-3" id="pills-tab4" role="tablist">
+                <li class="nav-item" id="tabDatosDetalleJefSub">
+                    <a class="nav-link active" id="frDetJefSub-tab" data-toggle="pill" href="#frDetJefSub" role="tab" aria-controls="frDetJefSub" aria-selected="true">Detalle</a>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="pills-tabContent4">
+                <div class="tab-pane fade show active" id="frDetJefSub" role="tabpanel" aria-labelledby="frDetJefSub-tab">
+                    @Html.Partial("_JefSubMant")
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginScriptContext())
+{
+    Html.AddScriptBlock(
+@<script type="text/javascript">
+    function cargaGridPersonalAsignado() {
+        $('#gridDetalleAsignaPersonal').empty();
+        $("#gridDetalleAsignaPersonal").load(obtenerURL("/CodificarCP/ObtenerAsignaPersonal"), function (response, status, xhr) {
+            if (status === "success") {
+                table = $('#dtListasJefSup').DataTable({
+                    ajax: {
+                        url: obtenerURL('/CodificarCP/ObtenerListadoPersonalAsignado?rol=' + $("#uRol").val()),
+                        dataSrc: "",
+                    },
+                    rowId: 'relGUID',
+                    retrieve: true,
+                    columns: [
+                                {
+                                    'data': null,
+                                    'render': function (data, type, row) {
+                                        return '<span id="' + row.relGUID + '" class="fa fa-pencil" style="color: blue; font-size: 1rem;cursor: pointer;" onclick="obtenerAsignaPersonal(this)"></span>'
+                                    }
+                                },
+                                {
+                                    'data': null,
+                                    'render': function (data, type, row) {
+                                        return '<span id="' + row.UsuarioP + "/" + row.UsuarioS + '" class="fa fa-close" style="color: red; font-size: 1rem;cursor: pointer;" onclick="eliminaAsignaPersonal(this)"></span>'
+                                    }
+                                },
+                                { data: "NPrincipal" },
+                                { data: "NSecundario" }
+                    ],
+                    columnDefs: [],
+                    dom: 'Bfrtip',
+                    buttons: [{ extend: 'pdfHtml5', title: 'PDF', text: 'Exportar Pdf', orientation: 'landscape', pageSize: 'LEGAL' }, { extend: 'excelHtml5', title: 'EXCEL', text: 'Exportar Excel' }],
+                    language: { url: obtenerURL("/Json/Spanish.json") },
+                    lengthMenu: [5],
+                    bLengthChange: false,
+                    searching: true
+                });
+
+                $('#dtListasJefSup tbody').on('click', 'tr', function () {
+                    $("#dtListasJefSup tr.selected").removeClass();
+                    $(this).addClass('selected');
+                });
+            }
+        })
+    }
+
+    $(document).ready(function () {
+        cargaGridPersonalAsignado();
+    })
+</script>
+, true);
+}

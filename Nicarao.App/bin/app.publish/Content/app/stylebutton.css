@@ -1,0 +1,150 @@
+﻿.button-success, .button-success > .button-encabezado > label {
+    background: rgba(40,167,69,1);
+}
+
+.button-primary, .button-primary > .button-encabezado > label {
+    background: rgba(0,123,255,1);
+}
+
+.button-danger, .button-danger > .button-encabezado > label {
+    background: rgba(220,53,69,1);
+}
+
+
+.button-success:active {
+    box-shadow: 0px 0px 0px 3px rgba(40,167,69,0.8) !important;
+}
+
+.button-primary:active {
+    box-shadow: 0px 0px 0px 3px rgba(0,123,255,0.8) !important;
+}
+
+.button-danger:active {
+    box-shadow: 0px 0px 0px 3px rgba(220,53,69,0.8) !important;
+}
+
+.button-success, .button-primary, .button-danger {
+    position: relative;
+    display: table;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.button-encabezado {
+    position: relative;
+    display: table;
+    top: -17px;
+}
+
+    .button-encabezado > div {
+        position: relative;
+        display: table;
+        float: left;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: #FBF7F7;
+        margin-left: 5px;
+    }
+
+    .button-encabezado > label {
+        margin-right: 8px;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+        margin-top: 6px;
+        padding-left: 8px;
+        padding-right: 8px;
+        cursor: pointer;
+        /*min-width: 110px;*/
+        font-size: 12px;
+    }
+
+.button-success > p, .button-primary > p, .button-danger > p {
+    display: block;
+    height: 100%;
+    margin-top: -19px;
+    margin-bottom: 8px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.ico-noti-indice{
+    position: absolute;
+    display:block;
+    width: 70%;
+    height: 70%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+}
+
+.button-success .ico-noti-indice {
+    background-image: url("../../imagen/success.svg");
+    background-repeat: no-repeat;
+}
+
+.button-primary .ico-noti-indice {
+    background: url("../../imagen/primary.svg");
+    background-repeat: no-repeat;
+}
+
+.button-danger .ico-noti-indice {
+    background: url("../../imagen/danger.svg");
+    background-repeat: no-repeat;
+}
+
+
+.button-success > .button-encabezado > div {
+    box-shadow: 0px -0.5px 2px 1px #26ab04;
+}
+
+.button-primary > .button-encabezado > div {
+    box-shadow: 0px -0.5px 2px 1px #2a6fd6;
+}
+
+.button-danger > .button-encabezado > div {
+    box-shadow: 0px -0.5px 2px 1px #d82b2b;
+}
+
+
+
+.button-success:hover .button-encabezado > div {
+    box-shadow: 0px -0.5px 2px 1px rgba(36,154,36,1);
+}
+
+.button-success:hover, .button-success:hover > .button-encabezado > label {
+    background: rgba(36,154,36,1);
+}
+
+    .button-success:hover > .button-encabezado > div > .ico {
+        background: url("../../imagen/success_hover.svg");
+    }
+
+
+
+.button-primary:hover .button-encabezado > div {
+    box-shadow: 0px -0.5px 2px 1px rgba(3,117,239,1);
+}
+
+.button-primary:hover, .button-primary:hover > .button-encabezado > label {
+    background: rgba(3,117,239,1);
+}
+
+    .button-primary:hover . > .button-encabezado > div > .ico {
+        background: url("../../imagen/primary_hover.svg");
+    }
+
+
+
+.button-danger:hover .button-encabezado > div {
+    box-shadow: 0px -0.5px 2px 1px rgba(199,47,61,1);
+}
+
+.button-danger:hover, .button-danger:hover > .button-encabezado > label {
+    background: rgba(199,47,61,1);
+}
+
+    .button-danger:hover > .button-encabezado > div > .ico {
+        background: url("../../imagen/danger_hover.svg");
+    }

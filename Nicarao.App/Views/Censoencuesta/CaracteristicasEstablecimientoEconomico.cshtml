@@ -1,0 +1,243 @@
+﻿@using Gaia.Helpers;
+@model Gaia.DAL.Model.Persona
+
+@{
+    string addres = "apiAlexaLocal";
+}
+
+<div class="content">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0">Sección III. CARACTERISTICAS DEL ESTABLECIMIENTO ECONOMICO Y/O HOGAR CON ACTIVIDAD ECONOMICA</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <label>¿Cuál es la actividad a que se dedica la empresa, establecimiento u hogar? (considere la que le genera mayor ingresos) </label>
+                </div>
+                <div class="col-md-6">
+                    <label>Si es empresa o establecimiento, anote el nombre y su razón social. Y para hogar con actividad económica, lo que aplique </label>
+                </div>
+                <div class="col-md-3">
+                    <label>Si es Empresa principal y tiene sucursales o establecimientos adicionales, indique cuántos. (No aplica para hogares con actividad económica) </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Actividad">
+                            @Html.TextAreaFor(model => model.Identificador, new { id = "txtActividad", PlaceHolder = "Actividad", @class = "form-control", autocomplete = "off" })
+                            <span>Actividad</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Nombr">
+                            @Html.TextAreaFor(model => model.Identificador, new { id = "txtNombre", PlaceHolder = "Nombre", @class = "form-control", autocomplete = "off" })
+                            <span>Nombre</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Razón Social">
+                            @Html.TextAreaFor(model => model.Identificador, new { id = "txtRazonSocial", PlaceHolder = "Razón Social", @class = "form-control", autocomplete = "off" })
+                            <span>Razón Social</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Número Sucursales o Establecimientos">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtCualOtro", PlaceHolder = "Sucursales o Establecimientos", @class = "form-control mask", Value = "0" })
+                            <span>Número</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2" id="divchkNoAplica">
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="switch-NoAplica">
+                        <label class="custom-control-label" for="switch-NoAplica" id="labelNoAplica">No Aplica</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-9">
+                    <label>
+                        Si es sucursal o establecimiento adicional de una Empresa principal, anote el nombre o razón social de la empresa a la que pertenece y, en qué departamento y municipio se ubica. (No aplica para hogares con actividad económica)
+                    </label>
+                </div>
+                <div class="col-md-3">
+                    <label>
+                        Indique donde se desarrolla la actividad económica
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Nombre de la Empresa a la que pertenece">
+                            @Html.TextAreaFor(model => model.Identificador, new { id = "txtNombreEmpresa", PlaceHolder = "Nombre Empresa", @class = "form-control", autocomplete = "off" })
+                            <span>Nombre Empresa</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Departamento">
+                            <select id="ddlDepartamento" class="form-control sel"></select>
+                            <span>Departamento</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Municipio">
+                            <select id="ddlMunicipio" class="form-control sel"></select>
+                            <span>Municipio</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2" id="divchkNoAplicaAdicional">
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="switch-NoAplicaAdicional">
+                        <label class="custom-control-label" for="switch-NoAplicaAdicional" id="labelNoAplicaAdicional">No Aplica</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Donde se desarrolla la actividad económica">
+                            <select id="ddlDondeDesarrollaActividad" class="form-control sel"></select>
+                            <span>Donde se Desarrolla</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <label>
+                        Cuál es la condición jurídica de este establecimiento
+                    </label>
+                </div>
+                <div class="col-md-4">
+                    <label>
+                        Este establecimiento, empresa u hogar, lleva registros contables, tales como
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Cuál es la condición jurídica de este establecimiento">
+                            <select id="ddlCondicionJuridica" class="form-control sel"></select>
+                            <span>Condición Jurídica</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Lleva registros contables">
+                            <select id="ddlRegistrosContables" class="form-control sel"></select>
+                            <span>Registros Contables</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label>
+                        ¿Cuántas personas trabajan en el establecimiento o empresa? (Se excluye a instituciones o empresas del sector público)
+                    </label>
+                </div>                
+            </div>
+            <br />
+            <div class="row" id="rowControl4" ">
+                @{Html.RenderAction("ObtenerListaPersonasTrabajanEstablecimiento", "Censoencuesta");}
+            </div>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginScriptContext())
+{
+    Html.AddScriptBlock(
+@<script type="text/javascript">
+    var dato;
+     $(document).ready(function () {
+         $(".sel").select2({
+             placeholder: "Seleccione Opción",
+             allowClear: true,
+         });
+
+         $("#txtFechaPrimeraVisita").inputmask("99/99/9999");
+         $("#txtFechaSegundaVisita").inputmask("99/99/9999");
+         $("#txtFechaTerceraVisita").inputmask("99/99/9999");
+
+         cargaTipoObjeto();
+     })
+
+     function cargaTipoObjeto() {
+        $.ajax({
+            url: obtenerURL('@HtmlEncriptUrl.EncodeUrl(addres, "catalogos/Listar/{seccion}", "get")'),
+            type: "get",
+            dataType: "json",
+            data: { "seccion": "CaracteristicasEstablecimientoEconomico" },
+            success: function (result) {
+                dato = result[0].JsonDatos;
+                $(dato.JsonDepartamentos).each(function () {
+                    $("#ddlDepartamento").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                });
+                $(dato.JsonDondeActividad).each(function () {
+                    $("#ddlDondeDesarrollaActividad").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                });
+                $(dato.JsonCondicionJuridica).each(function () {
+                    $("#ddlCondicionJuridica").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                });
+                $(dato.JsonRegistroContable).each(function () {
+                    $("#ddlRegistrosContables").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                });
+            },
+            error: function (data) {
+                alertify.alert().destroy();
+                alertify.alert('Confirmación', data.Mensaje);
+                alertify.alert().setting('modal', true);
+            }
+        })
+    };
+
+    $("#ddlDepartamento").on("select2:select", function (a) {
+        var strDept = $(this).val();
+        $("#ddlMunicipio option").each(function () { $(this).remove(); });
+        var datoespecifico = dato.JsonMunicipios.filter(e => (e.Departamento == strDept));
+        $(datoespecifico).each(function () {
+            $("#ddlMunicipio").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+        });
+    });
+
+    $("#ddlResultadoEntrevista").on("select2:select", function (a) {
+        var strresultadoEntrevista = $(this).val();
+        if (strresultadoEntrevista > 3) {
+            if (strresultadoEntrevista == 8) { $('#txtCualOtro').prop("disabled", false); }
+        }
+        else { $('#txtCualOtro').prop("disabled", true); }
+    });
+
+    $("#ddlCondicionJuridica").on("select2:select", function (a) {
+        var strondicionJuridica = $(this).val();
+        if (strondicionJuridica == 2) {
+            $('#ddlRegistrosContables').prop("disabled", true);
+            $("#rowControl4").css({ opacity: 0.5 });
+            $("#rowControl4").css("pointer-events", "none");
+        }
+        else {
+            $('#ddlRegistrosContables').prop("disabled", false);
+            $("#rowControl4").css({ opacity: 1 });
+            $("#rowControl4").css("pointer-events", "auto");
+        }
+    });
+</script>
+, true);
+}
+
+

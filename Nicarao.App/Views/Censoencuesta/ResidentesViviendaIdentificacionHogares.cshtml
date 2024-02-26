@@ -1,0 +1,141 @@
+﻿@using Gaia.Helpers;
+@model Gaia.DAL.Model.Persona
+
+@{
+    string addres = "apiAlexaLocal";
+}
+
+<div class="content">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0">Sección II. RESIDENTES DE LA VIVIENDA E IDENTIFICACION DE HOGARES (SOLO HOGAR PRINCIPAL)</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Condición de Ocupación">
+                            <select id="ddlCondicionOcupacion" class="form-control sel"></select>
+                            <span>Condición de Ocupación</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label>¿Cuantas personas residen habitualmente en esta vivienda?</label>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Total Personas">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtTotalPersonas", PlaceHolder = "Total", @class = "form-control mask", Value = "0", disabled="disabled" })
+                            <span>Total Personas</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Varones">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtVarones", PlaceHolder = "Varones", @class = "form-control mask", Value = "0" })
+                            <span>Varones</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Mujeres">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtMujeres", PlaceHolder = "Mujeres", @class = "form-control mask", Value = "0" })
+                            <span>Mujeres</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-3">
+                    <label>¿Hay en esta vivienda personas o grupo de personas que preparen por separado sus alimentos?</label>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Preparen por separado alimentos">
+                            <select id="ddlPreparenSeparadoAlimentos" class="form-control sel"></select>
+                            <span>Preparen Separado</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label>Señor(a) teniendo en cuenta que un HOGAR esta formado por una persona o grupo de personas parientes o no, que viven bajo el mismo techo y que preparen en común sus alimentos (olla común), diga:</label>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Total Hogares">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtTotalHogares", PlaceHolder = "Total", @class = "form-control mask", Value = "0" })
+                            <span>Total Hogares</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@using (Html.BeginScriptContext())
+{
+    Html.AddScriptBlock(
+@<script type="text/javascript">
+    var dato;
+    $(document).ready(function () {
+        $(".sel").select2({
+            placeholder: "Seleccione Opción",
+            allowClear: true,
+        });
+
+        $(".mask").inputmask('Regex', { regex: "^[0-9]+$" });       
+
+        cargaTipoObjeto();
+
+    })
+
+    function cargaTipoObjeto() {
+        $.ajax({
+            url: obtenerURL('@HtmlEncriptUrl.EncodeUrl(addres, "catalogos/Listar/{seccion}", "get")'),
+            type: "get",
+            dataType: "json",
+            data: { "seccion": "ResidentesViviendaIdentificacionHogar" },
+            success: function (result) {
+                dato = result[0].JsonDatos;
+                $(dato.JsonCondicionOcupacion).each(function () {
+                    $("#ddlCondicionOcupacion").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                });
+                $(dato.JsonSiNo).each(function () {
+                    $("#ddlPreparenSeparadoAlimentos").append($("<option></option>").val(this.Id).html(this.Descripcion)).select2("val", "ca");
+                });
+
+            },
+            error: function (data) {
+                alertify.alert().destroy();
+                alertify.alert('Confirmación', data.Mensaje);
+                alertify.alert().setting('modal', true);
+            }
+        })
+    }    
+
+    $("#ddlCondicionOcupacion").on("select2:select", function (a) {
+        var strcondicionOcupacion = $(this).val();
+        if (strcondicionOcupacion != 1) {
+            alertify.error('Pase a Seccion X', 'warning', 3, function () { });
+            $('#cell-content22').empty();
+            $("#cell-content22").load(obtenerURL("/CensoEncuesta/ResultadoEntrevistaHogar"));
+        }
+    });
+
+    $("#txtVarones").focusout(function () {
+        var vTotal = (parseFloat($("#txtVarones").val()) + parseFloat($("#txtMujeres").val()));
+        $("#txtTotalPersonas").val(vTotal);
+        
+    })
+
+    $("#txtMujeres").focusout(function () {
+        var vTotal = (parseFloat($("#txtVarones").val()) + parseFloat($("#txtMujeres").val()));
+        $("#txtTotalPersonas").val(vTotal);
+    })
+</script>
+, true);
+}

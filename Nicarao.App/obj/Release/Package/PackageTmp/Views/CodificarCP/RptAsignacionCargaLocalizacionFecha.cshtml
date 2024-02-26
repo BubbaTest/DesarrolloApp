@@ -1,0 +1,211 @@
+﻿@model Gaia.DAL.Model.Persona
+
+@Html.Hidden("txtUsuario", (object)ViewBag.Usuario.ToString())
+
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Departamento">
+                            @Html.DropDownListFor(model => model.Identificador, new SelectList(ViewBag.departamento as System.Collections.IEnumerable, "CodDepartamento", "NomDepartamento"),
+                                "", new { id = "ddlDepartamento", @class = "form-control sel", @style = "width:100%;" })
+                            <span>Departamento:</span>
+                            @Html.ValidationMessage("departamento", "* Campo Requerido *", new { id = "lbldepartamento", @style = "color:red; display: none;" })
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Municipio">
+                            <select id="ddlMunicipio" class="form-control sel"></select>
+                            <span>Municipio:</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Período">
+                            @Html.DropDownList("per", new SelectList(ViewBag.Periodo as System.Collections.IEnumerable, "Value", "Text"),
+                                    "", new { id = "ddlPeriodo", @class = "form-control sel", @style = "width:100%;" })
+                            <span>Período:</span>
+                            @Html.ValidationMessage("periodo", "* Campo Requerido *", new { id = "lblperiodo", @style = "color:red; display: none;" })
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Año">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtAnio", @class = "form-control" })
+                            <span>Año:</span>
+                            @Html.ValidationMessage("anio", "* Campo Requerido *", new { id = "lblanio", @style = "color:red; display: none;" })
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Fecha Inicio" id="Fechas1">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtFechaI", @class = "form-control", PlaceHolder = "Fecha Inicio" })
+                            <span>Fecha Inicio:</span>
+                            @Html.ValidationMessage("fechaini", "* Campo Requerido *", new { id = "lblfechaini", @style = "color:red; display: none;" })
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Fecha Fin" id="Fechas3">
+                            @Html.TextBoxFor(model => model.Identificador, new { id = "txtFechaF", @class = "form-control", PlaceHolder = "Fecha Final" })
+                            <span>Fecha Fin:</span>
+                            @Html.ValidationMessage("fechafin", "* Campo Requerido *", new { id = "lblfechafin", @style = "color:red; display: none;" })
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 d-flex justify-content-center">
+                    <button class="btn btn-primary" style="margin-right:10px" data-tabcontinuar="data-tabcontinuar" id="btngenerarPDF" onclick="fnGenerarReporte('PDF')">
+                        <span>Generar</span>
+                        <span class="fa fa-file-pdf-o"></span>
+                    </button>
+                    @*<button class="btn btn-success" style="margin-right:10px" data-tabcontinuar="data-tabcontinuar" id="btngenerarEXCEL" onclick="fnGenerarReporte('EXCEL')">
+                            <span>Generar EXCEL</span>
+                            <span class="fa fa-file-excel-o"></span>
+                        </button>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<div class="content" id="gridPowerbi">
+</div>
+
+@using (Html.BeginScriptContext())
+{
+    Html.AddScriptBlock(
+@<script type="text/javascript">
+     $(document).ready(function () {
+         $(".sel").select2({
+             placeholder: "Seleccione Opción",
+             allowClear: true,
+         });
+
+         $("#txtFechaI").datepicker({ language: 'es', format: 'dd/mm/yyyy', autoclose: true });
+         $("#txtFechaF").datepicker({ language: 'es', format: 'dd/mm/yyyy', autoclose: true });
+         $("#Fechas1").hide();
+         $("#Fechas3").hide();
+     })
+
+     $("#ddlDepartamento").on("change", function (a) {
+         var strDept = $(this).val();
+         $("#ddlMunicipio option").each(function () { $(this).remove(); });
+         sUrl = obtenerURL("/CodificarCP/ddlMunicipio?Departamento=" + strDept);
+         $("#ddlMunicipio").load(sUrl);
+     });
+
+     $("#ddlPeriodo").on("change", function (a) {
+         var Periodo = $(this).val();
+         if (Periodo == "8") {
+             $("#Fechas1").show();
+             $("#Fechas3").show();
+         }
+         else {
+             $("#Fechas1").hide();
+             $("#Fechas3").hide();
+             $("#txtFechaI").val("");
+             $("#txtFechaF").val("");
+         }
+     });
+
+     function fnGenerarReporte(obj) {
+         var bandera = true;
+
+         if ($('#ddlDepartamento').val() == "") {
+             $("#lbldepartamento").show();
+             bandera = false;
+         }
+
+         if ($('#ddlPeriodo').val().toString().length < 1) {
+             $("#lblperiodo").show();
+             bandera = false;
+         }
+
+         if ($('#txtAnio').val().toString().length < 1) {
+             $("#lblanio").show();
+             bandera = false;
+         }
+
+         if (bandera == true) {
+             $("#lbldepartamento").hide();
+             $("#lblperiodo").hide();
+             $("#lblanio").hide();
+
+             var ANIO = $("#txtAnio").val();
+
+             if ($("#ddlPeriodo").val() == "8") {
+                 FechaIni = $("#txtFechaI").val();
+                 FechaFin = $("#txtFechaF").val();
+             }
+             else {
+                 if ($("#ddlPeriodo").val() == "4") {
+                     FechaIni = '01/01/' + ANIO;
+                     FechaFin = '31/03/' + ANIO;
+                 }
+                 else if ($("#ddlPeriodo").val() == "5") {
+                     FechaIni = '01/04/' + ANIO;
+                     FechaFin = '30/06/' + ANIO;
+                 }
+                 else if ($("#ddlPeriodo").val() == "6") {
+                     FechaIni = '01/07/' + ANIO;
+                     FechaFin = '30/09/' + ANIO;
+                 }
+                 else if ($("#ddlPeriodo").val() == "7") {
+                     FechaIni = '01/10/' + ANIO;
+                     FechaFin = '31/12/' + ANIO;
+                 }
+                 else if ($("#ddlPeriodo").val() == "2") {
+                     FechaIni = '01/01/' + ANIO;
+                     FechaFin = '30/06/' + ANIO;
+                 }
+                 else if ($("#ddlPeriodo").val() == "3") {
+                     FechaIni = '01/07/' + ANIO;
+                     FechaFin = '31/12/' + ANIO;
+                 }
+                 else {
+                     FechaIni = '01/01/' + ANIO;
+                     FechaFin = '31/12/' + ANIO;
+                 }
+             }             
+
+             var url = obtenerURL('CodificarCP/GenerarDatoAsignacionLocacionFecha?AsignoId=' + $("#txtUsuario").val() + '&Municipio=' + $("#ddlMunicipio").val() + '&FechaIni=' + FechaIni + '&FechaFin=' + FechaFin);
+
+             $.post(url)
+                 .done(function (data) {
+                     var listado = JSON.parse(data);
+
+                     if (listado.Resultado === "true") {
+                         $('#gridPowerbi').empty();
+                         $("#gridPowerbi").load(obtenerURL("/CodificarCP/PowerBi"));
+                         alertify.alert().destroy();
+                         alertify.alert('Confirmación', listado.Mensaje);
+                         alertify.alert().setting('modal', true);
+                     }
+                     else {
+                         alertify.alert().destroy();
+                         alertify.alert('Advertencia', listado.Mensaje);
+                         alertify.alert().setting('modal', true);
+                     }
+                 })
+         }
+         else {
+             alertify.alert().destroy();
+             alertify.alert('Advertencia', 'Llenar todos los campos obligatorios');
+             alertify.alert().setting('modal', true);
+         }
+     }
+</script>
+, true);
+}

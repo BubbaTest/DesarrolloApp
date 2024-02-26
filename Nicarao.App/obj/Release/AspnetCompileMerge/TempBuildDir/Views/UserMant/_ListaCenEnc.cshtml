@@ -1,0 +1,117 @@
+﻿<style>
+    .dataTables_empty {
+        display: none;
+    }
+
+    table.cell-border {
+        width: 100%;
+        clear: both;
+    }
+
+        table.cell-border th {
+            padding: 5px;
+            border: 1px solid #fff;
+        }
+
+        table.cell-border thead th {
+            text-align: center;
+            background: #66a9bd;
+        }
+
+        table.cell-border tbody td {
+            text-align: center;
+        }
+
+    td {
+        font-size: 12px;
+    }
+</style>
+
+<div id="documentosCenEnc">
+    <table id="dtListasCenEnc" class="cell-border" cellspacing="0" style="width:100%;">
+        <thead>
+            <tr>
+                <th class="sortable-column"></th>
+                <th class="sortable-column"></th>
+                <th class="sortable-column">Id</th>
+                <th class="sortable-column">Descripción</th>
+                <th class="sortable-column">Activo</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@using (Html.BeginScriptContext())
+{
+    Html.AddScriptBlock(
+@<script type="text/javascript">
+    function obtenerCenEnc(obj) {
+        vId = $(obj).attr('id');
+        var url = obtenerURL('/UserMant/ObtenerCenEnc?Id=' + vId);
+        $.getJSON(url)
+            .done(function (data) {
+                encabezdo = data;
+                iniciarValoresCenEnc();
+            })
+    }
+
+    function iniciarValoresCenEnc() {
+        $.each(encabezdo, function (i, item) {
+            $('#txtCenEncId').prop("disabled", true);
+            $("#txtCenEncId").val(item.Id);
+            $("#txtCenEncDescripcion").val(item.Descripcion);    
+            if (item.Activo === true) {
+                document.getElementById("activocenenc").checked = true;
+                document.getElementById("inactivocenenc").checked = false;
+            }
+            else {
+                document.getElementById("activocenenc").checked = false;
+                document.getElementById("inactivocenenc").checked = true;
+            }
+        });
+
+        $('#btnGuardaCenEnc').hide();
+        $('#btnActualizarCenEnc').show();
+        encabezdo = "";
+    };
+
+    function eliminaCenEnc(obj) {
+        alertify.defaults.theme.ok = "button warning";
+        alertify.defaults.theme.cancel = "button primary";
+        alertify.confirm().destroy();
+        alertify.confirm('Advertencia', 'Esta seguro de querer Eliminar el Censo/Encuesta?'
+            , function () { //onOk      
+                showalertify();
+                vId = $(obj).attr('id');
+                var url = obtenerURL('/UserMant/eliminaCenEnc?cenencjson=' + vId);
+                $.post(url)
+                    .done(function (data) {
+                        var listado = JSON.parse(data);
+                        if (listado.Resultado === "true") {
+                            $('#frCenEnc').empty();
+                            $('#frCenEnc').load(obtenerURL("/UserMant/ListaCenEnc"));
+                            alertify.alert().destroy();
+                            alertify.alert('Confirmación', listado.Mensaje);
+                            alertify.alert().setting('modal', true);
+                        }
+                        else {
+                            alertify.alert().destroy();
+                            alertify.alert('Advertencia', listado.Mensaje);
+                            alertify.alert().setting('modal', true);
+                        }
+                    })
+                closealertify();
+            }
+            , function () { })//onCancel
+            .set('labels', { ok: '< Si >', cancel: '< No >' });
+    }
+</script>
+, true);
+}
+
+
+
+
+
+
+

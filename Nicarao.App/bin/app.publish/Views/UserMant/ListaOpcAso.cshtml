@@ -1,0 +1,110 @@
+﻿<div class="container" id="gridDetalleOpcAso">
+</div>
+
+<div class="content">
+    <div class="card">
+        <div class="card-body">
+            <ul class="nav nav-tabs mb-3" id="pills-tab3" role="tablist">
+                <li class="nav-item" id="tabDatosDetalleOpciones">
+                    <a class="nav-link active" id="frDetOpcAso-tab" data-toggle="pill" href="#frDetOpcAso" role="tab" aria-controls="frDetOpcAso" aria-selected="true">Detalle</a>
+                </li>                
+            </ul>
+
+            <div class="tab-content" id="pills-tabContent3">
+                <div class="tab-pane fade show active" id="frDetOpcAso" role="tabpanel" aria-labelledby="frDetOpcAso-tab">
+                    @Html.Partial("_OpcAsoMant")
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@using (Html.BeginScriptContext())
+{
+    Html.AddScriptBlock(
+@<script type="text/javascript">
+    $(document).ready(function () {
+        $('#gridDetalleOpcAso').empty();
+        $("#gridDetalleOpcAso").load(obtenerURL("/UserMant/ObtenerListaOpcAso"), function (response, status, xhr) {
+            if (status === "success") {
+                table = $('#dtListasOpcAso').dataTable({
+                    ajax: {
+                        url: obtenerURL("/UserMant/ObtenerOpcAso"),
+                        dataSrc: "",
+                    },
+                    rowId: 'OpcionId',
+                    retrieve: true,
+                    columns: [
+                                {
+                                    'data': null,
+                                    'render': function (data, type, row) {
+                                        return '<span id="' + row.OpcionId + '" class="fa fa-pencil" style="color: blue; font-size: 1rem;cursor: pointer;" onclick="obtenerOpcAso(this)"></span>'
+                                    }
+                                },
+                                {
+                                    'data': null,
+                                    'render': function (data, type, row) {
+                                        return '<span id="' + row.OpcionId + '" class="fa fa-close" style="color: red; font-size: 1rem;cursor: pointer;" onclick="eliminaOpcAso(this)"></span>'
+                                    }
+                                },
+                                { data: "OpcionId" },
+                                { data: "Nivel" },
+                                { data: "Padre" },
+                                { data: "Opcion" },
+                                { data: "OpcionTipo" },
+                                { data: "Mapeo" },
+                                { data: "DescripcionGeneral" },
+                                {
+                                    data: "Activo",
+                                    render: function (data, type, row) {
+                                        if (data == "1") { return "Activo"; } else { return "Inactivo"; }
+                                    }
+                                }
+                    ],
+                    columnDefs: [],
+                    dom: 'Bfrtip',
+                    buttons: [{ extend: 'pdfHtml5', title: 'PDF', text: 'Exportar Pdf', orientation: 'landscape', pageSize: 'LEGAL' }, { extend: 'excelHtml5', title: 'EXCEL', text: 'Exportar Excel' }],
+                    fnInitComplete: function (settings, json) {
+                        var table = $('#dtListasOpcAso').DataTable();
+                        $('#dtListasOpcAso thead tr:eq(1)').hide();
+                        var g = "false"
+                        table.columns().every(function (index) {
+                            $('#dtListasOpcAso thead tr:eq(0) th:eq(' + index + ')').on('click', function () {
+                                if (g == "true") {
+                                    $('#dtListasOpcAso thead tr:eq(1)').hide();
+                                    g = "false";
+                                }
+                                else {
+                                    $('#dtListasOpcAso thead tr:eq(1)').show();
+                                    g = "true";
+                                }
+                                $('#dtListasOpcAso thead tr:eq(1) th:eq(' + index + ') input').show();
+                            });
+                            $('#dtListasOpcAso thead tr:eq(1) th:eq(' + index + ') input').on('keyup change', function () {
+                                table.column($(this).parent().index() + ':visible')
+                                    .search(this.value)
+                                    .draw();
+                            });
+                        });
+                    },
+                    dom: 'Bfrtip',
+                    buttons: [{extend: 'pdfHtml5', title: 'PDF', text: 'Exportar Pdf',orientation: 'landscape', pageSize: 'LEGAL'} ,{ extend: 'excelHtml5', title: 'EXCEL', text: 'Exportar Excel' }],
+                    language: { url: obtenerURL("/Json/Spanish.json") },
+                    lengthMenu: [5],
+                    bLengthChange: false,
+                    searching: true
+                });
+
+                $('#dtListasOpcAso tbody').on('click', 'tr', function () {
+                    $("#dtListasOpcAso tr.selected").removeClass();
+                    $(this).addClass('selected');
+                });
+            }
+        })
+    })
+</script>
+, true);
+}
+

@@ -1,0 +1,476 @@
+﻿@model Gaia.DAL.Model.Persona
+
+@Html.Hidden("txtTabla")
+@Html.Hidden("txtVariable")
+@Html.Hidden("txtVariable2")
+@Html.Hidden("txtVariable3")
+
+@Html.Hidden("txtAtiende", (object)ViewBag.Atiende.ToString())
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Censo/Encuesta">
+                            @Html.DropDownListFor(model => model.Identificador, new SelectList(ViewBag.CenEnc as System.Collections.IEnumerable, "Id", "Descripcion"),
+                                "", new { id = "ddlSCenEnc", @class = "form-control sel", @style = "width:100%;" })
+                            <span>Censo/Encuesta:</span>
+                        </label>
+                        @Html.ValidationMessage("scenenc", "* Campo Requerido *", new { id = "lblscenenc", @style = "color:red; display: none;" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Departamento">
+                            @Html.DropDownListFor(model => model.Identificador, new SelectList(ViewBag.departamento as System.Collections.IEnumerable, "CodDepartamento", "NomDepartamento"),
+                                "", new { id = "ddlDepartamento", @class = "form-control sel", @style = "width:100%;" })
+                            <span>Departamento:</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Municipio">
+                            <select id="ddlMunicipio" class="form-control sel"></select>
+                            <span>Municipio:</span>
+                        </label>
+                    </div>
+                </div>                
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Segmento">
+                            <select id="ddlSegmento" class="form-control sel"></select>
+                            <span>Segmento:</span>
+                        </label>
+                        @Html.ValidationMessage("desp", "* Campo Requerido *", new { id = "lbldesp", @style = "color:red; display: none;" })
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Sección">
+                            <select id="ddlSeccion" class="form-control sel" , disabled="disabled"></select>
+                            @*@Html.DropDownListFor(model => model.Celular, new SelectList(ViewBag.Seccion as System.Collections.IEnumerable, "SeccionId", "Descripcion"),
+                                "", new { id = "ddlSeccion", @class = "form-control sel", @style = "width:100%;", disabled = "disabled" })*@
+                            <span>Sección:</span>
+                        </label>
+                        @Html.ValidationMessage("seccion", "* Campo Requerido *", new { id = "lblseccion", @style = "color:red; display: none;" })
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Variable">
+                            <select id="ddlVariable" class="form-control sel" , disabled="disabled"></select>
+                            @Html.ValidationMessage("variable", "* Campo Requerido *", new { id = "lblvariable", @style = "color:red; display: none;" })
+                            <span>Variable:</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <button type="button" id="btnEvaluarActResolucion" class="btn btn-light" style="border-radius:50%; display:none" onclick="cargaPreguntaFiltro()" data-toggle="tooltip" data-placement="top" title="Filtrar">
+                        <span class="fa fa-search" style="color:blue;font-size: 2rem;"></span>
+                    </button>
+                </div>
+            </div>
+            <div class="row justify-content-center" style="display:none" id="rnacidoen">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Nacido En">
+                            @Html.DropDownListFor(model => model.Identificador, new SelectList(ViewBag.Nacidoen as System.Collections.IEnumerable, "Value", "Text"),
+                                "", new { id = "ddlNacidoEn", @class = "form-control sel", @style = "width:100%;" })
+                            <span>Nacido En:</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<div class="content">
+    @*<div class="row justify-content-start">
+            <div class="col-md-5">
+                <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Filtrar">
+                    @Html.TextBoxFor(model => model.Busqueda, new { id = "cDetalleSeleccionBUSQUEDA", PlaceHolder = "Filtrar", @class = "form-control" })
+                    <span>Filtrar</span>
+                </label>
+            </div>
+            <div class="col-md-1">
+                <button type="button" id="btnFiltrar" class="btn btn-light" style="border-radius:50%;" onclick="filtrar(cDetalleSeleccionBUSQUEDA.value)" data-toggle="tooltip" data-placement="top" title="Filtrar">
+                    <span class="fa fa-search" style="color:blue;font-size: 2rem;"></span>
+                </button>
+            </div>
+            <div class="col-md-4"></div>
+        </div>*@
+
+    <div class="row">
+        <div class="col-8" id="listadoPregunta">
+        </div>
+        <div class="col-4" id="listadoCatalogo">
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginScriptContext())
+{
+    Html.AddScriptBlock(
+@<script type="text/javascript">
+     var sUrl; var vescatalogo; var vcatalogo; var svariable; var svista;
+
+     $(document).ready(function () {
+         $(".sel").select2({
+             placeholder: "Seleccione Opción",
+             allowClear: true,
+         });
+     })
+
+     $("#ddlSCenEnc").on("change", function (a) {
+         var strCenEnc = $(this).val();
+         $("#ddlSeccion option").each(function () { $(this).remove(); });
+         sUrl = obtenerURL("/CodificarCP/ddlSeccion?CenEnc=" + strCenEnc);
+         $("#ddlSeccion").load(sUrl)
+     });
+
+     $("#ddlDepartamento").on("change", function (a) {
+         var strDept = $(this).val();
+         $("#ddlMunicipio option").each(function () { $(this).remove(); });
+         if ($("#txtAtiende").val() == "Filtrado") { sUrl = obtenerURL("/CodificarCP/ddlMunicipioAsignado?Departamento=" + strDept); }
+         else { sUrl = obtenerURL("/CodificarCP/ddlMunicipio?Departamento=" + strDept); }
+         $("#ddlMunicipio").load(sUrl);
+     });
+
+     $("#ddlMunicipio").on("change", function (a) {
+         var strMun = $(this).val();
+         $("#ddlSegmento option").each(function () { $(this).remove(); });
+         if ($("#txtAtiende").val() == "Filtrado") { sUrl = obtenerURL("/CodificarCP/ddlSegmentoAsignado?Municipio=" + strMun); }
+         else { sUrl = obtenerURL("/CodificarCP/ddlSegmentoTodos?Municipio=" + strMun); }
+         $("#ddlSegmento").load(sUrl);
+     });
+
+     $("#ddlSegmento").on("change", function (a) {
+         $('#ddlSeccion').prop("disabled", false);
+         $('#ddlVariable').prop("disabled", false);
+     });
+
+     $("#ddlSeccion").on("change", function (a) {
+         var strMun = $(this).val().split("/");
+         $("#ddlVariable option").each(function () { $(this).remove(); });
+         sUrl = obtenerURL("/CodificarCP/ddlVariable?Seccion=" + strMun[1]);
+         $("#ddlVariable").load(sUrl);
+         $("#btnEvaluarActResolucion").hide();
+         var urls = obtenerURL('/CodificarCP/ObtenerNaceNacionalExtranjero?Variable=NaceNacionalExranjero');
+         $.post(urls)
+             .done(function (dato) {
+                 var svalor = dato.split("-");
+                 if ($("#ddlSCenEnc").val() == svalor[0] && strMun != svalor[1]) {
+                     $("#ddlNacidoEn").select2("val", "ca");
+                     $("#rnacidoen").hide();
+                 }
+             })         
+     }); 
+
+     $("#ddlVariable").on("select2:select", function (a) {
+         var strMun = $(this).val().split("/");
+         if (strMun[0] == "s07p09" || strMun[0] == "s07p13") {
+             $("#btnEvaluarActResolucion").hide();
+             $("#ddlNacidoEn").select2("val", "ca");
+             $("#rnacidoen").show();
+         }
+         else {
+             obtieneParametrosVariableCadena(strMun[0]);
+             $("#btnEvaluarActResolucion").show();
+             $("#rnacidoen").hide();
+         }
+     });
+
+     $("#ddlNacidoEn").on("select2:select", function (a) {
+         var vVar = $("#ddlVariable").val().split("/");
+         var strMun = vVar[0] + $(this).val();
+         obtieneParametrosVariableCadena(strMun)
+         $("#btnEvaluarActResolucion").show();
+     });
+
+     function obtieneParametrosVariableCadena(obj) {
+         var url = obtenerURL('/CodificarCP/ObtenerVariableControl?variableId=' + obj);
+         $.getJSON(url)
+             .done(function (data) {
+                 var Valores = data[0].Cadena.split("/");
+                 $("#txtTabla").val(Valores[0]);
+                 $("#txtVariable").val(Valores[1]);
+                 $("#txtVariable2").val(Valores[2]);
+                 $("#txtVariable3").val(Valores[3]);
+                 vescatalogo = data[0].EsCatalogo;
+                 vcatalogo = data[0].Catalogo;
+                 svista = data[0].Vista;
+             })
+     }
+
+     //function cargaPreguntaFiltro1() {
+         //Process.Start("notepad.exe");
+         //Process.Start("C:\Program Files (x86)\CSPro 7.7\CSPro.exe")
+     //}
+
+     function cargaPreguntaFiltro() {
+         var url;
+         svariable = $("#ddlVariable").val().split("/");
+         var sseccion = $("#ddlSeccion").val().split("/");
+         $('#listadoCatalogo').empty();
+
+         if (sseccion[0] == "IV") { //$("#ddlSeccion").val()
+             switch (svariable[0]) {
+                 case "s04p06":
+                     listagenericadepregunta(svariable[0])
+                     break;
+                 default://s04p04c
+                     listagenericadepregunta(svariable[0]);
+             }
+         }
+         else if (sseccion[0] == "VII") {
+             switch (svariable[0]) {
+                 case "s07p18":
+                     listagenericadepregunta(svariable[0]);
+                     break;
+                 case "s07p23":
+                     listagenericadepregunta(svariable[0]);
+                     break;
+                 case "s07p25":
+                     listagenericadepregunta(svariable[0]);
+                     break;
+                 case "s07p13":
+                     if ($("#ddlNacidoEn").val() == "-03") { listagenericadepregunta(svariable[0] + "-03"); }
+                     else { listagenericadepregunta(svariable[0] + "-01"); }
+                     break;
+                 default: //s07p09
+                     if ($("#ddlNacidoEn").val() == "-03") { listagenericadepregunta(svariable[0] + "-03"); }
+                     else { listagenericadepregunta(svariable[0] + "-01"); }
+             }
+         }
+         else if (sseccion[0] == "VIII") {
+             switch (svariable[0]) {
+                 case "s08p01o7o8":
+                     listagenericadepregunta(svariable[0]);
+                     break;
+                 default:
+                     console.log("nada8")
+             }
+         }
+         else if (sseccion[0] == "E-III") {
+             switch (svariable[0]) {
+                 case "es03p01":
+                     listagenericadepregunta(svariable[0]);
+                     break;
+                 default: //es03p04_2
+                     listagenericadepregunta(svariable[0]);
+             }
+         }
+         else {
+             console.log("nada");
+         }
+     }
+
+     function listagenericadepregunta(obj) {
+         $('#listadoPregunta').empty();
+         $("#listadoPregunta").load(obtenerURL("/CodificarCP/" + svista), function (response, status, xhr) {
+             //if (status === "success") {
+             //    if (obj == "s04p06") {
+             //        //ListaPreguntaMigracionProfesion();
+             //    }
+             //    else if (obj == "s04p04c") {
+             //        //ListaPaisMigracion();
+             //    }
+             //    else if (obj == "s07p18") {
+             //        //ListaCarreraPersona();
+             //    }
+             //    else if (obj == "s07p23") {
+             //       // ListaTrabajoPersona();
+             //    }
+             //    else if (obj == "s07p25") {
+             //        //ListaDedicaEstablecimientoPersona();
+             //    }
+             //    else if (obj == "s07p13-03" || obj == "s07p09-03") {
+             //        //ListaNaceExtranjeroPersona();
+             //    }
+             //    else if (obj == "s07p13-01" || obj == "s07p09-01") {
+             //        //ListaNaceNacionalPersona();
+             //    }
+             //    else if (obj == "s08p01o7o8") {
+             //        //ListaAgropecuariaActividad();
+             //    }
+             //    else if (obj == "es03p01") {
+             //        //ListaEstEmpHogarActividad();
+             //    }
+             //    else if (obj == "es03p04_2") {
+             //        //ListaMunicipioActividad();
+             //    }
+             //}
+         })
+     }
+
+     function cargaFormularioFiltro(obj) {
+         $('#listadoCatalogo').empty();
+         $("#listadoCatalogo").load(obtenerURL("/CodificarCP/" + obj));
+     }
+
+     function cargaCatalogoFiltro(obj) {
+         var url = obtenerURL('/CodificarCP/ObtenerCatalogoFiltro?catalogo=' + obj);
+         $('#listadoCatalogo').empty();
+         $("#listadoCatalogo").load(obtenerURL("/CodificarCP/_ListaCatalogoFiltro"), function (response, status, xhr) {
+             if (status === "success") {
+                 table = $('#dtListasCatFiltro').DataTable({
+                     ajax: {
+                         url: url,
+                         dataSrc: "",
+                     },
+                     rowId: 'ID',
+                     retrieve: true,
+                     columns: [
+                         { data: "ID" },
+                         { data: "DESCRIPCION" }
+                     ],
+                     fnInitComplete: function (settings, json) {
+                         var api = this.api();
+                         var table = $('#dtListasCatFiltro').DataTable();
+                         api.$('td').click(function (xolumna) {
+                             if (xolumna.currentTarget.cellIndex < 1) {
+                             } else { api.search(this.innerHTML).draw(); }
+                         });
+                     },
+                     language: { url: obtenerURL("/Json/Spanish.json") }, lengthMenu: [5], bLengthChange: false, searching: true, dom: 'Bfrtip',
+                     buttons: [
+                         {
+                             extend: 'collection', className: 'button',
+                             text: 'Codificar Traza', autoClose: true,
+                             action: function (e, dt, node, config) {
+
+                                 var dtData = $('#dtListasCatFiltro').DataTable().rows(".selected").data();
+                                 if (dtData.length === 0) {
+                                     alertify.alert().destroy();
+                                     alertify.alert("Advertencia", "Debe seleccionar un registro para realizar esta acción");
+                                 } else {
+                                     if (svariable[0] == "s07p18") {
+                                         $.each(dtData, function (i, item) {
+                                             codigosSeleccionados(item.ID, item.DESCRIPCION);
+                                         });
+                                     }
+                                     else if (svariable[0] == "es03p01") {
+                                         $.each(dtData, function (i, item) {
+                                             codigosSeleccionados(item.DESCRIPCION, "indefinido");
+                                         });
+                                     }
+                                     else {
+                                         $.each(dtData, function (i, item) {
+                                             codigosSeleccionados(item.ID, "indefinido");
+                                         });
+                                     }
+                                 }
+                             }
+                         },
+                     ]
+                 });
+
+                 $('#dtListasCatFiltro tbody').on('click', 'tr', function () {
+                     $("#dtListasCatFiltro tr.selected").removeClass();
+                     $(this).addClass('selected');
+                 });
+             }
+         })
+     }
+
+     function codigosSeleccionados(obj, obj2) {
+         var ids = ""; var url;
+         var listaCheckp2 = $("#listadoPregunta input[type='checkbox']");
+         $.each(listaCheckp2, function (indexp2, itemp2) {
+             if ($(itemp2).prop('checked') === true) {
+                 ids += $("#" + itemp2.id + "").attr("id") + "/";
+             }
+         })
+         //ids = ids.substr(0, ids.length - 1)
+         ids = ids.slice(0, ids.length - 1)
+
+         if (obj2 == "indefinido") {
+             url = obtenerURL('/CodificarCP/GuardarCodificacionTrazas?Tabla=' + $("#txtTabla").val() + '&Variable=' + $("#txtVariable").val() + '&Clasificacion=' + $.trim(obj) + '&Ids=' + ids);
+         } else {
+             url = obtenerURL('/CodificarCP/GuardarCodificacionTrazas?Tabla=' + $("#txtTabla").val() + '&Variable=' + $("#txtVariable").val() + '&Clasificacion=' + $.trim(obj) + '&Ids=' + ids + '&Variable2=' + $("#txtVariable2").val() + '&Clasificacion2=' + $.trim(obj2));
+         }
+
+         $.ajax({
+             url: url,
+             type: 'post',
+             dataType: 'text',
+             success: function (data) {
+                 var listado = JSON.parse(data);
+                 if (listado.Resultado === "true") {
+                     cargaPreguntaFiltro();
+                     alertify.alert().destroy();
+                     alertify.alert('Advertencia', listado.Mensaje);
+                     alertify.alert().setting('modal', true);
+                 }
+                 else {
+                     alertify.alert().destroy();
+                     alertify.alert('Confirmación', listado.Mensaje);
+                     alertify.alert().setting('modal', true);
+                 }
+             },
+         });
+     }
+
+     function codigosTodos() {
+         var tables = $('#dtListasPreFiltro').DataTable();
+         tables
+             .column(0)
+             .data()
+             .each(function (values, indexs) {
+                 itemss = {};
+                 itemss["Id"] = values.GDB_ARCHIVE_OID;
+                 DATAs.push(itemss);
+             });
+     }
+
+     function filtrar(DetalleSeleccionBUSQUEDA) {
+         DetalleSeleccionBUSQUEDA = $.trim(DetalleSeleccionBUSQUEDA)
+         DetalleSeleccionBUSQUEDA = DetalleSeleccionBUSQUEDA.replace(/  /g, ' ');
+         var url = obtenerURL('/CodificarCP/BuscarPor?DetalleSeleccion=' + DetalleSeleccionBUSQUEDA + '&Dep=' + $("#ddlDepartamento").val() + '&Mun=' + $("#ddlMunicipio").val() + '&Seg=' + $("#ddlSegmento").val());
+         $('#listadoPregunta').empty();
+         $("#listadoPregunta").load(obtenerURL("/CodificarCP/_ListaPreguntaFiltro"), function (response, status, xhr) {
+             if (status === "success") {
+                 table = $('#dtListasPreFiltro').DataTable({
+                     ajax: {
+                         url: url,
+                         dataSrc: "",
+                     },
+                     rowId: 'OBJECTID',
+                     retrieve: true,
+                     columns: [
+                         {
+                             'data': null,
+                             'render': function (data, type, row) {
+                                 return '<input type="checkbox" id=' + row.OBJECTID + '>';
+                             },
+                         },
+                         { data: "s07p23" },
+                         { data: "s07_nombre" }
+                     ],
+                     fnInitComplete: function (settings, json) {
+                         var api = this.api();
+                         var table = $('#dtListasPreFiltro').DataTable();
+                         api.$('td').click(function (xolumna) {
+                             if (xolumna.currentTarget.cellIndex < 1) {
+                             } else { api.search(this.innerHTML).draw(); }
+                         });
+                     },
+                     language: { url: obtenerURL("/Json/Spanish.json") }, lengthMenu: [5], bLengthChange: false, searching: true
+                 });
+
+                 $('#dtListasPreFiltro tbody').on('click', 'tr', function () {
+                     $("#dtListasPreFiltro tr.selected").removeClass();
+                     $(this).addClass('selected');
+                 });
+             }
+         })
+     }
+</script>
+, true);
+}
+

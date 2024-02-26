@@ -1,0 +1,70 @@
+﻿<div class="container full-size">
+    <table id="dtListasPreFiltro" class="display cell-border" cellspacing="0">
+        <thead>
+            <tr>
+                <th></th>
+                <th class="sortable-column">Area</th>
+                <th class="sortable-column">Edificación</th>
+                <th class="sortable-column">Vivienda</th>
+                <th class="sortable-column">Hogar</th>
+                <th class="sortable-column">CP</th>
+                <th class="sortable-column">Nombre</th>
+                <th class="sortable-column">Profesión/Oficio</th>
+                <th class="sortable-column">Código</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@using (Html.BeginScriptContext())
+{
+    Html.AddScriptBlock(
+        @<script type="text/javascript">
+            $(document).ready(function () {
+                ListaPreguntaMigracionProfesion();
+            })
+            
+            function ListaPreguntaMigracionProfesion() { 
+                var url = obtenerURL('/CodificarCP/ObtenerPreguntaListaGenerico?Pregunta=s04p06&Dep=' + $("#ddlDepartamento").val() + '&Mun=' + $("#ddlMunicipio").val() + '&Seg=' + $("#ddlSegmento").val());
+                table = $('#dtListasPreFiltro').DataTable({
+                            ajax: {
+                                    url: url,
+                                    dataSrc: "",
+                                },
+                            rowId: 'GDB_ARCHIVE_OID',
+                            retrieve: true,
+                            columns: [
+                                {
+                                    'data': null,
+                                    'render': function (data, type, row) {
+                                        return '<input type="checkbox" id=' + row.GDB_ARCHIVE_OID + '>';
+                                    },
+                                },
+                                { data: "AreaResidencia" },
+                                { data: "s1_q13" },
+                                { data: "s02v00" },
+                                { data: "s03h00" },
+                                { data: "s04e00" },
+                                { data: "s04nombre" },
+                                { data: "s04p06"},
+                                { data: "s04p06c"}
+                            ],
+                            fnInitComplete: function (settings, json) {
+                                if (vescatalogo==true) { cargaCatalogoFiltro(vcatalogo); }
+                                else { cargaFormularioFiltro(vcatalogo);}
+                            },
+                            fnRowCallback: function (row, data, index) {
+                                if (data["s04p06c"] != "") { $(row).addClass("text-primary"); }
+                            },
+                            language: { url: obtenerURL("/Json/Spanish.json") }, lengthMenu: [5], bLengthChange: false, searching: true
+                        });
+
+                        $('#dtListasPreFiltro tbody').on('click', 'tr', function () {
+                            $("#dtListasPreFiltro tr.selected").removeClass();
+                            $(this).addClass('selected');
+                        });
+            }
+        </script>
+    , true);
+}
+

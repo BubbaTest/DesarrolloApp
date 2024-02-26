@@ -1,0 +1,196 @@
+﻿<div class="container" id="gridDetalleVariable">
+</div>
+
+<div class="content">
+    <div class="card">
+        <div class="card-body">
+            <ul class="nav nav-tabs mb-3" id="pills-tab3" role="tablist">
+                <li class="nav-item" id="tabDatosDetalleVariable">
+                    <a class="nav-link active" id="frDetVariable-tab" data-toggle="pill" href="#frDetVariable" role="tab" aria-controls="frDetVariable" aria-selected="true">Detalle</a>
+                </li>
+                <li class="nav-item" id="varsec" style="display: none">
+                    <a class="nav-link" id="frRelVariablesS-tab" data-toggle="pill" href="#frRelVariablesS" role="tab" aria-controls="frRelVariablesS" aria-selected="true">Asociar Sección</a>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="pills-tabContent3">
+                <div class="tab-pane fade show active" id="frDetVariable" role="tabpanel" aria-labelledby="frDetVariable-tab">
+                    @Html.Partial("_VariableMant")
+                </div>
+                <div class="tab-pane fade" id="frRelVariablesS" role="tabpanel" aria-labelledby="frRelVariablesS-tab">
+                    <div class="container">
+                        <h5 style="align-self:center" id="btnrSeccion">
+
+                            <button class="btn btn-primary" style="margin-right:10px;" data-tabcontinuar="data-tabcontinuar" id="btnrelSeccion" onclick="relVariableSeccion()">
+                                <span>Agregar</span>
+                                <span class="fa fa-plus"></span>
+                            </button>
+                        </h5>
+                        <div class="row justify-content-center">
+                            <div class="col-md-8" id="rru">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginScriptContext())
+{
+    Html.AddScriptBlock(
+        @<script type="text/javascript">
+            $(document).ready(function () {
+                $('#gridDetalleVariable').empty();
+                $("#gridDetalleVariable").load(obtenerURL("/UserMant/ObtenerListaVariable"), function (response, status, xhr) {
+                    if (status === "success") {
+                        table = $('#dtListasVariable').DataTable({
+                            ajax: {
+                                url: obtenerURL("/UserMant/ObtenerVariable"),
+                                dataSrc: "",
+                            },
+                            rowId: 'VariableId',
+                            retrieve: true,
+                            columns: [
+                                        {
+                                            'data': null,
+                                            'render': function (data, type, row) {
+                                                return '<span id="' + row.VariableId + '" class="fa fa-pencil" style="color: blue; font-size: 1rem;cursor: pointer;" onclick="obtenerVariable(this)"></span>'
+                                            }
+                                        },
+                                        {
+                                            'data': null,
+                                            'render': function (data, type, row) {
+                                                return '<span id="' + row.VariableId + '" class="fa fa-close" style="color: red; font-size: 1rem;cursor: pointer;" onclick="eliminaVariable(this)"></span>'
+                                            }
+                                        },
+                                        { data: "VariableId" },
+                                        { data: "Descripcion" },
+                                        {
+                                            data: "Clasificacion",
+                                            render: function (data, type, row) {
+                                                if (data == "P") { return "Persona"; } else { return "Edificación"; }
+                                            }
+                                        },
+                                        { data: "CenEnc" },
+                                        {
+                                            data: "Activo",
+                                            render: function (data, type, row) {
+                                                if (data == "1") { return "Activo"; } else { return "Inactivo"; }
+                                            }
+                                        }
+                            ],
+                            columnDefs: [],
+                            dom: 'Bfrtip',
+                            buttons: [{extend: 'pdfHtml5', title: 'PDF', text: 'Exportar Pdf',orientation: 'landscape', pageSize: 'LEGAL'} ,{ extend: 'excelHtml5', title: 'EXCEL', text: 'Exportar Excel' }],
+                            language: { url: obtenerURL("/Json/Spanish.json") },
+                            lengthMenu: [5],
+                            bLengthChange: false,
+                            searching: true
+                        });
+
+                        $('#dtListasVariable tbody').on('click', 'tr', function () {
+                            $("#dtListasVariable tr.selected").removeClass();
+                            $(this).addClass('selected');
+                        });
+                    }
+                })
+            })
+
+            function relVariableSeccion() {
+                    var contenido;
+                    var div = $("#ModalGenerico");
+                    alertify.confirm().destroy();
+                div.load(obtenerURL("/UserMant/_SeccionVariable?variableId=" + vvariableId) + "&CenEnc=" + $("#ddlVCenEnc").val(), function () {
+                        contenido = div.html();
+                        div.empty();
+                        alertify.defaults.maintainFocus = false;
+                        alertify.defaults.theme.ok = "button warning";
+                        alertify.defaults.theme.cancel = "button primary";
+                        var modal = alertify.confirm()
+                            .setContent(contenido)
+                            .set({ 'startMaximized': false, 'maximizable': false, 'resizable': true, 'labels': { ok: '< Guardar >', cancel: '< Salir >' } })
+                                    .resizeTo(700, 300)
+                            .set('oncancel', function (closeEvent) {})
+                            .set('onok', function (closeEvent) {GuardaVariableSeccion();})
+                            .show();
+
+                        $(".ajs-reset").remove();
+                        $(".ajs-commands").remove();
+                        $(".ajs-header").remove();
+                        $("div").remove(".ajs-commands, .ajs-header, .ajs-reset");
+                        var select2 = $(modal.elements.root).find("select");
+                        select2.select2().on("select2:open", function (e) {
+                            var id = e.target.id;
+                            var div_results = "#select2-" + id + "-results";
+                            $(div_results).parents(".select2-container").css({ 'z-index': '3000' });
+                        });
+
+                        $(".sel").select2({
+                            placeholder: "Seleccione Sección",
+                            allowClear: true,
+                        });
+                    })
+                }
+
+                function GuardaVariableSeccion() {
+                    showalertify();
+                    var reljson = JSON.stringify({ "SeccionId": $('#ddlrelSeccionid').val().toString(), "VariableId": vvariableId});
+                    var url = obtenerURL('/UserMant/GuardarRelSeccionVariable?reljson=' + reljson);
+                    $.post(url)
+                       .done(function (data) {
+                           var listado = JSON.parse(data);
+                           if (listado.Resultado === "true") {
+                               alertify.alert().destroy();
+                               alertify.alert('Confirmación', listado.Mensaje);
+                               alertify.alert().setting('modal', true);
+                               var url = obtenerURL("/UserMant/_ListaSeccionR");
+                                $('#rru').empty();
+                                $('#rru').load(url, function (response, status, xhr) {
+                                    if (status === "success") {
+                                        table = $('#dtListasSeccionR').DataTable({
+                                            ajax: {
+                                                url: obtenerURL('/UserMant/ObtenerRelacionSegmento?VariableId=' + vvariableId),
+                                                dataSrc: "",
+                                            },
+                                            rowId: 'SeccionId',
+                                            retrieve: true,
+                                            columns: [
+                                                {
+                                                    'data': null,
+                                                    'render': function (data, type, row) {
+                                                        return '<span id="' + row.SeccionId + ";" + '" class="fa fa-close" style="color: red; font-size: 1rem;cursor: pointer;" onclick="eliminarelVariableSegmento(this)"></span>'
+                                                    }
+                                                },
+                                                { data: "SeccionId" },
+                                                { data: "Descripcion" }
+                                            ],
+                                            columnDefs: [],
+                                            dom: 'Bfrtip',
+                                            buttons: [{ extend: 'pdfHtml5', title: 'PDF', text: 'Exportar Pdf', orientation: 'landscape', pageSize: 'LEGAL' }, { extend: 'excelHtml5', title: 'EXCEL', text: 'Exportar Excel' }],
+                                            language: { url: obtenerURL("/Json/Spanish.json") },
+                                            lengthMenu: [5],
+                                            bLengthChange: false,
+                                            searching: true,
+                                            rowGroup: true,
+                                        });
+
+                                        $('#dtListasSeccionR tbody').on('click', 'tr', function () {
+                                            $("#dtListasSeccionR tr.selected").removeClass();
+                                            $(this).addClass('selected');
+                                        });
+                                    }
+                                })
+                           }
+                           else {
+                               alertify.alert().destroy();
+                               alertify.alert('Advertencia', listado.Mensaje);
+                               alertify.alert().setting('modal', true);
+                           }
+                       })
+                    closealertify();
+                }
+        </script>
+    , true);
+}

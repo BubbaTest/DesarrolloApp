@@ -1,0 +1,120 @@
+﻿<style>
+    .dataTables_empty {
+        display: none;
+    }
+
+    table.cell-border {
+        width: 100%;
+        clear: both;
+    }
+
+        table.cell-border th {
+            padding: 5px;
+            border: 1px solid #fff;
+        }
+
+        table.cell-border thead th {
+            text-align: center;
+            background: #66a9bd;
+        }
+
+        table.cell-border tbody td {
+            text-align: center;
+        }
+
+    td {
+        font-size: 12px;
+    }
+</style>
+
+<div id="documentosSeccion">
+    <table id="dtListasSeccion" class="cell-border" cellspacing="0" style="width:100%;">
+        <thead>
+            <tr>
+                <th class="sortable-column"></th>
+                <th class="sortable-column"></th>
+                <th class="sortable-column">Id</th>
+                <th class="sortable-column">Descripción</th>
+                <th class="sortable-column">Censo/Encuesta</th>
+                <th class="sortable-column">Activo</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@using (Html.BeginScriptContext())
+{
+    Html.AddScriptBlock(
+        @<script type="text/javascript">
+            function eliminaSeccion(obj) {
+                alertify.defaults.theme.ok = "button warning";
+                alertify.defaults.theme.cancel = "button primary";
+                alertify.confirm().destroy();
+                alertify.confirm('Advertencia', 'Esta seguro de querer Eliminar la Sección?'
+                    , function () { //onOk  
+                        showalertify();
+                        vseccionId = $(obj).attr('id');
+                        var url = obtenerURL('/UserMant/eliminaSeccion?seccionjson=' + vseccionId);
+                        $.post(url)
+                        .done(function (data) {
+                            var listado = JSON.parse(data);
+                            if (listado.Resultado === "true") {
+                                $('#frSeccion').empty();
+                                $('#frSeccion').load(obtenerURL("/UserMant/ListaSeccion"));
+                                alertify.alert().destroy();
+                                alertify.alert('Confirmación', listado.Mensaje);
+                                alertify.alert().setting('modal', true);
+                            }
+                            else {
+                                alertify.alert().destroy();
+                                alertify.alert('Advertencia', listado.Mensaje);
+                                alertify.alert().setting('modal', true);
+                            }
+                        })
+                        closealertify();
+                    }
+                    , function () { })//onCancel
+                    .set('labels', { ok: '< Si >', cancel: '< No >' });
+            }
+
+            function obtenerSeccion(obj) {
+                vseccionId = $(obj).attr('id');
+                var url = obtenerURL('/UserMant/ObtenerSeccion?SeccionId=' + vseccionId);
+                $.getJSON(url)
+                    .done(function (data) {
+                        encabezdo = data;
+                        iniciarValoresSeccion();
+                    })
+            }
+
+            function iniciarValoresSeccion() {
+                $.each(encabezdo, function (i, item) {
+                    $("#txtrelGUID").val(item.relGUID);
+                    $('#txtUSeccionId').prop("disabled", true);
+                    $("#txtSeccionId").val(item.SeccionId);
+                    $("#txtSDescripcion").val(item.Descripcion);
+                    $("#ddlSCenEnc").val(item.CenEnc).trigger("change");
+                    if (item.Activo === true) {
+                        document.getElementById("activosec").checked = true;
+                        document.getElementById("inactivosec").checked = false;
+                    }
+                    else {
+                        document.getElementById("activosec").checked = false;
+                        document.getElementById("inactivosec").checked = true;
+                    }
+                });
+
+                $('#btnGuardaSeccion').hide();
+                $('#btnActualizaSeccion').show();
+                encabezdo = "";
+            };
+        </script>
+     , true);
+}
+
+
+
+
+
+
+

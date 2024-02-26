@@ -1,0 +1,16 @@
+﻿@model Gaia.DAL.Model.BusquedaUsuarioGAIA
+
+<div class="container">
+    <div class="row justify-content-center">        
+        @Html.DropDownListFor(x => x.BUSQUEDA, new SelectList(ViewBag.RSeccion as System.Collections.IEnumerable, "SeccionId", "Descripcion"),
+        "", new { id = "ddlrelSeccionid", @class = "form-control sel", @style = "width:100%;" })
+    </div>
+</div>
+
+@using (Html.BeginScriptContext())
+{
+    Html.AddScriptBlock(
+        @<script type="text/javascript">
+        </script>
+     , true);
+}

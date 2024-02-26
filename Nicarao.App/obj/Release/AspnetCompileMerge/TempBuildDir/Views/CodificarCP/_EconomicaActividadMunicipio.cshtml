@@ -1,0 +1,97 @@
+﻿@model PJN.DAL.Model.LATRINIDAD.S04_LIST_EMIGRA
+
+<div class="container full-size" id="documentosAsig">
+    @*<div class="card">*@
+        <div class="card-body">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Municipio">
+                            @Html.DropDownListFor(model => model.s04p04c, new SelectList(ViewBag.mun as System.Collections.IEnumerable, "CodMunicipio", "NomMunicipio"),
+                                "", new { id = "ddlMunN", @class = "form-control sel", @style = "width:100%;" })
+                            <span>Municipio:</span>
+                        </label>
+                        @Html.ValidationMessage("munn", "* Campo Requerido *", new { id = "lblmunn", @style = "color:red; display: none;" })
+                    </div>
+                </div>
+            </div>            
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="row" style=" height: 100px; align-content: center;">
+                    <div class="col-md-12 d-flex justify-content-center" id="rowButtons">
+                        <button class="btn btn-primary" style="margin-right:10px;" data-tabcontinuar="data-tabcontinuar" id="btnGuardaTrazas" onclick="codificarTrazas()">
+                            <span>Codificar Trazas</span>
+                            <span class="fa fa-database"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @*</div>*@
+</div>
+
+
+@using (Html.BeginScriptContext())
+{
+    Html.AddScriptBlock(
+        @<script type="text/javascript">
+            $(document).ready(function () {
+                 $(".sel").select2({
+                    placeholder: "Seleccione Opción",
+                    allowClear: true,
+                });
+            })
+
+            function codificarTrazas(obj) {
+                var ids = "";
+                var bandera = true;
+                if ($('#ddlMunN').val() == "" || $('#ddlMunN').val() ==null ) {
+                    $("#lblmunn").show();
+                    bandera = false;
+                }
+
+                if (bandera == true) {
+                    showalertify();
+                    $("#lblmunn").hide();
+
+                    var listaCheckp2 = $("#listadoPregunta input[type='checkbox']");
+                        $.each(listaCheckp2, function (indexp2, itemp2) {
+                            if ($(itemp2).prop('checked') === true) {
+                                ids += $("#" + itemp2.id + "").attr("id") +"/";
+                            }
+                        })
+                        ids = ids.substr(0, ids.length - 1)
+                        var url = obtenerURL('/CodificarCP/GuardarCodificacionTrazas?Tabla=' + $("#txtTabla").val() + '&Variable=' + $("#txtVariable").val() + '&Clasificacion=' + $("#ddlMunN").val() + '&Ids=' + ids); //$("#ddlMunN option:selected").text()
+                        $.ajax({
+                            url: url,
+                            type: 'post',
+                            dataType: 'text',
+                            success: function (data) {
+                                var listado = JSON.parse(data);
+                                if (listado.Resultado === "true") {
+                                    cargaPreguntaFiltro()
+                                    alertify.alert().destroy();
+                                    alertify.alert('Advertencia', listado.Mensaje);
+                                    alertify.alert().setting('modal', true);
+                                }
+                                else {
+                                    alertify.alert().destroy();
+                                    alertify.alert('Confirmación', listado.Mensaje);
+                                    alertify.alert().setting('modal', true);
+                                }
+                            }
+                        });
+                }
+                else {
+                    alertify.confirm().destroy();
+                    alertify.confirm('Llenar todos los campos obligatorios!').set('basic', true);
+                    alertify.confirm().setting('modal', true);
+                }
+            }
+        </script>
+    , true);
+}
+
+
+
