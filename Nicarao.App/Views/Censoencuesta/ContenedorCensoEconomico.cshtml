@@ -116,6 +116,22 @@
                 </label>
             </div>
         </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Longitud">
+                    @Html.TextBoxFor(model => model.Identificador, new { id = "txtLongitud", placeholder = "Longitud", @class = "form-control", autocomplete = "off", disabled = "disabled" })
+                    <span>Longitud</span>
+                </label>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Latitud">
+                    @Html.TextBoxFor(model => model.Identificador, new { id = "txtLatitud", placeholder = "Latitud", @class = "form-control", autocomplete = "off", disabled = "disabled" })
+                    <span>Latitud</span>
+                </label>
+            </div>
+        </div>
     </div>
 </fieldset>
 
@@ -157,7 +173,20 @@
         });
 
         $("#txtIdentificacion").inputmask("999-999999-9999A");
+
+        getLocation();
     })
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(useLocation);
+        }
+    };
+
+    function useLocation(position) {
+        $("#txtLongitud").val(position.coords.longitude);
+        $("#txtLatitud").val(position.coords.latitude);
+    };
 
     function IdeUbiEst() {
         $('#cell-content22').empty();

@@ -2216,6 +2216,7 @@
     <Content Include="Views\Censoencuesta\CaracteristicasEstablecimientoEconomico.cshtml" />
     <Content Include="Views\Censoencuesta\ListaPersonasTrabajanEstablecimiento.cshtml" />
     <Content Include="Views\Censoencuesta\_ListaPersonasTrabajanEstablecimiento.cshtml" />
+    <Content Include="Views\Censoencuesta\_Map.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

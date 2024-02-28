@@ -169,17 +169,39 @@
         </div>
         <div class="col-md-1">
             <button type="button" id="btnEvaluarActResolucion" class="btn btn-light" style="border-radius:50%;" onclick="ValidarNicaraoActuacion()" data-toggle="tooltip" data-placement="top" title="Buscar">
-                <span class="fa fa-search" style="color:blue;font-size: 2rem;"></span>
+                <span class="fa fa-search" style="color:blue;font-size: 1rem;"></span>
             </button>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-1">
             <div class="form-group">
                 <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Número de Boleta">
                     @Html.TextBoxFor(model => model.Identificador, new { id = "txtBoleta", placeholder = "Número de Boleta", @class = "form-control", autocomplete = "off", disabled = "disabled" })
                     <span>Número de Boleta</span>
                 </label>
             </div>
-        </div>       
+        </div>
+        <div class="col-md-1">
+            <div class="form-group">
+                <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Longitud">
+                    @Html.TextBoxFor(model => model.Identificador, new { id = "txtLongitud", placeholder = "Longitud", @class = "form-control", autocomplete = "off", disabled = "disabled" })
+                    <span>Longitud</span>
+                </label>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <div class="form-group">
+                <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Latitud">
+                    @Html.TextBoxFor(model => model.Identificador, new { id = "txtLatitud", placeholder = "Latitud", @class = "form-control", autocomplete = "off", disabled = "disabled" })
+                    <span>Latitud</span>
+                </label>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <button type="button" id="btnMapa" class="btn btn-light" style="border-radius:50%;" data-toggle="tooltip" data-placement="top" title="Mapa">
+                <span class="fa fa-map-marker" style="color:black;font-size: 1rem;"></span>
+            </button>
+        </div>
+       
         @*<div class="col-md-3">
             <div class="form-group">
                 <label class="has-float-label" data-toggle="tooltip" data-placement="top" title="Censo/Encuesta">
@@ -202,7 +224,7 @@
                 @Html.ValidationMessage("scenenc", "* Campo Requerido *", new { id = "lblscenenc", @style = "color:red; display: none;" })
             </div>
         </div>*@
-    </div>
+    </div>    
 </fieldset>
 
 <div class="vw_GestionarSupervision">
@@ -258,15 +280,55 @@
     Html.AddScriptBlock(
 @<script type="text/javascript">
     $(document).ready(function () {
-        $(".sel").select2({
-            placeholder: "Seleccione Opción",
-            allowClear: true,
-        });
 
         $("#txtIdentificacion").inputmask("999-999999-9999A");
 
-        //cargaTipoObjeto();
+        $("#btnMapa").on("click", function (e) {
+            alertify.confirm().destroy();
+
+            var contenido;
+            var div = $("#ModalGenerico");
+
+            div.load(obtenerURL("/Censoencuesta/Mapa"), function () {
+                contenido = div.html();
+                div.empty();
+                var modal = alertify.confirm()
+                    .setHeader('')
+                    .setContent(contenido)
+                    .set({ 'startMaximized': true, 'resizable': false, 'basic': true, 'closable': false })
+                    .show();                  
+            });
+        }); 
+
+        getLocation();
     })
+
+    function CancelarMapa() {
+        //google.maps.event.clearListeners(map, 'bounds_changed');
+        //google.maps.event.clearListeners(map, 'dragend'); 
+        $("#map").remove();
+        alertify.confirm().close();
+    }
+
+    function getLocation() {
+        const options = {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 0,
+        };
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(useLocation,
+                error => console.log(error),
+                options
+            )
+        }
+    };
+
+    function useLocation(position) {
+        $("#txtLongitud").val(position.coords.longitude);
+        $("#txtLatitud").val(position.coords.latitude);  
+    }; 
 
     function IdeUbiUsoVivienda() {
          $('#cell-content22').empty();
@@ -342,7 +404,6 @@
             }
         });
     }  
-
 
 </script>
 , true);

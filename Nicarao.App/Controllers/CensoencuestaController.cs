@@ -55,7 +55,12 @@ namespace Nicarao.App.Controllers
             return View();
         }
 
-        [OutputCache(Duration = 60, Location = OutputCacheLocation.Server)]
+        public ActionResult Mapa()
+        {
+            return PartialView("_Map");
+        }
+
+        //[OutputCache(Duration = 60, Location = OutputCacheLocation.Server)]
         public ActionResult ContenedorCensoPoblacionVivienda()
         {
             //ViewBag.Departamentos = _DEPT.SelectAll().ToList();

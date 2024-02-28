@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>C:\Users\ldavila\Documents\Visual Studio 2017\projects\nicarao.app\Nicarao.App\Nicarao.App\bin\app.publish\</_PublishTargetUrl>
-    <History>True|2024-02-26T17:37:31.8755571Z;True|2024-02-26T09:11:40.9788432-06:00;True|2024-02-22T13:41:14.4586716-06:00;</History>
+    <History>True|2024-02-28T18:25:00.4627579Z;True|2024-02-28T12:05:28.3804639-06:00;True|2024-02-27T11:00:19.6353766-06:00;True|2024-02-26T11:37:31.8755571-06:00;True|2024-02-26T09:11:40.9788432-06:00;True|2024-02-22T13:41:14.4586716-06:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -13,10 +13,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/26/2023 10:24:50</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>02/26/2024 11:37:15</publishTime>
+      <publishTime>02/28/2024 15:29:58</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>02/26/2024 11:37:14</publishTime>
+      <publishTime>02/28/2024 15:29:58</publishTime>
     </File>
     <File Include="bin/BCrypt.Net-Next.dll">
       <publishTime>11/27/2018 14:14:30</publishTime>
@@ -64,13 +64,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>02/22/2024 13:39:55</publishTime>
     </File>
     <File Include="bin/Gaia.DAL.dll">
-      <publishTime>02/26/2024 11:36:35</publishTime>
+      <publishTime>02/28/2024 12:04:29</publishTime>
     </File>
     <File Include="bin/Gaia.DAL.dll.config">
       <publishTime>11/27/2018 14:14:28</publishTime>
     </File>
     <File Include="bin/Gaia.DAL.pdb">
-      <publishTime>02/26/2024 11:36:35</publishTime>
+      <publishTime>02/28/2024 12:04:29</publishTime>
     </File>
     <File Include="bin/Gaia.Helpers.dll">
       <publishTime>02/22/2024 13:39:55</publishTime>
@@ -79,13 +79,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>02/22/2024 13:39:55</publishTime>
     </File>
     <File Include="bin/Gaia.Seguridad.dll">
-      <publishTime>02/26/2024 11:36:37</publishTime>
+      <publishTime>02/28/2024 15:29:16</publishTime>
     </File>
     <File Include="bin/Gaia.Seguridad.dll.config">
       <publishTime>02/14/2024 11:09:23</publishTime>
     </File>
     <File Include="bin/Gaia.Seguridad.pdb">
-      <publishTime>02/26/2024 11:36:37</publishTime>
+      <publishTime>02/28/2024 15:29:16</publishTime>
     </File>
     <File Include="bin/HtmlAgilityPack.dll">
       <publishTime>11/15/2017 18:29:10</publishTime>
@@ -109,19 +109,19 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/26/2023 10:24:54</publishTime>
     </File>
     <File Include="bin/Nicarao.App.dll">
-      <publishTime>02/26/2024 11:36:52</publishTime>
+      <publishTime>02/28/2024 15:29:31</publishTime>
     </File>
     <File Include="bin/Nicarao.App.pdb">
-      <publishTime>02/26/2024 11:36:52</publishTime>
+      <publishTime>02/28/2024 15:29:31</publishTime>
     </File>
     <File Include="bin/Nicarao.DAL.dll">
-      <publishTime>02/26/2024 11:36:40</publishTime>
+      <publishTime>02/28/2024 15:29:18</publishTime>
     </File>
     <File Include="bin/Nicarao.DAL.dll.config">
       <publishTime>02/14/2024 11:09:25</publishTime>
     </File>
     <File Include="bin/Nicarao.DAL.pdb">
-      <publishTime>02/26/2024 11:36:40</publishTime>
+      <publishTime>02/28/2024 15:29:18</publishTime>
     </File>
     <File Include="bin/PJN.DAL.dll">
       <publishTime>02/22/2024 13:39:55</publishTime>
@@ -196,13 +196,13 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/26/2023 10:24:52</publishTime>
     </File>
     <File Include="bin/TAEL.Dal.dll">
-      <publishTime>02/26/2024 11:36:34</publishTime>
+      <publishTime>02/28/2024 12:04:27</publishTime>
     </File>
     <File Include="bin/TAEL.Dal.dll.config">
       <publishTime>05/23/2022 11:37:26</publishTime>
     </File>
     <File Include="bin/TAEL.Dal.pdb">
-      <publishTime>02/26/2024 11:36:34</publishTime>
+      <publishTime>02/28/2024 12:04:27</publishTime>
     </File>
     <File Include="bin/WebActivatorEx.dll">
       <publishTime>11/27/2018 14:14:34</publishTime>
@@ -3550,7 +3550,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>02/14/2024 11:04:26</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>02/26/2024 11:37:01</publishTime>
+      <publishTime>02/28/2024 15:29:40</publishTime>
     </File>
     <File Include="Scripts/alertify.js">
       <publishTime>12/26/2023 16:26:46</publishTime>
@@ -5800,10 +5800,10 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>02/26/2024 10:53:54</publishTime>
     </File>
     <File Include="Views/Censoencuesta/ContenedorCensoEconomico.cshtml">
-      <publishTime>02/13/2024 08:51:20</publishTime>
+      <publishTime>02/27/2024 10:49:32</publishTime>
     </File>
     <File Include="Views/Censoencuesta/ContenedorCensoPoblacionVivienda.cshtml">
-      <publishTime>02/22/2024 08:57:02</publishTime>
+      <publishTime>02/28/2024 12:04:25</publishTime>
     </File>
     <File Include="Views/Censoencuesta/DatosViviendaHogarPrincipal.cshtml">
       <publishTime>02/26/2024 10:35:07</publishTime>
@@ -5821,19 +5821,19 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>02/26/2024 08:47:21</publishTime>
     </File>
     <File Include="Views/Censoencuesta/ListaActividadAgropecuariaHogar.cshtml">
-      <publishTime>02/26/2024 11:33:11</publishTime>
+      <publishTime>02/26/2024 14:03:13</publishTime>
     </File>
     <File Include="Views/Censoencuesta/ListaDefuncionesHogar.cshtml">
-      <publishTime>02/26/2024 11:32:57</publishTime>
+      <publishTime>02/26/2024 14:03:24</publishTime>
     </File>
     <File Include="Views/Censoencuesta/ListaEmigracionInternacionalHogar.cshtml">
-      <publishTime>02/26/2024 11:33:21</publishTime>
+      <publishTime>02/26/2024 14:03:49</publishTime>
     </File>
     <File Include="Views/Censoencuesta/ListaMiembrosHogar.cshtml">
-      <publishTime>02/26/2024 11:33:29</publishTime>
+      <publishTime>02/26/2024 14:04:02</publishTime>
     </File>
     <File Include="Views/Censoencuesta/ListaPersonasTrabajanEstablecimiento.cshtml">
-      <publishTime>02/26/2024 11:33:38</publishTime>
+      <publishTime>02/26/2024 14:04:26</publishTime>
     </File>
     <File Include="Views/Censoencuesta/PersonasHogar.cshtml">
       <publishTime>02/26/2024 10:38:25</publishTime>
@@ -5848,19 +5848,22 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>02/13/2024 11:44:31</publishTime>
     </File>
     <File Include="Views/Censoencuesta/_ListaActividadAgropecuariaHogar.cshtml">
-      <publishTime>02/26/2024 10:13:28</publishTime>
+      <publishTime>02/26/2024 14:02:20</publishTime>
     </File>
     <File Include="Views/Censoencuesta/_ListaDefuncionesHogar.cshtml">
       <publishTime>02/26/2024 11:28:07</publishTime>
     </File>
     <File Include="Views/Censoencuesta/_ListaEmigracionInternacionalHogar.cshtml">
-      <publishTime>02/26/2024 10:11:00</publishTime>
+      <publishTime>02/26/2024 14:02:32</publishTime>
     </File>
     <File Include="Views/Censoencuesta/_ListaMiembrosHogar.cshtml">
-      <publishTime>02/26/2024 10:07:43</publishTime>
+      <publishTime>02/26/2024 14:02:38</publishTime>
     </File>
     <File Include="Views/Censoencuesta/_ListaPersonasTrabajanEstablecimiento.cshtml">
-      <publishTime>02/26/2024 10:15:53</publishTime>
+      <publishTime>02/26/2024 14:02:45</publishTime>
+    </File>
+    <File Include="Views/Censoencuesta/_Map.cshtml">
+      <publishTime>02/28/2024 15:28:52</publishTime>
     </File>
     <File Include="Views/CodificarCP/ConfAsignacion.cshtml">
       <publishTime>02/02/2024 07:58:01</publishTime>
@@ -6082,7 +6085,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>07/26/2021 14:29:06</publishTime>
     </File>
     <File Include="Views/Usuario/Login.cshtml">
-      <publishTime>02/02/2024 09:17:50</publishTime>
+      <publishTime>02/27/2024 07:50:06</publishTime>
     </File>
     <File Include="Views/Usuario/_Autorizar.cshtml">
       <publishTime>11/27/2018 14:14:28</publishTime>
@@ -6100,7 +6103,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>10/26/2023 10:24:52</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>02/26/2024 10:23:21</publishTime>
+      <publishTime>02/28/2024 15:29:36</publishTime>
     </File>
     <File Include="webfonts/fa-brands-400.eot">
       <publishTime>10/26/2023 10:26:44</publishTime>
