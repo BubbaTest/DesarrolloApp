@@ -1,8 +1,11 @@
-﻿
+﻿@{
+    string addres = "Map";
+}
+
 <script>
     (g => { var h, a, k, p = "The Google Maps JavaScript API", c = "google", l = "importLibrary", q = "__ib__", m = document, b = window; b = b[c] || (b[c] = {}); var d = b.maps || (b.maps = {}), r = new Set, e = new URLSearchParams, u = () => h || (h = new Promise(async (f, n) => { await (a = m.createElement("script")); e.set("libraries", [...r] + ""); for (k in g) e.set(k.replace(/[A-Z]/g, t => "_" + t[0].toLowerCase()), g[k]); e.set("callback", c + ".maps." + q); a.src = `https://maps.${c}apis.com/maps/api/js?` + e; d[q] = f; a.onerror = () => h = n(Error(p + " could not load.")); a.nonce = m.querySelector("script[nonce]")?.nonce || ""; m.head.append(a) })); d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n)) })({
-        key: "AIzaSyB4NyxZFy8yegCPxZdZLMD05xqO3F5dpV0",
-        // Add other bootstrap parameters as needed, using camel case.
+        key: '',
+        // Add other bootstrap parameters as needed, using camel case. "AIzaSyB4NyxZFy8yegCPxZdZLMD05xqO3F5dpV0"
         // Use the 'v' parameter to indicate the version to load (alpha, beta, weekly, etc.)
     });
 </script>
@@ -12,10 +15,10 @@
     <form>
         <div class="row justify-content-center">
             <div class="col-75 p-2">
-                <input type="text" placeholder="Ubicación" id="txtautocomplete" autocomplete = "off">
+                <input type="text" placeholder="Ubicación" id="txtautocomplete" autocomplete="off">
 
             </div>
-            </div>
+        </div>
         <div class="row justify-content-center p-4">
             <br>
             <input type="button" id="btnSuccess" onclick="test()" value="Buscar">
@@ -33,14 +36,14 @@
 {
     Html.AddScriptBlock(
 @<script type="text/javascript">
-    $(document).ready(function () {
-        getLocation2();
-    })
+     $(document).ready(function () {
+         getLocation2();
+     })
 
      function getLocation2() {
          //if (navigator.geolocation) {
          //    navigator.geolocation.getCurrentPosition(useLocation2);
-         //}  
+         //}
          const options = {
              enableHighAccuracy: true,
              timeout: 5000,
@@ -55,7 +58,7 @@
          }
      };
 
-    function useLocation2(position) {
+     function useLocation2(position) {
          coordenadas = {
              lng: position.coords.longitude,
              lat: position.coords.latitude,
@@ -63,54 +66,54 @@
          }
 
          generarMapa(coordenadas);
-    };
+     };
 
-    async function generarMapa(coordenadas) {
-        const { Map } = await google.maps.importLibrary("maps");
-        const { PlacesService } = await google.maps.importLibrary("places")
-            map = new Map(document.getElementById("map"), {
-                zoom: 15,
-                center: { lat: coordenadas.lat, lng: coordenadas.lng },
-                mapTypeControl: true,
-                navigationControlOptions: {
-                    style: google.maps.NavigationControlStyle.SMALL
-                },
-                //mapTypeId: "satellite",
-            });
+     async function generarMapa(coordenadas) {
+         const { Map } = await google.maps.importLibrary("maps");
+         //const { PlacesService } = await google.maps.importLibrary("places")
+         map = new Map(document.getElementById("map"), {
+             zoom: 15,
+             center: { lat: coordenadas.lat, lng: coordenadas.lng },
+             mapTypeControl: true,
+             navigationControlOptions: {
+                 style: google.maps.NavigationControlStyle.SMALL
+             },
+             //mapTypeId: "satellite",
+         });
 
-            var marker = new google.maps.Marker({
-                map: map,
-                draggable: true,
-                position: { lat: coordenadas.lat, lng: coordenadas.lng }
-            });
+         var marker = new google.maps.Marker({
+             map: map,
+             draggable: true,
+             position: { lat: coordenadas.lat, lng: coordenadas.lng }
+         });
 
-            marker.addListener('dragend', function (event) {
-                document.getElementById('txtLatitud').value = this.getPosition().lat();
-                document.getElementById('txtLongitud').value = this.getPosition().lng();
-            })
-    }      
+         marker.addListener('dragend', function (event) {
+             document.getElementById('txtLatitud').value = this.getPosition().lat();
+             document.getElementById('txtLongitud').value = this.getPosition().lng();
+         })
+     }
 
-    async function test() {
-        const { PlacesService } = await google.maps.importLibrary("places")
+     async function test() {
+         const { PlacesService } = await google.maps.importLibrary("places")
 
-        var request = {
-            query: $("#txtautocomplete").val(),
-            fields: ['name', 'geometry'],
-        };
+         var request = {
+             query: $("#txtautocomplete").val(),
+             fields: ['name', 'geometry'],
+         };
 
-        var service = new google.maps.places.PlacesService(map);                  
+         var service = new google.maps.places.PlacesService(map);
 
          var s = service.findPlaceFromQuery(request, function (results, status) {
-             if (status === google.maps.places.PlacesServiceStatus.OK) {  
+             if (status === google.maps.places.PlacesServiceStatus.OK) {
                  var marker = new google.maps.Marker({
                      map: map,
-                     draggable: true,                   
-                    position: results[0].geometry.location
-                });
-                map.setCenter(results[0].geometry.location);
-            }
-        });
-    }
+                     draggable: true,
+                     position: results[0].geometry.location
+                 });
+                 map.setCenter(results[0].geometry.location);
+             }
+         });
+     }
 </script>
 , true);
 }
